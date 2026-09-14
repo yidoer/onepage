@@ -39,6 +39,9 @@ https://<你的用户名>.github.io/<仓库名>/
 
 根目录的 `index.html` 会被自动加载，即 3D 模拟器；顶栏的「散射推导」按钮进入推导页。
 
+> **本仓库的线上地址**：<https://yidoer.github.io/onepage.github.io/>
+> 注意仓库名是 onepage.github.io 而不是 yidoer.github.io，所以它属于**项目站点**，网址带仓库名后缀，不是域名根 https://yidoer.github.io/。
+
 > `.nojekyll` 已包含在仓库中，用于关闭 Jekyll 处理，避免以下划线开头的源文件被特殊对待。
 
 ### 为什么部署这么简单
