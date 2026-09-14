@@ -1,0 +1,430 @@
+<section class="sec" id="s10">
+  <h2 class="sec-title"><span class="num">十</span>推论一：原子核的存在与核半径上限</h2>
+
+  <p class="lede">推导到这里，公式本身已经完备。但物理学的价值在于它<strong>允许我们断言什么</strong>。这一节从式 (7.8) 出发，提取出三条互相独立、且都能被实验检验的结论。</p>
+
+  <h3 class="sub">10.1 &nbsp;正电荷必定高度集中</h3>
+
+  <p>把 <span class="m">\S 1</span> 的论证反过来用。式 (1.3) 是<strong>给定弥散尺度 <span class="m">R</span> 时偏转的上界</strong>，它是一个严格的不等式。既然实验确实观测到了 <span class="m">\theta \ge 90^\circ = \pi /2</span>，就必有</p>
+
+  <div class="eq">
+    <span class="body m">\frac{2k_{e}Ze^{2}}{R\,E}\ge \frac{\pi }{2}\ \ \Rightarrow \ \ R\le \frac{4k_{e}Ze^{2}}{\pi E}</span>
+    <span class="tag">(10.1)</span>
+  </div>
+
+  <p>代入 5 MeV / 金的条件：</p>
+
+  <div class="eq key">
+    <span class="body m">R\le \frac{4\cdot 1.822\times 10^{-26}}{\pi \cdot 8.011\times 10^{-13}} \text{m}\approx 2.9\times 10^{-14} \text{m}=29 \text{fm}</span>
+    <span class="tag">(10.2)</span>
+  </div>
+
+  <p>而原子的尺度是 <span class="m">\approx 10^{-10}</span> m。也就是说，<strong>集中正电荷的尺度至多是原子的 1/3400</strong>。这条结论只用到"存在 90&#176; 散射"这一个实验事实，不依赖卢瑟福公式的具体形状，因此格外可靠。</p>
+
+  <div class="box caution">
+    <p class="bt">
+      <svg class="ic ic-in" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.6 21.4 19.6H2.6z"/><path d="M12 9.6v4.4M12 17h.01"/></svg>
+      电子不可能造成大角度散射——一个常被忽略的关键论证
+    </p>
+    <p>有人会想：也许把 α 粒子弹回来的是电子？这个想法可以被一个纯粹的运动学事实排除。对于"质量 <span class="m">m</span> 的粒子弹性撞击静止的质量 <span class="m">M</span> 的粒子"，当 <span class="m">M &lt; m</span> 时，入射粒子在实验室系中的偏转角有<strong>严格上界</strong></p>
+    <p style="margin-top:8px"><span class="m">\sin \,\theta _{\text{max}}=M/m</span>。对电子与 α 粒子：<span class="m">m_{e}/m_{\alpha } = 0.0005486/4.0015 = 1.37\times 10^{-4}</span>，故</p>
+    <p style="margin-top:8px"><span class="m">\theta _{\text{max}} = \arcsin (1.37\times 10^{-4}) \approx 0.0079^\circ</span>。即便 α 粒子<strong>正面撞上</strong>一个电子，它最多只能被偏转百分之八度。要累积到 90&#176; 需要约 11400 次方向完全一致的碰撞。因此大角度散射体必须是<strong>既重又集中</strong>的正电荷——它只能是原子核。</p>
+  </div>
+
+  <h3 class="sub">10.2 &nbsp;核半径的定量上限</h3>
+
+  <p>式 (10.2) 给出的 29 fm 太宽松。利用卢瑟福公式本身，可以得到一个紧得多的界。</p>
+
+  <p>推导卢瑟福公式时用了假设 A2（点电荷）。这条假设在 <span class="m">r_{\text{min}} \gg R</span> 时成立；一旦粒子能进入到核表面以内，势就不再是纯 <span class="m">1/r</span>，公式必定失效。由式 (6.2)，正碰时的最近距离为 <span class="m">d = C/E</span>，因此<strong>公式成立的条件</strong>可以写成一个能量条件：</p>
+
+  <div class="eq">
+    <span class="body m">\frac{C}{E}\gg R\ \ \Leftrightarrow \ \ E\ll \frac{C}{R}\equiv E_{\text{crit}}</span>
+    <span class="tag">(10.3)</span>
+  </div>
+
+  <p>于是核半径可以<strong>由实验直接读出</strong>：找到卢瑟福公式开始系统失效的能量 <span class="m">E_{\text{crit}}</span>，则 <span class="m">R \approx C/E_{\text{crit}}</span>。α 粒子在金箔上的实测偏离出现在 <span class="m">E_{\text{crit}} \approx 25-30</span> MeV（<span class="m">\S 9.2</span> 式 9.2 的理论预言是 32.6 MeV），代入得</p>
+
+  <div class="eq key">
+    <span class="body m">R_{\text{Au}}\approx \frac{3.644\times 10^{-26}}{27\cdot 1.602\times 10^{-13}} \text{m}\approx 8.4\times 10^{-15} \text{m}=8.4 \text{fm}</span>
+    <span class="tag">(10.4)</span>
+  </div>
+
+  <p>而由质量数经验公式 <span class="m">R = r_{0}A^{1/3}</span>（<span class="m">r_{0} \approx 1.2</span> fm）算得 <span class="m">R_{\text{Au}} \approx 7.0</span> fm。<strong>两种完全独立的途径给出同一量级</strong>——这正是核式模型最有力的自洽性证据。</p>
+
+  <div class="box key">
+    <p class="bt">
+      <svg class="ic ic-in" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7.5v4.7l3 1.8"/></svg>
+      推论一总结
+    </p>
+    <p>① 正电荷集中尺度 <span class="m">\le 29</span> fm（仅用"存在 90&#176; 散射"，不依赖公式形状）<br>
+    ② 大角度散射体必须是重粒子（电子在运动学上被排除）<br>
+    ③ 核半径 <span class="m">\approx 8</span> fm 量级，与 <span class="m">r_{0}A^{1/3}</span> 独立吻合</p>
+  </div>
+</section>
+
+<section class="sec" id="s11">
+  <h2 class="sec-title"><span class="num">十一</span>推论二：核式模型的确立</h2>
+
+  <h3 class="sub">11.1 &nbsp;公式给出的不是一条曲线，而是三条可分别验证的标度律</h3>
+
+  <p>式 (7.8) 的价值不只在"能拟合一张角分布图"。它同时预言了三个方向的依赖关系（表 2），而这三条彼此独立。任何一条被违反，整个模型就要重来。盖革与马斯登在 1913 年发表的定量结果，正是逐条检验了它们：</p>
+
+  <div class="tw">
+    <table>
+      <caption>表 6 &nbsp;卢瑟福公式的三条预言与实验检验</caption>
+      <thead><tr><th>预言</th><th>检验方法</th><th>结果对模型的意义</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><span class="m">\csc ^{4}(\theta /2)</span> 角分布</td>
+          <td>同一束流、同一箔，只改变探测器角度</td>
+          <td>确认"散射中心是一个点状的 <span class="m">1/r</span> 势源"</td>
+        </tr>
+        <tr>
+          <td>厚度线性（单次散射）</td>
+          <td>改变箔厚，计数应严格正比于厚度</td>
+          <td>确认大角度事件是<strong>单次</strong>碰撞，排除多次累积</td>
+        </tr>
+        <tr>
+          <td><span class="m">\propto Z^{2}</span></td>
+          <td>换用不同元素的箔（Cu、Ag、Au、Pt…）</td>
+          <td>确认散射体电荷就是元素的原子序数——<strong>等于"数出了"核电荷数</strong></td>
+        </tr>
+        <tr>
+          <td><span class="m">\propto E^{-2}</span></td>
+          <td>改变 α 粒子能量重测</td>
+          <td>确认 <span class="m">b \propto 1/E</span> 的运动学，排除其他势形式</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>特别值得注意的是 <span class="m">Z^{2}</span> 这一条。它意味着：<strong>通过测量散射强度，可以直接读出原子核的电荷数</strong>。这与莫塞莱由 X 射线特征频率测得的"原子序数"完全一致，从而把"原子序数"从一个排列序号变成了一个<em>有物理意义的电荷量</em>。</p>
+
+  <h3 class="sub">11.2 &nbsp;为什么"核式"是不可回避的</h3>
+
+  <p>把 <span class="m">\S 10</span> 与本节合起来看，逻辑链条是封闭的：</p>
+
+  <p><strong>第一步（存在性）</strong>：大角度散射被观测到 → 存在一个尺度 <span class="m">\lesssim 10^{-14}</span> m 的强场区域。<br>
+  <strong>第二步（成分）</strong>：该区域在运动学上不可能是电子（<span class="m">\S 10.1</span>）→ 它是正电荷。<br>
+  <strong>第三步（荷量）</strong>：散射强度按 <span class="m">Z^{2}</span> 标度，且 <span class="m">Z</span> 与元素序数吻合 → 集中的正电荷恰好携带 <span class="m">Ze</span>。<br>
+  <strong>第四步（排他）</strong>：原子整体电中性 → 剩下 <span class="m">Z</span> 个电子必然处在这个小区域<strong>之外</strong>，占据整个原子的尺度。</p>
+
+  <p>这四步之后，"正电荷弥散、电子嵌在其中"的图像已无立足之地。剩下的唯一可能是：<strong>原子由一个极小的重核与核外电子云构成</strong>——即核式模型。</p>
+
+  <h3 class="sub">11.3 &nbsp;散射实验作为"探针"的范式意义</h3>
+
+  <p>卢瑟福散射更深层的贡献，是确立了粒子物理最基本的方法论：<strong>用已知的探针去撞未知的靶，通过散射角分布反推靶的结构。</strong>式 (7.8) 就是这个反演的显式公式——测得 <span class="m">d\sigma /d\Omega</span>，就能定出相互作用势的形式与作用区域的尺度。此后从深度非弹性散射发现夸克、到在 LHC 上确认希格斯玻色子，用的都是同一套逻辑。</p>
+</section>
+
+<section class="sec" id="s12">
+  <h2 class="sec-title"><span class="num">十二</span>推论三：经典模型的困难</h2>
+
+  <p class="lede">核式模型解决了大角度散射，却立刻制造了一个更严重的危机。这一节给出这个危机的定量形式——它不属于卢瑟福散射本身，而是"把核式模型继续当作经典行星系"的必然后果。</p>
+
+  <h3 class="sub">12.1 &nbsp;加速电荷必然辐射</h3>
+
+  <p>按经典电动力学，任何作加速运动的电荷都会辐射电磁波，功率由拉莫尔公式给出</p>
+
+  <div class="eq">
+    <span class="body m">P=\frac{q^{2}a^{2}}{6\pi \varepsilon _{0}c^{3}}</span>
+    <span class="tag">(12.1)</span>
+  </div>
+
+  <p>核外电子在圆轨道上运动时加速度 <span class="m">a = v^{2}/r = k_{e}Ze^{2}/(m_{e}r^{2})</span>，而轨道能量 <span class="m">E = -k_{e}Ze^{2}/(2r)</span>。把 <span class="m">dE/dt = -P</span> 写成对 <span class="m">r</span> 的方程并积分（从玻尔半径 <span class="m">a_{0}</span> 一直落到 <span class="m">r = 0</span>），得到<strong>塌缩时间</strong></p>
+
+  <div class="eq key">
+    <span class="body m">\tau =\frac{a_{0}^{3}c^{3}m_{e}^{2}}{4k_{e}^{2}Ze^{4}}</span>
+    <span class="tag">(12.2)</span>
+  </div>
+
+  <p>对氢原子（<span class="m">Z = 1</span>，<span class="m">a_{0} = 5.2918\times 10^{-11}</span> m）代入数值：</p>
+
+  <div class="eq">
+    <span class="body m">\tau \approx 1.6\times 10^{-11} \text{s}</span>
+    <span class="tag">(12.3)</span>
+  </div>
+
+  <p>约 <strong>16 皮秒</strong>。也就是说，如果电子真的像行星一样绕核作经典轨道运动，原子会在不到一亿分之一秒内辐射掉全部能量、电子坠入核中。物质根本不可能稳定存在。</p>
+
+  <div class="box caution">
+    <p class="bt">
+      <svg class="ic ic-in" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.6 21.4 19.6H2.6z"/><path d="M12 9.6v4.4M12 17h.01"/></svg>
+      这个矛盾不否定卢瑟福散射
+    </p>
+    <p>必须把两件事分清楚。<strong>卢瑟福散射本身不受这个问题影响</strong>：α 粒子是<em>外来闯入者</em>，它在核附近沿着一条双曲线掠过就离去，不构成束缚轨道，因此不存在"辐射塌缩"。式 (12.1)&#8211;(12.3) 针对的是<strong>束缚电子</strong>。</p>
+    <p style="margin-top:8px">真正的教训是：核式模型<em>必然要求</em>一套非经典的运动规律来处理束缚态。这个要求直接催生了玻尔的定态与量子化条件 <span class="m">L = n\hbar</span>（1913），并最终发展成量子力学。因此，α 散射实验同时扮演了两个角色：它<strong>建立了</strong>核式模型，又<strong>证伪了</strong>经典力学在原子尺度上的适用性。</p>
+  </div>
+</section>
+
+<section class="sec" id="s13">
+  <h2 class="sec-title"><span class="num">十三</span>适用边界与各类修正</h2>
+
+  <p class="lede">卢瑟福公式是一个精确的经典结果，但它的成立有明确的条件。以下逐条给出"何时需要修正、如何修正、量级多大"。这些边界本身就是物理信息。</p>
+
+  <h3 class="sub">13.1 &nbsp;反冲：把靶核质量视为有限的后果</h3>
+
+  <p>假设 A1 把靶核当作固定不动的。实际上靶核会反冲，正确的做法是转到<strong>质心系</strong>并引入约化质量</p>
+
+  <div class="eq">
+    <span class="body m">\mu =\frac{mM}{m+M}</span>
+    <span class="tag">(13.1)</span>
+  </div>
+
+  <p>质心系中相互作用能只依赖相对坐标，因此<strong>只要把 <span class="m">m</span> 换成 <span class="m">\mu</span>、<span class="m">E</span> 换成质心系动能 <span class="m">E_{\text{cm}} = \tfrac{1}{2}\mu v_{\text{rel}}^{2}</span></strong>，式 (7.8) 的形式<em>完全不变</em>，只是其中的 <span class="m">\theta</span> 变成质心系散射角。实验室系角度需再由附录 <a class="ref" href="#a3">C</a> 的关系转换。</p>
+
+  <div class="tw">
+    <table>
+      <caption>表 7 &nbsp;反冲修正的相对大小（<span class="m">\mu /m = M/(m+M)</span>）</caption>
+      <thead><tr><th>靶</th><th class="n">A</th><th class="n">&#956;/m</th><th>是否需要修正</th></tr></thead>
+      <tbody>
+        <tr><td>金 Au</td><td class="n">197</td><td class="n">0.980</td><td>2% —— 通常可忽略</td></tr>
+        <tr><td>银 Ag</td><td class="n">108</td><td class="n">0.964</td><td>3.6% —— 视精度而定</td></tr>
+        <tr><td>铝 Al</td><td class="n">27</td><td class="n">0.871</td><td><b>13% —— 必须修正</b></td></tr>
+        <tr><td>氦 He</td><td class="n">4</td><td class="n">0.500</td><td><b>50% —— α 打 α，反冲主导</b></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>结论：对重靶（<span class="m">A \gtrsim 100</span>）反冲可以忽略；对轻靶必须用约化质量。这正是"卢瑟福公式在重元素上吻合得最好"的原因之一。</p>
+
+  <h3 class="sub">13.2 &nbsp;电子屏蔽：把长程库仑势切断</h3>
+
+  <p>真实原子中核外电子会部分中和核的电场。在半径 <span class="m">r \gtrsim a</span> 之外，有效势被指数压低：</p>
+
+  <div class="eq">
+    <span class="body m">U(r)\approx \frac{C}{r}\,e^{-r/a},\ \ a\approx a_{0}Z^{-1/3}</span>
+    <span class="tag">(13.2)</span>
+  </div>
+
+  <p>对金：<span class="m">a \approx 5.2918\times 10^{-11}/79^{1/3} \approx 1.23\times 10^{-11}</span> m（约 12.3 pm）。屏蔽只在瞄准距 <span class="m">b \gtrsim a</span> 时才有影响，对应</p>
+
+  <div class="eq">
+    <span class="body m">\cot \,\frac{\theta }{2}=\frac{a}{C/2E}=\frac{1.23\times 10^{-11}}{2.275\times 10^{-14}}=541\ \ \Rightarrow \ \ \theta \approx 0.21^{\circ }</span>
+    <span class="tag">(13.3)</span>
+  </div>
+
+  <p>因此<strong>只要 <span class="m">\theta \gtrsim 1^\circ</span>，屏蔽完全可忽略</strong>，卢瑟福公式按原样使用即可。屏蔽只在极小角度（<span class="m">\theta \lesssim 0.2^\circ</span>）才起作用，而且它恰好截断了式 (8.1) 中 <span class="m">\theta _{0} \to 0</span> 时的发散（<span class="m">\S 8.2</span>）。</p>
+
+  <h3 class="sub">13.3 &nbsp;相对论修正</h3>
+
+  <p>假设 A4 要求 <span class="m">v \ll c</span>。α 粒子静能 <span class="m">m_{\alpha }c^{2} = 3727.4</span> MeV，故</p>
+
+  <div class="eq">
+    <span class="body m">\frac{v}{c}=\sqrt{\frac{2E}{m_{\alpha }c^{2}}}:\ \ 5 \text{MeV}\to 0.052,\ \ 100 \text{MeV}\to 0.232</span>
+    <span class="tag">(13.4)</span>
+  </div>
+
+  <p>5 MeV 时 <span class="m">v^{2}/c^{2} \approx 2.7\times 10^{-3}</span>，非相对论近似误差约 0.3%，完全可忽略。到 100 MeV 时 <span class="m">v^{2}/c^{2} \approx 5.4%</span>，必须改用相对论运动学（Mott 散射）。由于 α 粒子与多数偶偶核自旋均为 0，自旋相关的 Mott 项不出现，主要修正来自运动学。</p>
+
+  <h3 class="sub">13.4 &nbsp;自旋与磁相互作用</h3>
+
+  <p>本文只考虑库仑（电）相互作用。若入射粒子或靶核有自旋，还会出现磁矩之间的相互作用。其相对大小约为 <span class="m">O(v^{2}/c^{2})</span>，对 5 MeV 的 α 粒子是 <span class="m">10^{-3}</span> 量级，属于可忽略的高阶效应。α 粒子自旋为 0，因此在 α 散射中这一项完全不存在。</p>
+
+  <h3 class="sub">13.5 &nbsp;量子力学为什么给出同一结果</h3>
+
+  <p>这是一个容易被含糊带过的要点，值得说清楚。</p>
+
+  <p>在量子力学中，"瞄准距 <span class="m">b</span>"不是一个可观测的轨迹参数，粒子的位置与动量不能同时确定，<span class="m">b</span> 与 <span class="m">\theta</span> 之间<strong>不存在一一对应</strong>。然而对纯库仑势，用玻恩近似（乃至精确解）算出的微分散射截面，在非相对论、无自旋条件下<strong>与式 (7.8) 逐字相同</strong>。</p>
+
+  <div class="box note">
+    <p class="bt">
+      <svg class="ic ic-in" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11.2v5.2M12 7.7h.01"/></svg>
+      这是库仑势的特权，不是普遍规律
+    </p>
+    <p>经典与量子结果相同，是 <span class="m">1/r</span> 势的特殊性质（与库仑问题额外隐藏的 <span class="m">\mathrm{SO}(4)</span> 对称性有关）。一旦势偏离 <span class="m">1/r</span>：</p>
+    <p style="margin-top:8px">• 加上屏蔽（式 13.2）→ 量子截面出现干涉结构，经典图像失效；<br>
+    • 进入核力作用范围 → 出现衍射式的振荡，且截面不再由 <span class="m">Z^{2}</span> 唯一决定；<br>
+    • 能量高到 <span class="m">\lambda _{\text{de Broglie}}</span> 与核尺度可比 → 必须用量子散射理论。</p>
+    <p style="margin-top:8px">所以 <strong>"经典推导得到正确公式"不是方法的胜利，而是这个特定势的巧合</strong>。这一点在把卢瑟福散射作为方法论推广时必须牢记。</p>
+  </div>
+
+  <h3 class="sub">13.6 &nbsp;单次散射与薄靶条件</h3>
+
+  <p>假设 A5 要求粒子在穿过箔时只发生一次有效散射。这条假设的检验方式很直接：<strong>散射计数必须严格正比于箔厚</strong>（表 6 第二行）。若观察到非线性（偏薄时正比、偏厚时增长更快），说明多次散射开始贡献。多次散射的角分布近似为高斯型，会叠加在卢瑟福的 <span class="m">\csc ^{4}</span> 尾巴上，在小角度处首先造成偏离。</p>
+
+  <h3 class="sub">13.7 &nbsp;适用条件总表</h3>
+
+  <div class="tw">
+    <table>
+      <caption>表 8 &nbsp;卢瑟福公式的适用范围</caption>
+      <thead><tr><th>假设</th><th>成立条件</th><th>对 5 MeV α / Au 的检验</th><th>失效后果</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>A1 不反冲</td>
+          <td><span class="m">m \ll M</span></td>
+          <td class="n">&#956;/m = 0.980 <svg class="ic ic-in ok" viewBox="0 0 24 24" aria-hidden="true"><path d="M4.6 12.9 9.7 18 19.4 6.6"/></svg>（2% 误差）</td>
+          <td>角度需按附录 C 转换</td>
+        </tr>
+        <tr>
+          <td>A2 点电荷</td>
+          <td><span class="m">d \gg R</span></td>
+          <td class="n">45.5 fm vs 7.0 fm <svg class="ic ic-in ok" viewBox="0 0 24 24" aria-hidden="true"><path d="M4.6 12.9 9.7 18 19.4 6.6"/></svg>（6.5 倍）</td>
+          <td>需用核形状因子修正</td>
+        </tr>
+        <tr>
+          <td>A3 只有库仑力</td>
+          <td><span class="m">r \gg 2</span> fm</td>
+          <td class="n">同上 <svg class="ic ic-in ok" viewBox="0 0 24 24" aria-hidden="true"><path d="M4.6 12.9 9.7 18 19.4 6.6"/></svg></td>
+          <td>核力介入，截面偏离</td>
+        </tr>
+        <tr>
+          <td>A4 非相对论</td>
+          <td><span class="m">v^{2}/c^{2} \ll 1</span></td>
+          <td class="n">0.27% <svg class="ic ic-in ok" viewBox="0 0 24 24" aria-hidden="true"><path d="M4.6 12.9 9.7 18 19.4 6.6"/></svg></td>
+          <td>需用 Mott 散射公式</td>
+        </tr>
+        <tr>
+          <td>A5 单次散射</td>
+          <td>薄靶</td>
+          <td class="n">计数 &#8733; 厚度 <svg class="ic ic-in ok" viewBox="0 0 24 24" aria-hidden="true"><path d="M4.6 12.9 9.7 18 19.4 6.6"/></svg></td>
+          <td>叠加高斯型多次散射</td>
+        </tr>
+        <tr>
+          <td>A6 无屏蔽</td>
+          <td><span class="m">\theta \gtrsim 0.2^\circ</span></td>
+          <td class="n">&#952; &#8819; 1&#176; <svg class="ic ic-in ok" viewBox="0 0 24 24" aria-hidden="true"><path d="M4.6 12.9 9.7 18 19.4 6.6"/></svg></td>
+          <td>小角度截面被截断</td>
+        </tr>
+        <tr>
+          <td>A7 弹性</td>
+          <td>电子激发可忽略</td>
+          <td class="n">&#8730;</td>
+          <td>能量损失，需用阻止本领修正</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="box key">
+    <p class="bt">
+      <svg class="ic ic-in" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20.5V13M10 20.5V4.5M16 20.5v-5M22 20.5h-20"/></svg>
+      全文结论
+    </p>
+    <p>从库仑力与两条守恒律出发，我们得到了式 (7.8) 这个闭合结果，并从中提取出三层推论：<strong>结构上</strong>——原子的正电荷集中于 <span class="m">\lesssim 10^{-14}</span> m 的核内，尺度与 <span class="m">r_{0}A^{1/3}</span> 自洽；<strong>方法上</strong>——散射角分布可以作为反推相互作用势与作用区域尺度的显式工具；<strong>边界上</strong>——公式在 <span class="m">5</span> MeV、重靶条件下精确成立，其失效点（<span class="m">\approx 30</span> MeV）本身又成为测量核半径的探针。而经典行星模型的崩溃（<span class="m">\S 12</span>）则表明：核式模型必须配上一套新的运动学——这正是量子力学登场的地方。</p>
+  </div>
+</section>
+
+<section class="sec" id="a1">
+  <h2 class="sec-title"><span class="num">附录 A</span>Binet 方程与圆锥曲线解</h2>
+
+  <p>正文 4.1 节从"能量守恒 + 角动量守恒"直接得到了式 (4.3)。这里用更标准的 <strong>Binet 方程</strong>独立导出同一个方程，以确认式 (4.3) 的可靠性。</p>
+
+  <p>径向运动方程为</p>
+  <div class="eq">
+    <span class="body m">m(r\ddot{}-r\varphi \dot{}^{2})=F_{r}=\frac{C}{r^{2}}</span>
+    <span class="tag">(A.1)</span>
+  </div>
+
+  <p>由式 (3.6) <span class="m">\varphi \dot{} = L/(mr^{2})</span>，对时间求导可把 <span class="m">d/dt</span> 换成 <span class="m">(L/(mr^{2}))d/d\varphi</span>。记 <span class="m">u = 1/r</span>，有</p>
+  <div class="eq">
+    <span class="body m">r\ddot{}=-\frac{L^{2}u^{2}}{m^{2}}\frac{d^{2}u}{d\varphi ^{2}},\ \ r\varphi \dot{}^{2}=\frac{L^{2}u^{3}}{m^{2}}</span>
+    <span class="tag">(A.2)</span>
+  </div>
+  <p>代入式 (A.1) 并整理，即得式 (4.3)：<span class="m">u'' + u = -mC/L^{2}</span>。<strong>两条路线给出同一方程。</strong></p>
+
+  <p class="mnote"><b>关于求导时约去的因子。</b>两边对 <span class="m">\varphi</span> 求导时约去了 <span class="m">du/d\varphi</span>。若 <span class="m">du/d\varphi = 0</span> 恒成立，则 <span class="m">u</span> 为常数，对应圆轨道——对开放轨道（双曲线）不适用，故本文情形下该因子的零点只是孤立点（近核点），不影响解的一般性。</p>
+
+  <h3 class="sub">A.1 &nbsp;由解反推 <i>A</i> 与 <i>&#945;</i> 的物理意义</h3>
+  <p>把解 <span class="m">u = A\cos \varphi - 1/\alpha</span> 代回能量守恒式 (4.2)，可用 <span class="m">\varphi = 0</span> 处（近核点，<span class="m">du/d\varphi = 0</span>）的值定出 <span class="m">A</span>，从而确认 <span class="m">\alpha = L^{2}/(mC)</span> 与 <span class="m">e = A\alpha</span> 的定义（式 4.5）是自洽的。正文 5.4 节用这套关系做了独立互校，结果与冲量法完全一致。</p>
+</section>
+
+<section class="sec" id="a2">
+  <h2 class="sec-title"><span class="num">附录 B</span>冲量积分的严格计算</h2>
+
+  <p>正文 5.2 节把积分从 <span class="m">-\varphi _{\infty }</span> 到 <span class="m">+\varphi _{\infty }</span> 写成了一次性积分。这里补上"为什么可以这样写"以及被积函数为何与轨道形状无关。</p>
+
+  <p>冲量的定义是 <span class="m">\Delta \vec{p} = \int \vec{F}\,dt</span>。力的方向沿 <span class="m">\hat{r}</span>。由对称性，我们只需它的对称轴分量，即把 <span class="m">\vec{F}</span> 投影到对称轴方向，得到 <span class="m">(C/r^{2})\cos \varphi</span>。</p>
+
+  <p>换元时用的关键是式 (3.6)：</p>
+  <div class="eq">
+    <span class="body m">dt=\frac{mr^{2}}{L}d\varphi \ \ \Rightarrow \ \ \frac{C}{r^{2}}dt=\frac{mC}{L}d\varphi</span>
+    <span class="tag">(B.1)</span>
+  </div>
+
+  <p>注意右端<strong>不再含 <i>r</i></strong>。这正是库仑问题可积的核心：<span class="m">1/r^{2}</span> 的力与 <span class="m">r^{2}</span> 的角动量因子恰好互为倒数。于是</p>
+
+  <div class="eq">
+    <span class="body m">\Delta p=\frac{mC}{L}\int _{-\varphi _{\infty }}^{\varphi _{\infty }}\cos \,\varphi \,d\varphi =\frac{2mC}{L}\sin \,\varphi _{\infty }</span>
+    <span class="tag">(B.2)</span>
+  </div>
+
+  <p><strong>一个值得注意的地方</strong>：式 (B.2) 中不含偏心率 <span class="m">e</span>，也不含 <span class="m">\alpha</span>——积分的值只依赖积分限 <span class="m">\varphi _{\infty }</span>。也就是说，无论轨道"张得多开"，冲量都相同。这是 <span class="m">1/r^{2}</span> 力的另一项特殊性质，也是为什么式 (5.7) 会如此简洁。</p>
+
+  <p>由式 (4.9) <span class="m">\varphi _{\infty } = (\pi -\theta )/2</span>，得 <span class="m">\sin \varphi _{\infty } = \cos (\theta /2)</span>，即式 (5.4)。</p>
+</section>
+
+<section class="sec" id="a3">
+  <h2 class="sec-title"><span class="num">附录 C</span>质心系与实验室系的转换</h2>
+
+  <p>式 (7.8) 中的 <span class="m">\theta</span> 严格来说是<strong>质心系</strong>散射角。实验在实验室系进行，两者需要通过运动学换算。设入射粒子质量 <span class="m">m</span>、靶核质量 <span class="m">M</span>，记质量比 <span class="m">\rho = m/M</span>。</p>
+
+  <p>质心系中两粒子动量大小相等方向相反，散射后仍如此。把质心速度变换回实验室系，可得</p>
+
+  <div class="eq">
+    <span class="body m">\tan \,\theta _{\text{lab}}=\frac{\sin \,\theta _{\text{cm}}}{\rho +\cos \,\theta _{\text{cm}}}</span>
+    <span class="tag">(C.1)</span>
+  </div>
+
+  <p>当 <span class="m">\rho \ll 1</span>（重靶）时 <span class="m">\theta _{\text{lab}} \approx \theta _{\text{cm}}</span>，这正是假设 A1 的精确含义。对 α + Au，<span class="m">\rho = 4.0015/197 \approx 0.0203</span>，两系角度差异在 <span class="m">1^\circ</span> 量级，属于可修正的系统效应。</p>
+
+  <p>相应地，能量也需换算：</p>
+  <div class="eq">
+    <span class="body m">E_{\text{cm}}=\frac{M}{m+M}E_{\text{lab}}=\frac{1}{1+\rho }E_{\text{lab}}</span>
+    <span class="tag">(C.2)</span>
+  </div>
+
+  <p>把式 (7.8) 用在实验数据上时，必须用 <span class="m">E_{\text{cm}}</span> 与 <span class="m">\theta _{\text{cm}}</span>。对 α + Au 这带来约 2% 的能量修正，与表 7 的反冲修正一致（两者是同一件事的两种表述）。</p>
+</section>
+
+<section class="sec" id="a4">
+  <h2 class="sec-title"><span class="num">附录 D</span>符号与常数表</h2>
+
+  <div class="tw">
+    <table>
+      <caption>表 D.1 &nbsp;符号</caption>
+      <thead><tr><th>符号</th><th>含义</th><th>单位</th></tr></thead>
+      <tbody>
+        <tr><td class="n"><span class="m">z, Z</span></td><td>入射粒子与靶核的电荷数（α：<span class="m">z = 2</span>）</td><td class="n">&#8212;</td></tr>
+        <tr><td class="n"><span class="m">k_{e}</span></td><td>库仑常量 <span class="m">1/(4\pi \varepsilon _{0})</span></td><td class="n">N&middot;m<sup>2</sup>/C<sup>2</sup></td></tr>
+        <tr><td class="n"><span class="m">C</span></td><td>相互作用常数 <span class="m">k_{e}zZe^{2}</span>（= 势能 &#215; 距离）</td><td class="n">J&middot;m</td></tr>
+        <tr><td class="n"><span class="m">E</span></td><td>入射动能 <span class="m">\tfrac{1}{2}mv_{0}^{2}</span>（无穷远处）</td><td class="n">J</td></tr>
+        <tr><td class="n"><span class="m">b</span></td><td>瞄准距（力心到入射渐近线的垂距）</td><td class="n">m</td></tr>
+        <tr><td class="n"><span class="m">\theta</span></td><td>散射角</td><td class="n">rad</td></tr>
+        <tr><td class="n"><span class="m">\varphi</span></td><td>极角，自近核点方向量起</td><td class="n">rad</td></tr>
+        <tr><td class="n"><span class="m">\varphi _{\infty }</span></td><td><span class="m">r \to \infty</span> 时的极角，<span class="m">= (\pi -\theta )/2</span></td><td class="n">rad</td></tr>
+        <tr><td class="n"><span class="m">e</span></td><td>轨道偏心率 <span class="m">= \csc (\theta /2)</span></td><td class="n">&#8212;</td></tr>
+        <tr><td class="n"><span class="m">\alpha</span></td><td>半正焦弦尺度 <span class="m">= L^{2}/(mC)</span></td><td class="n">m</td></tr>
+        <tr><td class="n"><span class="m">L</span></td><td>角动量大小 <span class="m">= mv_{0}b</span></td><td class="n">kg&middot;m<sup>2</sup>/s</td></tr>
+        <tr><td class="n"><span class="m">r_{\text{min}}</span></td><td>最近逼近距离</td><td class="n">m</td></tr>
+        <tr><td class="n"><span class="m">d</span></td><td>正碰最近距离 <span class="m">= C/E</span></td><td class="n">m</td></tr>
+        <tr><td class="n"><span class="m">\sigma , \Omega</span></td><td>截面、立体角</td><td class="n">m<sup>2</sup>, sr</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="tw">
+    <table>
+      <caption>表 D.2 &nbsp;常数</caption>
+      <thead><tr><th>常数</th><th class="n">数值</th></tr></thead>
+      <tbody>
+        <tr><td>库仑常量 <span class="m">k_{e}</span></td><td class="n">8.9875517923&#215;10<sup>9</sup> N&middot;m<sup>2</sup>/C<sup>2</sup></td></tr>
+        <tr><td>元电荷 <span class="m">e</span></td><td class="n">1.602176634&#215;10<sup>&#8722;19</sup> C</td></tr>
+        <tr><td>α 粒子质量 <span class="m">m_{\alpha }</span></td><td class="n">6.644657&#215;10<sup>&#8722;27</sup> kg（3727.379 MeV/<i>c</i><sup>2</sup>）</td></tr>
+        <tr><td>电子质量 <span class="m">m_{e}</span></td><td class="n">9.109384&#215;10<sup>&#8722;31</sup> kg（0.510999 MeV/<i>c</i><sup>2</sup>）</td></tr>
+        <tr><td>玻尔半径 <span class="m">a_{0}</span></td><td class="n">5.291772&#215;10<sup>&#8722;11</sup> m</td></tr>
+        <tr><td>光速 <span class="m">c</span></td><td class="n">2.99792458&#215;10<sup>8</sup> m/s</td></tr>
+        <tr><td>能量换算</td><td class="n">1 MeV = 1.602176634&#215;10<sup>&#8722;13</sup> J</td></tr>
+        <tr><td>核半径经验式</td><td class="n"><span class="m">R \approx 1.2A^{1/3}</span> fm</td></tr>
+        <tr><td>长度换算</td><td class="n">1 fm = 10<sup>&#8722;15</sup> m；1 b = 10<sup>&#8722;28</sup> m<sup>2</sup></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="box note">
+    <p class="bt">
+      <svg class="ic ic-in" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11.2v5.2M12 7.7h.01"/></svg>
+      数值计算说明
+    </p>
+    <p>全文数值均按上述常数在双精度下直接计算，中途不作四舍五入，仅在显示时保留有效数字。因此表中相邻量（如 <span class="m">b</span> 与 <span class="m">r_{\text{min}}</span>）之间的比例关系可以用来自检，例如 <span class="m">r_{\text{min}}(\theta = 180^\circ ) = d</span> 与 <span class="m">r_{\text{min}}(90^\circ )/d = (1+\sqrt{2})/2 = 1.2071</span>（表中 54.9/45.5 = 1.207 <svg class="ic ic-in ok" viewBox="0 0 24 24" aria-hidden="true"><path d="M4.6 12.9 9.7 18 19.4 6.6"/></svg>）。</p>
+  </div>
+</section>

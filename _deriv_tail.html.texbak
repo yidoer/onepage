@@ -1,0 +1,17 @@
+  </main>
+</div>
+
+<footer class="pfoot">
+  <a class="back" href="index.html">
+    <svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M19.5 12H4.5M11 18.5 4.5 12 11 5.5"/></svg>
+    返回 3D 模拟器
+  </a>
+  <p><b>关于本文</b> &mdash;&mdash; 全文推导不引用任何"已知结论"，每一步都给出依据与自检；所有数值均可在附录 D 的常数下独立复算。</p>
+  <p><b>排版与依赖</b> &mdash;&mdash; 和纸（washi）风格；纸纹由 SVG <code>feTurbulence</code> 生成，公式以 HTML/CSS 手工排版。全文<strong>不含任何脚本、外部字体或 CDN 依赖</strong>，可直接离线打开，也可原样部署到 GitHub Pages。</p>
+  <p><b>可访问性与打印</b> &mdash;&mdash; 浅色与深色两套主题的正文对比度均已独立校验（&ge; 4.5:1）；支持 <code>prefers-reduced-motion</code> 与打印样式，可直接输出为纸张版式。</p>
+  <p><b>配套</b> &mdash;&mdash; 交互式 3D 演示见 <a class="ref" href="index.html">卢瑟福 α 粒子散射 3D 模拟器</a>。</p>
+</footer>
+
+</div>
+</body>
+</html>

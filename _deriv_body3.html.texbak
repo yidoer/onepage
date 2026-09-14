@@ -1,0 +1,289 @@
+<section class="sec" id="s7">
+  <h2 class="sec-title"><span class="num">七</span>微分散射截面与卢瑟福公式</h2>
+
+  <p class="lede">实验中不能控制单个粒子的瞄准距，只能统计"多少粒子被弹到了哪个角度"。截面就是把"<span class="m"><i>b</i>(<i>&#952;</i>)</span> 这条确定性关系"翻译成"可测量的计数分布"的桥梁。这一节完成这个翻译，并得到本文的主角——卢瑟福公式。</p>
+
+  <h3 class="sub">7.1 &nbsp;截面的定义</h3>
+
+  <p>设有一束强度为 <span class="m"><i>I</i></span>（单位时间穿过单位面积的粒子数）的平行粒子流射向一个靶核。由于轴对称，瞄准距在 <span class="m">[<i>b</i>, <i>b</i>+<i>d</i><i>b</i>]</span> 内的粒子落在面积为 <span class="m"><i>d&#963;</i> = 2&#960;<i>b</i>&#8201;|<i>d</i><i>b</i>|</span> 的圆环内。把</p>
+
+  <div class="eq">
+    <span class="body m"><i>d&#963;</i><span class="mo">&#8801;</span><span class="frac"><span class="fn"><i>d</i><i>N</i></span><span class="fd"><i>I</i></span></span><span class="mo">=</span>2&#960;<i>b</i><span class="mo">&#8201;</span>|<i>d</i><i>b</i>|</span>
+    <span class="tag">(7.1)</span>
+  </div>
+
+  <p>称为<strong>微分截面</strong>。它是对单个靶核而言的等效面积，量纲为面积。<span class="m"><i>d&#963;</i></span> 是"落在 <span class="m">[<i>&#952;</i>, <i>&#952;</i>+<i>d</i><i>&#952;</i>]</span> 环内"的截面。习惯上再除以该环对应的立体角</p>
+
+  <div class="eq">
+    <span class="body m"><i>d</i><i>&#937;</i><span class="mo">=</span>2&#960;<span class="mo">&#8201;</span><span class="mtext">sin</span><span class="mo">&#8201;</span><i>&#952;</i><span class="mo">&#8201;</span><i>d</i><i>&#952;</i></span>
+    <span class="tag">(7.2)</span>
+  </div>
+
+  <p>得到与探测器立体角无关的量</p>
+
+  <div class="eq">
+    <span class="body m"><span class="frac"><span class="fn"><i>d</i><i>&#963;</i></span><span class="fd"><i>d</i><i>&#937;</i></span></span><span class="mo">=</span><span class="frac"><span class="fn"><i>b</i></span><span class="fd"><span class="mtext">sin</span><span class="mo">&#8201;</span><i>&#952;</i></span></span><span class="mo">&#8201;</span><span class="mo">|</span><span class="frac"><span class="fn"><i>d</i><i>b</i></span><span class="fd"><i>d</i><i>&#952;</i></span></span><span class="mo">|</span></span>
+    <span class="tag">(7.3)</span>
+  </div>
+
+  <p class="mnote"><b>截面的物理读法。</b>截面不是几何面积，而是"有效靶面积"。它把"粒子被弹到 <span class="m"><i>&#952;</i></span> 附近"这件事折算成"靶核在这条路径上占据了多大一块面积"。这样不同实验的几何布置就可以互相比对。</p>
+
+  <h3 class="sub">7.2 &nbsp;代入 <i>b</i>(<i>&#952;</i>) 并化简</h3>
+
+  <p>由式 (5.7)，<span class="m"><i>b</i> = (<i>C</i>/2<i>E</i>)<span class="mtext">cot</span>(<i>&#952;</i>/2)</span>。对 <span class="m"><i>&#952;</i></span> 求导（注意 <span class="m">(<span class="mtext">cot</span><i>x</i>)&#8242; = &#8722;<span class="mtext">csc</span><sup>2</sup><i>x</i></span>）：</p>
+
+  <div class="eq">
+    <span class="body m"><span class="frac"><span class="fn"><i>d</i><i>b</i></span><span class="fd"><i>d</i><i>&#952;</i></span></span><span class="mo">=</span><span class="frac"><span class="fn"><i>C</i></span><span class="fd">2<i>E</i></span></span><span class="mo">&middot;</span><span class="mo">(</span><span class="mo">&#8722;</span><span class="frac"><span class="fn">1</span><span class="fd">2</span></span><span class="mo">)</span><span class="mo">&#8201;</span><span class="mtext">csc</span><sup>2</sup><span class="mo">&#8201;</span><span class="frac"><span class="fn"><i>&#952;</i></span><span class="fd">2</span></span><span class="mo">=</span><span class="mo">&#8722;</span><span class="frac"><span class="fn"><i>C</i></span><span class="fd">4<i>E</i></span></span><span class="mo">&#8201;</span><span class="mtext">csc</span><sup>2</sup><span class="mo">&#8201;</span><span class="frac"><span class="fn"><i>&#952;</i></span><span class="fd">2</span></span></span>
+    <span class="tag">(7.4)</span>
+  </div>
+
+  <p>把 <span class="m"><i>b</i></span>、<span class="m">|<i>db</i>/<i>d&#952;</i>|</span> 与 <span class="m"><span class="mtext">sin</span><i>&#952;</i> = 2<span class="mtext">sin</span>(<i>&#952;</i>/2)<span class="mtext">cos</span>(<i>&#952;</i>/2)</span> 一并代入式 (7.3)：</p>
+
+  <div class="eq">
+    <span class="body m"><span class="frac"><span class="fn"><i>d</i><i>&#963;</i></span><span class="fd"><i>d</i><i>&#937;</i></span></span><span class="mo">=</span><span class="frac"><span class="fn"><i>C</i></span><span class="fd">2<i>E</i></span></span><span class="frac"><span class="fn"><span class="mtext">cot</span>(<i>&#952;</i>/2)</span><span class="fd">2<span class="mtext">sin</span>(<i>&#952;</i>/2)<span class="mtext">cos</span>(<i>&#952;</i>/2)</span></span><span class="mo">&middot;</span><span class="frac"><span class="fn"><i>C</i></span><span class="fd">4<i>E</i></span></span><span class="mtext">csc</span><sup>2</sup><span class="mo">&#8201;</span><span class="frac"><span class="fn"><i>&#952;</i></span><span class="fd">2</span></span></span>
+    <span class="tag">(7.5)</span>
+  </div>
+
+  <p>这里发生了一次漂亮的连锁相消。记 <span class="m"><i>s</i> &#8801; <span class="mtext">sin</span>(<i>&#952;</i>/2)</span>、<span class="m"><i>c</i> &#8801; <span class="mtext">cos</span>(<i>&#952;</i>/2)</span>，则 <span class="m"><span class="mtext">cot</span>(<i>&#952;</i>/2) = <i>c</i>/<i>s</i></span>，式 (7.5) 中三角函数因子为</p>
+
+  <div class="eq">
+    <span class="body m"><span class="frac"><span class="fn"><i>c</i>/<i>s</i></span><span class="fd">2<i>s</i><i>c</i></span></span><span class="mo">&middot;</span><span class="frac"><span class="fn">1</span><span class="fd"><i>s</i><sup>2</sup></span></span><span class="mo">=</span><span class="frac"><span class="fn">1</span><span class="fd">2<i>s</i><sup>2</sup></span></span><span class="mo">&middot;</span><span class="frac"><span class="fn">1</span><span class="fd"><i>s</i><sup>2</sup></span></span><span class="mo">=</span><span class="frac"><span class="fn">1</span><span class="fd">2<span class="mtext">sin</span><sup>4</sup>(<i>&#952;</i>/2)</span></span></span>
+    <span class="tag">(7.6)</span>
+  </div>
+
+  <p>把 <span class="m"><i>c</i></span> 完全约掉，只剩一个纯粹的 <span class="m"><span class="mtext">sin</span><sup>4</sup>(<i>&#952;</i>/2)</span>。系数为 <span class="m">(<i>C</i>/2<i>E</i>)(<i>C</i>/4<i>E</i>) = <i>C</i><sup>2</sup>/(8<i>E</i><sup>2</sup>)</span>，再乘上式 (7.6) 中的 <span class="m">&#189;</span>：</p>
+
+  <div class="eq">
+    <span class="body m"><span class="frac"><span class="fn"><i>d</i><i>&#963;</i></span><span class="fd"><i>d</i><i>&#937;</i></span></span><span class="mo">=</span><span class="frac"><span class="fn"><i>C</i><sup>2</sup></span><span class="fd">16<i>E</i><sup>2</sup></span></span><span class="mo">&#8201;</span><span class="frac"><span class="fn">1</span><span class="fd"><span class="mtext">sin</span><sup>4</sup>(<i>&#952;</i>/2)</span></span></span>
+    <span class="tag">(7.7)</span>
+  </div>
+
+  <p>最后把 <span class="m"><i>C</i> = <i>k</i><sub>e</sub><i>zZe</i><sup>2</sup></span>（式 3.2）代回系数：<span class="m"><i>C</i><sup>2</sup>/(16<i>E</i><sup>2</sup>) = (<i>k</i><sub>e</sub><i>zZe</i><sup>2</sup>/4<i>E</i>)<sup>2</sup></span>。得到<strong>卢瑟福散射公式</strong>：</p>
+
+  <div class="eq key">
+    <span class="body m"><span class="frac"><span class="fn"><i>d</i><i>&#963;</i></span><span class="fd"><i>d</i><i>&#937;</i></span></span><span class="mo">=</span><span class="mo">(</span><span class="frac"><span class="fn"><i>k</i><sub>e</sub><i>zZe</i><sup>2</sup></span><span class="fd">4<i>E</i></span></span><span class="mo">)</span><sup>2</sup><span class="mo">&#8201;</span><span class="frac"><span class="fn">1</span><span class="fd"><span class="mtext">sin</span><sup>4</sup>(<i>&#952;</i>/2)</span></span></span>
+    <span class="tag">(7.8)</span>
+  </div>
+
+  <p class="mnote">若把入射粒子电荷写成 <span class="m"><i>z</i> = 2</span>（α 粒子），靶核电荷 <span class="m"><i>Z</i></span>，并用 <span class="m"><i>E</i></span> 表示入射动能，则式 (7.8) 亦可写作 <span class="m">(<i>k</i><sub>e</sub><i>zZe</i><sup>2</sup>/4<i>E</i>)<sup>2</sup><span class="mtext">csc</span><sup>4</sup>(<i>&#952;</i>/2)</span> 或 <span class="m">(<i>C</i>/4<i>E</i>)<sup>2</sup><span class="mtext">csc</span><sup>4</sup>(<i>&#952;</i>/2)</span>。三者完全等价。</p>
+
+  <h3 class="sub">7.3 &nbsp;公式在说什么</h3>
+
+  <p>式 (7.8) 有三个可单独检验的标度律，每一条都是实验可判据：</p>
+
+  <div class="tw">
+    <table>
+      <caption>表 2 &nbsp;卢瑟福公式的三个标度律及其物理含义</caption>
+      <thead><tr><th>依赖</th><th>标度</th><th>物理解释</th><th>检验方式</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>角度</td>
+          <td class="n"><span class="m"><span class="mtext">csc</span><sup>4</sup>(<i>&#952;</i>/2)</span></td>
+          <td>由 <span class="m"><i>b</i> &#8733; <span class="mtext">cot</span>(<i>&#952;</i>/2)</span> 与 <span class="m"><i>d&#963;</i> &#8733; <i>b</i>|<i>db</i>|</span> 共同产生，是"面积 &#8733; <i>b</i><sup>2</sup>"的几何后果</td>
+          <td>固定能量测角分布</td>
+        </tr>
+        <tr>
+          <td>能量</td>
+          <td class="n"><span class="m">&#8733; <i>E</i><sup>&#8722;2</sup></span></td>
+          <td>能量越高，同一角度对应的 <span class="m"><i>b</i></span> 越小，可用面积越小</td>
+          <td>改变束流能量重测</td>
+        </tr>
+        <tr>
+          <td>核电荷</td>
+          <td class="n"><span class="m">&#8733; <i>Z</i><sup>2</sup></span></td>
+          <td>库仑力正比于 <span class="m"><i>Z</i></span>，而截面正比于力（进而偏转）的平方</td>
+          <td>换用不同元素的箔</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="box note">
+    <p class="bt">
+      <svg class="ic ic-in" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11.2v5.2M12 7.7h.01"/></svg>
+      公式里为什么没有 <span class="m">&#8463;</span>
+    </p>
+    <p>式 (7.8) 完全由经典力学得到，其中不出现普朗克常数——但量子力学的严格计算（在纯库仑势、非相对论、无自旋条件下）给出的结果<strong>与它逐字相同</strong>。这不是巧合，而是库仑势特有的性质：它的 <span class="m">1/<i>r</i></span> 形式使经典轨迹与量子散射振幅之间存在精确对应。一旦势偏离 <span class="m">1/<i>r</i></span>（例如加上屏蔽或核力），两者立刻分离。详见 <span class="m">&#167;13.5</span>。</p>
+  </div>
+</section>
+
+<section class="sec" id="s8">
+  <h2 class="sec-title"><span class="num">八</span>积分截面与大角度稀有性</h2>
+
+  <h3 class="sub">8.1 &nbsp;散射到 <i>&#952;</i> &#8805; <i>&#952;</i><sub>0</sub> 的总截面</h3>
+
+  <p>把式 (7.8) 对角度积分，得到"散射角超过 <span class="m"><i>&#952;</i><sub>0</sub></span>"的截面。有一个更省力的等价做法：所有 <span class="m"><i>b</i> &#8804; <i>b</i>(<i>&#952;</i><sub>0</sub>)</span> 的粒子都会被弹到 <span class="m"><i>&#952;</i> &#8805; <i>&#952;</i><sub>0</sub></span>，所以这个截面就是半径为 <span class="m"><i>b</i>(<i>&#952;</i><sub>0</sub>)</span> 的圆盘面积：</p>
+
+  <div class="eq key">
+    <span class="body m"><i>&#963;</i>(<i>&#952;</i><span class="mrel">&#8805;</span><i>&#952;</i><sub>0</sub>)<span class="mo">=</span>&#960;<span class="mo">&#8201;</span><i>b</i>(<i>&#952;</i><sub>0</sub>)<sup>2</sup><span class="mo">=</span>&#960;<span class="mo">(</span><span class="frac"><span class="fn"><i>C</i></span><span class="fd">2<i>E</i></span></span><span class="mo">)</span><sup>2</sup><span class="mo">&#8201;</span><span class="mtext">cot</span><sup>2</sup><span class="mo">&#8201;</span><span class="frac"><span class="fn"><i>&#952;</i><sub>0</sub></span><span class="fd">2</span></span></span>
+    <span class="tag">(8.1)</span>
+  </div>
+
+  <p class="mnote">直接对式 (7.8) 积分可以验证这一点：<span class="m">&#8747;<sub><i>&#952;</i><sub>0</sub></sub><sup>&#960;</sup>(<i>C</i><sup>2</sup>/16<i>E</i><sup>2</sup>)<span class="mtext">csc</span><sup>4</sup>(<i>&#952;</i>/2)&#8201;2&#960;<span class="mtext">sin</span><i>&#952;</i>&#8201;<i>d&#952;</i> = &#960;(<i>C</i>/2<i>E</i>)<sup>2</sup><span class="mtext">cot</span><sup>2</sup>(<i>&#952;</i><sub>0</sub>/2)</span>。用 <span class="m"><i>u</i> = <i>&#952;</i>/2</span> 换元后，被积函数化为 <span class="m">&#8722;<span class="mtext">d</span>(1/(2<span class="mtext">sin</span><sup>2</sup><i>u</i>))</span>，积分是初等的。结果与"圆盘面积"论证一致。这也从侧面确认式 (7.8) 的归一化是正确的。</p>
+
+  <h3 class="sub">8.2 &nbsp;"大角度稀有"到底有多稀有</h3>
+
+  <p>式 (7.8) 的角度因子 <span class="m"><span class="mtext">csc</span><sup>4</sup>(<i>&#952;</i>/2)</span> 在 <span class="m"><i>&#952;</i> &#8594; 0</span> 时发散得非常快。下表以小角度 <span class="m">10&#176;</span> 为基准列出相对强度：</p>
+
+  <div class="tw">
+    <table>
+      <caption>表 3 &nbsp;<span class="m">d&#963;/d&#937;</span> 的角度依赖（相对 <span class="m"><i>&#952;</i> = 10&#176;</span>）</caption>
+      <thead><tr><th class="n">&#952;</th><th class="n">csc&#8308;(&#952;/2)</th><th class="n">相对强度</th><th>读法</th></tr></thead>
+      <tbody>
+        <tr><td class="n">5&#176;</td><td class="n">2.76&#215;10<sup>5</sup></td><td class="n">15.9</td><td>比 10&#176; 还强 16 倍</td></tr>
+        <tr><td class="n">10&#176;</td><td class="n">1.73&#215;10<sup>4</sup></td><td class="n">1</td><td>基准</td></tr>
+        <tr><td class="n">20&#176;</td><td class="n">1.10&#215;10<sup>3</sup></td><td class="n">1/15.8</td><td>已降一个半数量级</td></tr>
+        <tr><td class="n">30&#176;</td><td class="n">2.23&#215;10<sup>2</sup></td><td class="n">1/78</td><td></td></tr>
+        <tr><td class="n">60&#176;</td><td class="n">16</td><td class="n">1/1083</td><td>约千分之一</td></tr>
+        <tr><td class="n">90&#176;</td><td class="n">4</td><td class="n">1/4330</td><td><b>比 10&#176; 稀有约 4300 倍</b></td></tr>
+        <tr><td class="n">120&#176;</td><td class="n">1.78</td><td class="n">1/9756</td><td></td></tr>
+        <tr><td class="n">180&#176;</td><td class="n">1</td><td class="n">1/17331</td><td>正碰，最小值</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <figure class="fig">
+    <div class="frame">
+      <svg viewBox="0 0 640 300" role="img" aria-label="卢瑟福微分散射截面随散射角变化的对数坐标图">
+        <!-- 网格 -->
+        <g stroke="var(--rule)" stroke-width="1">
+          <line x1="60" y1="110" x2="600" y2="110"/>
+          <line x1="60" y1="180" x2="600" y2="180"/>
+          <line x1="150" y1="40" x2="150" y2="250"/>
+          <line x1="240" y1="40" x2="240" y2="250"/>
+          <line x1="330" y1="40" x2="330" y2="250"/>
+          <line x1="420" y1="40" x2="420" y2="250"/>
+          <line x1="510" y1="40" x2="510" y2="250"/>
+        </g>
+        <!-- 坐标轴 -->
+        <line x1="60" y1="250" x2="612" y2="250" class="sv-ink"/>
+        <line x1="60" y1="250" x2="60" y2="34" class="sv-ink"/>
+        <!-- 曲线 -->
+        <path class="sv-shu" stroke-width="2.2" d="M63,57.8 L66,85.9 L75,123 L90,151.1 L120,179 L150,195.2 L195,211.1 L240,221.9 L330,235.9 L420,244.2 L510,248.6 L600,250"/>
+        <!-- y 轴刻度 -->
+        <g class="sv-k" text-anchor="end">
+          <text x="54" y="44">10&#8313;</text>
+          <text x="54" y="114">10&#8309;</text>
+          <text x="54" y="184">10&#179;</text>
+          <text x="54" y="254">10&#8304;</text>
+        </g>
+        <!-- x 轴刻度 -->
+        <g class="sv-k" text-anchor="middle">
+          <text x="60" y="268">0&#176;</text>
+          <text x="150" y="268">30&#176;</text>
+          <text x="240" y="268">60&#176;</text>
+          <text x="330" y="268">90&#176;</text>
+          <text x="420" y="268">120&#176;</text>
+          <text x="510" y="268">150&#176;</text>
+          <text x="600" y="268">180&#176;</text>
+        </g>
+        <text x="330" y="292" text-anchor="middle" class="sv-tu">散射角 &#952;</text>
+        <text x="16" y="145" class="sv-tu" transform="rotate(-90 16,145)" text-anchor="middle">d&#963;/d&#937;（相对值）</text>
+        <!-- 注释 -->
+        <g class="sv-k">
+          <text x="96" y="144">角度每减半，强度约增 16 倍</text>
+          <line x1="90" y1="149" x2="76" y2="128" class="sv-ink2"/>
+          <text x="470" y="238">90&#176; 处仅剩 4（相对值）</text>
+        </g>
+      </svg>
+    </div>
+    <figcaption><b>图 3.</b> 微分散面随散射角的变化（纵轴为对数刻度）。曲线在 <span class="m"><i>&#952;</i> &#8594; 0</span> 时按 <span class="m"><span class="mtext">csc</span><sup>4</sup>(<i>&#952;</i>/2)</span> 无界上升，在 <span class="m"><i>&#952;</i> = 180&#176;</span> 处取最小值 1。这种"前方几乎全部、后方极其稀有"的形态，是卢瑟福模型给出核式图像的直接原因：只有极少数粒子能靠近到极小的距离。</figcaption>
+  </figure>
+
+  <div class="box caution">
+    <p class="bt">
+      <svg class="ic ic-in" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.6 21.4 19.6H2.6z"/><path d="M12 9.6v4.4M12 17h.01"/></svg>
+      一个必须指出的"发散"
+    </p>
+    <p>式 (8.1) 中令 <span class="m"><i>&#952;</i><sub>0</sub> &#8594; 0</span>，得到 <span class="m"><i>&#963;</i> &#8594; &#8734;</span>——总截面<strong>发散</strong>。这在物理上并非悖论：库仑力是长程力，任意远处的粒子都会受到哪怕极微弱的偏转，所以"被散射的粒子总数"确实无穷。实际中总会被两件事截断：<strong>电子屏蔽</strong>（把长程库仑势在 <span class="m"><i>r</i> &#8819; <i>a</i><sub>0</sub><i>Z</i><sup>&#8722;1/3</sup></span> 处切断，见 <span class="m">&#167;13.2</span>）和<strong>探测器的角度分辨极限</strong>。所以卢瑟福公式只有在 <span class="m"><i>&#952;</i></span> 不太小时才是可用的微分截面。</p>
+  </div>
+</section>
+
+<section class="sec" id="s9">
+  <h2 class="sec-title"><span class="num">九</span>数值实例：5 MeV α 粒子对金箔</h2>
+
+  <p class="lede">把公式里的数字真正算出来，才能看清量级。以下全部使用 SI 单位与盖革–马斯登实验的典型条件。</p>
+
+  <h3 class="sub">9.1 &nbsp;输入常数</h3>
+
+  <div class="tw">
+    <table>
+      <caption>表 4 &nbsp;数值输入</caption>
+      <thead><tr><th>量</th><th>符号</th><th class="n">数值</th></tr></thead>
+      <tbody>
+        <tr><td>α 粒子电荷数</td><td class="n"><span class="m"><i>z</i></span></td><td class="n">2</td></tr>
+        <tr><td>金核电荷数</td><td class="n"><span class="m"><i>Z</i></span></td><td class="n">79</td></tr>
+        <tr><td>库仑常量</td><td class="n"><span class="m"><i>k</i><sub>e</sub> = 1/4&#960;<i>&#949;</i><sub>0</sub></span></td><td class="n">8.9876&#215;10<sup>9</sup> N&middot;m<sup>2</sup>/C<sup>2</sup></td></tr>
+        <tr><td>入射动能</td><td class="n"><span class="m"><i>E</i></span></td><td class="n">5 MeV = 8.0109&#215;10<sup>&#8722;13</sup> J</td></tr>
+        <tr><td colspan="3" style="color:var(--ink-3);font-size:13px">由此算出两个导出量</td></tr>
+        <tr><td>相互作用常数</td><td class="n"><span class="m"><i>C</i> = <i>k</i><sub>e</sub><i>zZe</i><sup>2</sup></span></td><td class="n">3.6445&#215;10<sup>&#8722;26</sup> J&middot;m</td></tr>
+        <tr><td>角度标尺</td><td class="n"><span class="m"><i>C</i>/2<i>E</i></span></td><td class="n">2.2747&#215;10<sup>&#8722;14</sup> m = 22.75 fm</td></tr>
+        <tr><td>正碰距离</td><td class="n"><span class="m"><i>d</i> = <i>C</i>/<i>E</i></span></td><td class="n">4.5494&#215;10<sup>&#8722;14</sup> m = 45.49 fm</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3 class="sub">9.2 &nbsp;瞄准距与最近逼近距离</h3>
+
+  <p>由式 (5.7) 与 (6.1)，取 <span class="m"><i>C</i>/2<i>E</i> = 22.75</span> fm：</p>
+
+  <div class="tw">
+    <table>
+      <caption>表 5 &nbsp;5 MeV α 粒子在金核上的瞄准距与最近逼近距离</caption>
+      <thead>
+        <tr><th class="n">&#952;</th><th class="n">b（fm）</th><th class="n">b 的尺度类比</th><th class="n">r<sub>min</sub>（fm）</th><th class="n">相对 d&#963;/d&#937;</th></tr>
+      </thead>
+      <tbody>
+        <tr><td class="n">1&#176;</td><td class="n">2607</td><td class="n">2.6 pm（约 1/50 原子半径）</td><td class="n">2630</td><td class="n">1.72&#215;10<sup>8</sup></td></tr>
+        <tr><td class="n">5&#176;</td><td class="n">521</td><td class="n">0.52 pm</td><td class="n">544</td><td class="n">2.76&#215;10<sup>5</sup></td></tr>
+        <tr><td class="n">10&#176;</td><td class="n">260.0</td><td class="n">0.26 pm</td><td class="n">284</td><td class="n">1.73&#215;10<sup>4</sup></td></tr>
+        <tr><td class="n">30&#176;</td><td class="n">84.9</td><td class="n"></td><td class="n">111</td><td class="n">2.23&#215;10<sup>2</sup></td></tr>
+        <tr><td class="n">60&#176;</td><td class="n">39.4</td><td class="n"></td><td class="n">68.3</td><td class="n">16</td></tr>
+        <tr><td class="n">90&#176;</td><td class="n">22.75</td><td class="n"></td><td class="n">54.9</td><td class="n">4</td></tr>
+        <tr><td class="n">120&#176;</td><td class="n">13.1</td><td class="n"></td><td class="n">49.0</td><td class="n">1.78</td></tr>
+        <tr><td class="n">150&#176;</td><td class="n">6.10</td><td class="n"></td><td class="n">46.3</td><td class="n">1.15</td></tr>
+        <tr><td class="n">180&#176;</td><td class="n">0</td><td class="n">正碰</td><td class="n">45.5</td><td class="n">1</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>这张表里藏着三个非常重要的量级事实：</p>
+
+  <p><strong>(1) <span class="m"><i>r</i><sub>min</sub></span> 存在下界。</strong>无论把 <span class="m"><i>b</i></span> 调到多小，<span class="m"><i>r</i><sub>min</sub></span> 都不会小于 <span class="m">45.5</span> fm。能量决定了"能靠多近"的硬底线。</p>
+
+  <p><strong>(2) 与核半径相比还有很大余量。</strong>金核半径由 <span class="m"><i>R</i> &#8776; 1.2<i>A</i><sup>1/3</sup></span> fm 估计（<span class="m"><i>A</i> = 197</span>）：</p>
+
+  <div class="eq">
+    <span class="body m"><i>R</i><sub>Au</sub><span class="mo">&#8776;</span>1.2<span class="mo">&middot;</span>197<sup>1/3</sup><span class="mtext">&nbsp;fm</span><span class="mo">&#8776;</span>1.2<span class="mo">&middot;</span>5.818<span class="mtext">&nbsp;fm</span><span class="mo">&#8776;</span>7.0<span class="mtext">&nbsp;fm</span></span>
+    <span class="tag">(9.1)</span>
+  </div>
+
+  <p>而 <span class="m"><i>d</i> = 45.5</span> fm，是核半径的 <span class="m">6.5</span> 倍。所以 5 MeV 的 α 粒子<strong>根本碰不到核</strong>，全程只在核外感受纯库仑力——这正是卢瑟福公式在这个能量下精确成立的原因。</p>
+
+  <p><strong>(3) 想要"碰到"核需要多高能量？</strong>令 <span class="m"><i>d</i> = <i>R</i></span>，即 <span class="m"><i>C</i>/<i>E</i> = <i>R</i></span>：</p>
+
+  <div class="eq key">
+    <span class="body m"><i>E</i><sub>crit</sub><span class="mo">=</span><span class="frac"><span class="fn"><i>C</i></span><span class="fd"><i>R</i><sub>Au</sub></span></span><span class="mo">=</span><span class="frac"><span class="fn">3.6445&#215;10<sup>&#8722;26</sup></span><span class="fd">7.0&#215;10<sup>&#8722;15</sup></span></span><span class="mtext">&nbsp;J</span><span class="mo">&#8776;</span>5.2&#215;10<sup>&#8722;12</sup><span class="mtext">&nbsp;J</span><span class="mo">&#8776;</span>32.6<span class="mtext">&nbsp;MeV</span></span>
+    <span class="tag">(9.2)</span>
+  </div>
+
+  <p>这与实验事实高度吻合：用 α 粒子轰击金箔时，<strong>约 25&#8211;30 MeV 以上开始观察到对卢瑟福公式的系统偏离</strong>，而偏离正是核力开始介入、点电荷假设失效的标志。也就是说，<span class="m">&#167;10.2</span> 中由该公式反推出的核半径上限，其自洽性是被实验独立确认过的。</p>
+
+  <h3 class="sub">9.3 &nbsp;散射到 90&#176; 以上的概率</h3>
+
+  <p>用式 (8.1) 取 <span class="m"><i>&#952;</i><sub>0</sub> = 90&#176;</span>（每核）：</p>
+
+  <div class="eq">
+    <span class="body m"><i>&#963;</i>(<i>&#952;</i><span class="mrel">&#8805;</span>90<sup>&#8728;</sup>)<span class="mo">=</span>&#960;<span class="mo">&#8201;</span><i>b</i>(90<sup>&#8728;</sup>)<sup>2</sup><span class="mo">=</span>&#960;<span class="mo">&#8201;</span>(22.75<span class="mtext">&nbsp;fm</span>)<sup>2</sup><span class="mo">=</span>1.63&#215;10<sup>3</sup><span class="mtext">&nbsp;fm</span><sup>2</sup><span class="mo">=</span>16.3<span class="mtext">&nbsp;b</span></span>
+    <span class="tag">(9.3)</span>
+  </div>
+
+  <p>作为对照，一个金原子的几何截面约 <span class="m">&#960;(144<span class="mtext">&nbsp;pm</span>)<sup>2</sup> &#8776; 6.5&#215;10<sup>8</sup></span> b。因此被弹到 90&#176; 以上的比例约为</p>
+
+  <div class="eq">
+    <span class="body m"><span class="frac"><span class="fn">16.3</span><span class="fd">6.5&#215;10<sup>8</sup></span></span><span class="mrel">&#8776;</span>2.5&#215;10<sup>&#8722;8</sup></span>
+    <span class="tag">(9.4)</span>
+  </div>
+
+  <p>约四千万分之一。这就是为什么盖革和马斯登需要观察数以万计的闪烁、才能记录到寥寥几次大角度事件——也正是这寥寥几次，否定了汤姆孙模型。</p>
+</section>

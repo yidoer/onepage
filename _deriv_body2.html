@@ -1,0 +1,272 @@
+<section class="sec" id="s4">
+  <h2 class="sec-title"><span class="num">四</span>轨道积分：双曲线轨道</h2>
+
+  <p class="lede">这一节把两条守恒律合成一个关于轨道的微分方程并解出它。结果会告诉我们：α 粒子在库仑场中的轨道是一条<strong>以核为一个焦点的双曲线</strong>——这个几何事实是后面一切推论的地基。</p>
+
+  <h3 class="sub">4.1 &nbsp;从守恒律到轨道方程</h3>
+
+  <p>用极坐标写出能量守恒式 (3.4)。横向速度由角动量给出 <span class="m">v_{\varphi } = L/(mr)</span>，径向速度写成对角的导数 <span class="m">v_{r} = r\dot{} = (dr/d\varphi )\varphi \dot{}</span>，而由式 (3.6) <span class="m">\varphi \dot{} = L/(mr^{2})</span>，于是</p>
+
+  <div class="eq">
+    <span class="body m">E=\frac{L^{2}}{2mr^{4}}\sqrt{\frac{dr}{d\varphi }}^{2}+\frac{L^{2}}{2mr^{2}}+\frac{C}{r}</span>
+    <span class="tag">(4.1)</span>
+  </div>
+
+  <p>作代换 <span class="m">u \equiv 1/r</span>。此时 <span class="m">1/r^{4}\,(dr/d\varphi )^{2} = (du/d\varphi )^{2}</span>，式 (4.1) 化简为一个<strong>不含一次导数项、且没有显含 <i>&#966;</i></strong> 的方程：</p>
+
+  <div class="eq">
+    <span class="body m">E=\frac{L^{2}}{2m}\sqrt{\frac{du}{d\varphi }}^{2}+\frac{L^{2}u^{2}}{2m}+Cu</span>
+    <span class="tag">(4.2)</span>
+  </div>
+
+  <p>两边对 <span class="m">\varphi</span> 求导，并约去公因子 <span class="m">(L^{2}/m)(du/d\varphi )</span>（该因子在转折点处为零，需单独讨论，见附录 <a class="ref" href="#a1">A</a>），得到一个常系数线性方程：</p>
+
+  <div class="eq key">
+    <span class="body m">\frac{d^{2}u}{d\varphi ^{2}}+u=-\frac{mC}{L^{2}}</span>
+    <span class="tag">(4.3)</span>
+  </div>
+
+  <div class="box note">
+    <p class="bt">
+      <svg class="ic ic-in" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11.2v5.2M12 7.7h.01"/></svg>
+      式 (4.3) 右端的负号从哪里来
+    </p>
+    <p>负号是<strong>排斥</strong>的标记。若把力改成吸引（如电子绕核），右端变为 <span class="m">+mC/L^{2}</span>，解的形式随之变为 <span class="m">r = \alpha /(1 + e\,\cos \,\varphi )</span>——那才是行星轨道（椭圆/双曲线，核在焦点上）。这里 <span class="m">e\,\cos \,\varphi</span> 与 1 的相对符号相反，所以<em>轨道的凹侧背离力心</em>：粒子被"推出去"。这个符号差异正是卢瑟福散射与行星运动在几何上的唯一区别。</p>
+  </div>
+
+  <h3 class="sub">4.2 &nbsp;解的形式：圆锥曲线</h3>
+
+  <p>式 (4.3) 的通解为</p>
+
+  <div class="eq">
+    <span class="body m">u(\varphi )=A\,\cos \,\varphi +B\,\sin \,\varphi -\frac{mC}{L^{2}}</span>
+    <span class="tag">(4.4)</span>
+  </div>
+
+  <p>由于轨道关于最近点（<strong>近核点</strong>，apsis）对称，我们可以把极角的原点选在近核点方向上，即令 <span class="m">\varphi = 0</span> 处 <span class="m">du/d\varphi = 0</span>。这立即给出 <span class="m">B = 0</span>。<strong>近核点处 <i>du</i>/<i>d&#966;</i> = 0 并非额外假设</strong>，它是"轨道在近核点处 <i>r</i> 取极值"的直接后果。</p>
+
+  <p>再引入两个具有明确物理意义的量——一个<strong>长度</strong>和一个<strong>纯数</strong>：</p>
+
+  <div class="eq">
+    <span class="body m">\alpha \equiv \frac{L^{2}}{mC},\ \ e\equiv A\alpha</span>
+    <span class="tag">(4.5)</span>
+  </div>
+
+  <p>于是 <span class="m">u = A\cos \varphi - 1/\alpha</span>，取倒数得到<strong>轨道方程</strong>：</p>
+
+  <div class="eq key">
+    <span class="body m">r(\varphi )=\frac{\alpha }{e\,\cos \,\varphi -1}</span>
+    <span class="tag">(4.6)</span>
+  </div>
+
+  <p>式 (4.6) 就是极坐标下圆锥曲线的标准式，<span class="m">e</span> 为偏心率。<span class="m">e &lt; 1</span> 为椭圆，<span class="m">e = 1</span> 为抛物线，<span class="m">e &gt; 1</span> 为双曲线。由于粒子来自无穷远又回到无穷远，且势能在无穷远为零、动能为正，轨道必须是<strong>开放</strong>的；又由上一节的符号讨论，<span class="m">e &gt; 1</span>。因此：<strong>轨道是以核为一个焦点的双曲线。</strong></p>
+
+  <p>由式 (4.6) 可直接读出两个几何特征。第一，<span class="m">r</span> 在 <span class="m">\varphi = 0</span> 处取极小值</p>
+
+  <div class="eq">
+    <span class="body m">r_{\text{min}}=r(0)=\frac{\alpha }{e-1}</span>
+    <span class="tag">(4.7)</span>
+  </div>
+
+  <p>第二，粒子只能到达 <span class="m">e\,\cos \,\varphi \ge 1</span> 的角度范围。记 <span class="m">\varphi _{\infty }</span> 为 <span class="m">r \to \infty</span> 时 <span class="m">\varphi</span> 的极限，则</p>
+
+  <div class="eq">
+    <span class="body m">\cos \,\varphi _{\infty }=\frac{1}{e},\ \ \varphi _{\infty }=\arccos \,\frac{1}{e}</span>
+    <span class="tag">(4.8)</span>
+  </div>
+
+  <h3 class="sub">4.3 &nbsp;散射角与偏心率</h3>
+
+  <p>式 (4.6) 描述的轨道关于 <span class="m">\varphi = 0</span> 对称：粒子从 <span class="m">\varphi = -\varphi _{\infty }</span> 进入，经过近核点，从 <span class="m">\varphi = +\varphi _{\infty }</span> 离开。现在把它翻译成实验室里的角度。</p>
+
+  <p>在无穷远处 <span class="m">v_{r} \gg v_{\varphi }</span>，速度几乎沿径向。入射端速度<strong>指向</strong>力心，其方向角为 <span class="m">\pi - \varphi _{\infty }</span>；出射端速度<strong>背离</strong>力心，方向角为 <span class="m">\varphi _{\infty }</span>。两者之差就是散射角：</p>
+
+  <div class="eq">
+    <span class="body m">\theta =(\pi -\varphi _{\infty })-\varphi _{\infty }=\pi -2\varphi _{\infty }\ \ \Rightarrow \ \ \varphi _{\infty }=\frac{\pi -\theta }{2}</span>
+    <span class="tag">(4.9)</span>
+  </div>
+
+  <p>代入式 (4.8) 并用 <span class="m">\cos ((\pi -\theta )/2) = \sin (\theta /2)</span>：</p>
+
+  <div class="eq key">
+    <span class="body m">\frac{1}{e}=\cos \,\frac{\pi -\theta }{2}=\sin \,\frac{\theta }{2}\ \ \Rightarrow \ \ e=\frac{1}{\sin (\theta /2)}=\csc \,\frac{\theta }{2}</span>
+    <span class="tag">(4.10)</span>
+  </div>
+
+  <p>式 (4.10) 是一个很强的结果：<strong>偏心率只由散射角决定</strong>，与能量、电荷、瞄准距都无关。两个极限可以自检：正碰 <span class="m">\theta \to \pi</span> 给出 <span class="m">e \to 1</span>（双曲线退化为抛物线，粒子恰好"擦到"折返点）；擦边 <span class="m">\theta \to 0</span> 给出 <span class="m">e \to \infty</span>（双曲线拉直成一条直线，正如无场情形）。</p>
+
+  <figure class="fig">
+    <div class="frame">
+      <svg viewBox="0 0 660 420" role="img" aria-label="库仑排斥轨道几何：以核为焦点的双曲线、渐近线、瞄准距与最近逼近距离">
+        <!-- 渐近线 -->
+        <line x1="212" y1="8" x2="607" y2="403" class="sv-ink2"/>
+        <line x1="212" y1="412" x2="607" y2="17" class="sv-ink2"/>
+        <!-- 对称轴 -->
+        <line x1="330" y1="210" x2="632" y2="210" class="sv-ink2"/>
+        <!-- 轨道 -->
+        <path class="sv-shu" d="M600.4,385.5 C505,280 480,240 474.8,210 C480,180 505,140 600.4,34.5" stroke-width="2.1"/>
+        <!-- 瞄准距 b：由 O 到入射渐近线的垂足 -->
+        <line x1="330" y1="210" x2="372.4" y2="167.6" class="sv-ai"/>
+        <rect x="366" y="196" width="9" height="9" class="sv-ai" fill="none"/>
+        <!-- r_min -->
+        <line x1="330" y1="210" x2="474.8" y2="210" class="sv-ai" stroke-dasharray="0"/>
+        <!-- phi_inf 射线 -->
+        <line x1="330" y1="210" x2="436" y2="316" class="sv-ink2" stroke-dasharray="3 3"/>
+        <!-- 点 -->
+        <circle cx="330" cy="210" r="4" class="sv-fill-shu"/>
+        <circle cx="474.8" cy="210" r="3.4" class="sv-fill"/>
+        <!-- 标注 -->
+        <text x="600" y="404" class="sv-k">入射渐近线</text>
+        <text x="600" y="22" class="sv-k">出射渐近线</text>
+        <text x="486" y="205" class="sv-t">近核点</text>
+        <text x="560" y="200" class="sv-k">对称轴</text>
+        <text x="396" y="230" class="sv-t">r<tspan dy="4" font-size="9">min</tspan></text>
+        <text x="336" y="188" class="sv-t">b</text>
+        <text x="318" y="234" class="sv-tu">O</text>
+        <text x="352" y="252" class="sv-t">&#966;<tspan dy="4" font-size="9">&#8734;</tspan></text>
+        <text x="176" y="30" class="sv-tu">&#952; = &#960; &#8722; 2&#966;<tspan dy="4" font-size="9">&#8734;</tspan></text>
+        <!-- 直角标记 -->
+        <circle cx="414.8" cy="210" r="2.4" class="sv-fill" opacity=".5"/>
+        <text x="392" y="228" class="sv-k" opacity=".75">中心</text>
+      </svg>
+    </div>
+    <figcaption><b>图 2.</b> 库仑排斥轨道的完整几何（按 <span class="m">\theta = 90^\circ</span> 即 <span class="m">\varphi _{\infty } = 45^\circ</span>、<span class="m">e = \sqrt{2}</span> 精确绘制）。核位于焦点 <b>O</b>；两条虚线渐近线相交于双曲线的<strong>中心</strong>，中心位于焦点与近核点之间。由 <b>O</b> 到入射渐近线的垂距即瞄准距 <span class="m">b</span>（图中已标出直角）；<span class="m">r_{\text{min}}</span> 沿对称轴量取。进入方向与出射方向之差为 <span class="m">\theta</span>，而 <span class="m">\varphi _{\infty }</span> 是"O 到无穷远处粒子"的方位角与对称轴的夹角。</figcaption>
+  </figure>
+</section>
+
+<section class="sec" id="s5">
+  <h2 class="sec-title"><span class="num">五</span>散射角与瞄准距的关系</h2>
+
+  <p class="lede">上一节给出了轨道的形状，但还没把 <span class="m">\theta</span> 与真正决定命运的参数 <span class="m">b</span> 联系起来。这一节用<strong>冲量法</strong>求出这条关系，并在 5.4 用完全独立的第二条路线互校。</p>
+
+  <h3 class="sub">5.1 &nbsp;动量变化所受的两条约束</h3>
+
+  <p><strong>约束一：大小。</strong>在无穷远处势能为零，故入射与出射速率相等，均为 <span class="m">v_{0}</span>。两个等长矢量 <span class="m">m\vec{v}_{0}</span> 与 <span class="m">m\vec{v}_{0}'</span> 夹角为 <span class="m">\theta</span>，其差的模为</p>
+
+  <div class="eq">
+    <span class="body m">|\vec{\Delta p}|=2mv_{0}\,\sin \,\frac{\theta }{2}</span>
+    <span class="tag">(5.1)</span>
+  </div>
+
+  <p class="mnote"><b>为什么？</b>把等长矢量的差写成 <span class="m">2v\sin (\theta /2)</span>：两个矢量 <span class="m">\vec{a}, \vec{b}</span> 等长时 <span class="m">|\vec{a}-\vec{b}| = 2|\vec{a}|\sin (\theta /2)</span>，其中 <span class="m">\theta</span> 为夹角。这是"弦长 = 2R&#8201;sin(半角)"的直接应用。</p>
+
+  <p><strong>约束二：方向。</strong>轨道关于近核点与力心的连线（即对称轴）镜像对称。库仑力在镜像下不变，而垂直于对称轴的冲量分量在轨迹前半段与后半段<strong>等大反向</strong>，彼此抵消。因此净冲量<strong>严格沿对称轴</strong>，且因力为斥力而指向背离核的一侧。</p>
+
+  <h3 class="sub">5.2 &nbsp;把冲量积出来</h3>
+
+  <p>设 <span class="m">\varphi</span> 为粒子位置矢量与对称轴的夹角（与 4.2 节同一约定）。冲量沿对称轴的分量为</p>
+
+  <div class="eq">
+    <span class="body m">\Delta p=\int _{-\varphi _{\infty }}^{+\varphi _{\infty }}\frac{C}{r^{2}}\,\cos \,\varphi \,dt</span>
+    <span class="tag">(5.2)</span>
+  </div>
+
+  <p>关键一步是用式 (3.6) 换掉 <span class="m">dt</span>。这一步之所以奏效，是因为 <span class="m">dt = (mr^{2}/L)d\varphi</span> 分子上的 <span class="m">r^{2}</span> 恰好与力中的 <span class="m">1/r^{2}</span> 相消，积分顿时变得与轨道形状<strong>无关</strong>：</p>
+
+  <div class="eq">
+    <span class="body m">\Delta p=\frac{mC}{L}\int _{-\varphi _{\infty }}^{+\varphi _{\infty }}\cos \,\varphi \,d\varphi =\frac{mC}{L}\,[\sin \,\varphi ]_{-\varphi _{\infty }}^{+\varphi _{\infty }}=\frac{2mC}{L}\,\sin \,\varphi _{\infty }</span>
+    <span class="tag">(5.3)</span>
+  </div>
+
+  <p>由式 (4.9) 与 (4.10)，<span class="m">\sin \varphi _{\infty } = \sin ((\pi -\theta )/2) = \cos (\theta /2)</span>，于是</p>
+
+  <div class="eq">
+    <span class="body m">\Delta p=\frac{2mC}{L}\,\cos \,\frac{\theta }{2}</span>
+    <span class="tag">(5.4)</span>
+  </div>
+
+  <h3 class="sub">5.3 &nbsp;联立求解</h3>
+
+  <p>式 (5.1) 与 (5.4) 是同一个 <span class="m">\Delta p</span> 的两种表达，令其相等：</p>
+
+  <div class="eq">
+    <span class="body m">2mv_{0}\,\sin \,\frac{\theta }{2}=\frac{2mC}{L}\,\cos \,\frac{\theta }{2}</span>
+    <span class="tag">(5.5)</span>
+  </div>
+
+  <p>两边约去 <span class="m">2m</span>，用 <span class="m">L = mv_{0}b</span> 与 <span class="m">E = \tfrac{1}{2}mv_{0}^{2}</span> 整理：</p>
+
+  <div class="eq">
+    <span class="body m">v_{0}\,\sin \,\frac{\theta }{2}=\frac{C}{mv_{0}b}\,\cos \,\frac{\theta }{2}\ \ \Rightarrow \ \ mv_{0}^{2}b\,\sin \,\frac{\theta }{2}=C\,\cos \,\frac{\theta }{2}</span>
+    <span class="tag">(5.6)</span>
+  </div>
+
+  <p>即 <span class="m">2Eb\,\sin (\theta /2) = C\,\cos (\theta /2)</span>。于是得到本节的核心结果：</p>
+
+  <div class="eq key">
+    <span class="body m">\tan \,\frac{\theta }{2}=\frac{C}{2Eb},\ \ \ b=\frac{C}{2E}\,\cot \,\frac{\theta }{2}</span>
+    <span class="tag">(5.7)</span>
+  </div>
+
+  <p>式 (5.7) 里出现了贯穿全文的特征长度 <span class="m">C/(2E)</span>。它完全由入射条件决定，与瞄准距无关；<span class="m">b</span> 与 <span class="m">\theta</span> 的关系就是这个长度充当"标尺"的 <span class="m">\cot</span> 曲线。三个极限都合理：<span class="m">b \to \infty</span> 时 <span class="m">\theta \to 0</span>（远处掠过，几乎不偏）；<span class="m">b \to 0</span> 时 <span class="m">\theta \to \pi</span>（正碰，原路返回）；<span class="m">b</span> 越小偏转越大，且严格单调。</p>
+
+  <h3 class="sub">5.4 &nbsp;第二条路线：从轨道方程直接互校</h3>
+
+  <p>冲量法用到"净冲量沿对称轴"这一对称性论证。为了不留下任何可疑之处，这里再从轨道方程本身独立算一遍。在近核点处速度纯横向，能量守恒式 (3.4) 给出</p>
+
+  <div class="eq">
+    <span class="body m">E=\frac{L^{2}}{2mr_{\text{min}}^{2}}+\frac{C}{r_{\text{min}}}</span>
+    <span class="tag">(5.8)</span>
+  </div>
+
+  <p>把 <span class="m">L^{2} = mC\alpha</span>（式 4.5）与 <span class="m">r_{\text{min}} = \alpha /(e-1)</span>（式 4.7）代入，消去 <span class="m">\alpha</span>：</p>
+
+  <div class="eq">
+    <span class="body m">E=\frac{C}{2}\,\frac{e-1}{r_{\text{min}}}+\frac{C}{r_{\text{min}}}=\frac{C}{2r_{\text{min}}}(e+1)\ \ \Rightarrow \ \ r_{\text{min}}=\frac{C}{2E}(e+1)</span>
+    <span class="tag">(5.9)</span>
+  </div>
+
+  <p>再由式 (4.5) 与 <span class="m">L^{2} = 2mEb^{2}</span>：</p>
+
+  <div class="eq">
+    <span class="body m">b^{2}=\frac{L^{2}}{2mE}=\frac{C\alpha }{2E}=\frac{C}{2E}\,\frac{C(e+1)}{2E}(e-1)=\frac{C^{2}}{4E^{2}}(e^{2}-1)</span>
+    <span class="tag">(5.10)</span>
+  </div>
+
+  <p>而由式 (4.10)，<span class="m">e^{2} - 1 = \csc ^{2}(\theta /2) - 1 = \cot ^{2}(\theta /2)</span>（因为 <span class="m">1 + \cot ^{2} = \csc ^{2}</span>）。开方即得</p>
+
+  <div class="eq">
+    <span class="body m">b=\frac{C}{2E}\,\cot \,\frac{\theta }{2}</span>
+    <span class="tag">(5.11)</span>
+  </div>
+
+  <p>与式 (5.7) <strong>完全一致</strong>。两条互不依赖的推导（一条用力的时间积分，一条用轨道几何与能量）给出同一结果，式 (5.7) 可以放心使用。</p>
+</section>
+
+<section class="sec" id="s6">
+  <h2 class="sec-title"><span class="num">六</span>最近逼近距离</h2>
+
+  <p>把式 (4.10) 与 (5.9) 合起来，立刻得到最近逼近距离与散射角的关系：</p>
+
+  <div class="eq key">
+    <span class="body m">r_{\text{min}}=\frac{C}{2E}\,(1+\csc \,\frac{\theta }{2})=\frac{C}{2E}\,(1+\sqrt{1+\frac{2Eb}{C}^{2}})</span>
+    <span class="tag">(6.1)</span>
+  </div>
+
+  <p>（第二个等式用了 <span class="m">\csc (\theta /2) = \sqrt{1 + \cot ^{2}(\theta /2)}</span> 与式 5.7 的 <span class="m">\cot (\theta /2) = 2Eb/C</span>。）</p>
+
+  <h3 class="sub">6.1 &nbsp;正碰距离：一个自然的长度标尺</h3>
+
+  <p>取正碰 <span class="m">\theta = \pi</span>（即 <span class="m">b = 0</span>），<span class="m">\csc (\pi /2) = 1</span>，式 (6.1) 给出</p>
+
+  <div class="eq key">
+    <span class="body m">d\equiv r_{\text{min}}(\theta =\pi )=\frac{C}{E}=\frac{2k_{e}zZe^{2}}{mv_{0}^{2}}</span>
+    <span class="tag">(6.2)</span>
+  </div>
+
+  <p class="mnote">式 (6.2) 也可以由初等论证直接看出：正碰时粒子在最近点速度为零，全部动能转化为势能，<span class="m">\tfrac{1}{2}mv_{0}^{2} = C/d</span>，故 <span class="m">d = C/E</span>。式 (6.1) 是它的非正碰推广。</p>
+
+  <p><span class="m">d</span> 是核物理中最常用的长度标尺之一，称为<strong>库仑最近接近距离</strong>。它同时给出了两条信息：一是粒子在该能量下最多能靠近核多近；二是当 <span class="m">d</span> 与人射粒子的德布罗意波长、或与核半径可比时，本文的经典处理需要修正（<span class="m">\S 13</span>）。</p>
+
+  <div class="box key">
+    <p class="bt">
+      <svg class="ic ic-in" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20.5V13M10 20.5V4.5M16 20.5v-5M22 20.5h-20"/></svg>
+      到目前为止的成果清单
+    </p>
+    <p>已经不需要任何新假设，就能写出三个<strong>可直接与实验比较</strong>的关系：</p>
+    <p style="margin-top:8px">① 瞄准距与散射角 <span class="m">b = (C/2E)\cot (\theta /2)</span>（式 5.7）<br>
+    ② 最近逼近距离 <span class="m">r_{\text{min}} = (C/2E)(1 + \csc (\theta /2))</span>（式 6.1）<br>
+    ③ 正碰距离 <span class="m">d = C/E</span>（式 6.2）</p>
+    <p style="margin-top:8px">但实验并不能直接测量单个粒子的 <span class="m">b</span>——入射时 <span class="m">b</span> 是不可控的。实验能测的是<strong>有多少粒子被散射到某个角度附近</strong>。这就需要把式 (5.7) 翻译成截面的语言，正是下一节的内容。</p>
+  </div>
+</section>

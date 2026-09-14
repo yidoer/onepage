@@ -1,0 +1,6 @@
+--- deriv-LIGHT-1440 win=1440,900 ---
+{"errs":[],"paper":"rgb(245, 240, 230)","ink":"rgb(36, 31, 26)","ratioInk":14.38,"worstRatio":5.33,"worstSel":"body p","pageOverflowX":false,"iconTotal":21,"iconZero":0,"fracCollapsed":0,"eqScrollers":0,"secCount":17,"tocLinks":17,"contentW":720,"tocPosition":"sticky"}
+--- deriv-DARK-1440 win=1440,900 ---
+{"errs":[],"paper":"rgb(26, 23, 20)","ink":"rgb(237, 230, 216)","ratioInk":14.37,"worstRatio":5.78,"worstSel":"body p","pageOverflowX":false,"iconTotal":21,"iconZero":0,"fracCollapsed":0,"eqScrollers":0,"secCount":17,"tocLinks":17,"contentW":720,"tocPosition":"sticky"}
+--- deriv-LIGHT-504 win=504,760 ---
+{"errs":[],"paper":"rgb(245, 240, 230)","ink":"rgb(36, 31, 26)","ratioInk":14.38,"worstRatio":5.33,"worstSel":"body p","pageOverflowX":false,"iconTotal":21,"iconZero":0,"fracCollapsed":0,"eqScrollers":1,"secCount":17,"tocLinks":17,"contentW":472,"tocPosition":"static"}

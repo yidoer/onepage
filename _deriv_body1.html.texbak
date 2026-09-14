@@ -1,0 +1,238 @@
+<section class="sec" id="s1">
+  <h2 class="sec-title"><span class="num">一</span>引言：从"葡萄干布丁"到核式模型</h2>
+
+  <p class="lede">1903 年前后，J. J. 汤姆孙提出的原子模型把正电荷看作<em>均匀分布</em>在整个原子球体内的"布丁"，电子则像葡萄干一样嵌在其中。这个模型能解释当时已知的许多现象，却对一件小事给出了极其强硬的预言——而正是这个预言被实验推翻了。</p>
+
+  <h3 class="sub">汤姆孙模型给出的偏转上限</h3>
+
+  <p>设原子半径为 <span class="m"><i>R</i></span>，正电荷 <span class="m"><i>Ze</i></span> 均匀分布在球内。由高斯定理，球内半径 <span class="m"><i>r</i></span> 处的电场为</p>
+
+  <div class="eq">
+    <span class="body m"><i>E</i>(<i>r</i>)<span class="mo">=</span><i>k</i><sub>e</sub><span class="frac"><span class="fn"><i>Ze</i>&#8202;<i>r</i></span><span class="fd"><i>R</i><sup>3</sup></span></span><span class="mo">,</span><span class="mo">&nbsp;&nbsp;</span><i>E</i><sub>max</sub><span class="mo">=</span><i>E</i>(<i>R</i>)<span class="mo">=</span><span class="frac"><span class="fn"><i>k</i><sub>e</sub><i>Ze</i></span><span class="fd"><i>R</i><sup>2</sup></span></span></span>
+    <span class="tag">(1.1)</span>
+  </div>
+
+  <p>α 粒子电荷为 <span class="m">2<i>e</i></span>。取最有利的情形——粒子沿直径穿过、且全程处于最大场强处，横向冲量为</p>
+
+  <div class="eq">
+    <span class="body m">&#916;<i>p</i><sub>&#8869;</sub><span class="mrel">&le;</span>2<i>e</i><span class="mo">&middot;</span><i>E</i><sub>max</sub><span class="mo">&middot;</span><span class="frac"><span class="fn">2<i>R</i></span><span class="fd"><i>v</i></span></span><span class="mo">=</span><span class="frac"><span class="fn">4<i>k</i><sub>e</sub><i>Ze</i><sup>2</sup></span><span class="fd"><i>R</i>&#8202;<i>v</i></span></span></span>
+    <span class="tag">(1.2)</span>
+  </div>
+
+  <p>入射动量 <span class="m"><i>p</i> = <i>mv</i></span>，而 <span class="m"><i>mv</i><sup>2</sup> = 2<i>E</i></span>（<span class="m"><i>E</i></span> 为动能），故单次穿越的最大偏转角为</p>
+
+  <div class="eq key">
+    <span class="body m"><i>&#952;</i><sub>max</sub><span class="mrel">&#8776;</span><span class="frac"><span class="fn">&#916;<i>p</i><sub>&#8869;</sub></span><span class="fd"><i>p</i></span></span><span class="mo">=</span><span class="frac"><span class="fn">4<i>k</i><sub>e</sub><i>Ze</i><sup>2</sup></span><span class="fd"><i>R</i><span class="mo">&middot;</span><i>mv</i><sup>2</sup></span></span><span class="mo">=</span><span class="frac"><span class="fn">2<i>k</i><sub>e</sub><i>Ze</i><sup>2</sup></span><span class="fd"><i>R</i>&#8202;<i>E</i></span></span></span>
+    <span class="tag">(1.3)</span>
+  </div>
+
+  <p>代入盖革–马斯登实验的实际条件：<span class="m"><i>Z</i> = 79</span>（金）、<span class="m"><i>R</i> &#8776; 1.0&#215;10<sup>&#8722;10</sup></span> m、<span class="m"><i>E</i> = 5</span> MeV <span class="m">= 8.01&#215;10<sup>&#8722;13</sup></span> J，得</p>
+
+  <div class="eq">
+    <span class="body m"><i>&#952;</i><sub>max</sub><span class="mrel">&#8776;</span>4.6&#215;10<sup>&#8722;4</sup><span class="mtext">&nbsp;rad</span><span class="mrel">&#8776;</span>0.026<sup>&#8728;</sup></span>
+    <span class="tag">(1.4)</span>
+  </div>
+
+  <p>也就是说，整个原子的正电荷"摊开"在 10<sup>&#8722;10</sup> m 尺度上时，它对 α 粒子只能产生百分之几度的扰动。要累积到 90&#176;（<span class="m">1.571</span> rad），即便假设每次碰撞都恰好取到理论上限、且全部朝同一方向叠加，也至少需要</p>
+
+  <div class="eq">
+    <span class="body m"><i>N</i><span class="mrel">&#8805;</span><span class="frac"><span class="fn">1.571</span><span class="fd">4.6&#215;10<sup>&#8722;4</sup></span></span><span class="mrel">&#8776;</span>3.4&#215;10<sup>3</sup><span class="mtext">&nbsp;次</span></span>
+    <span class="tag">(1.5)</span>
+  </div>
+
+  <p>而 3400 次独立碰撞全部取向一致的概率量级为 <span class="m">2<sup>&#8722;3400</sup> &#8776; 10<sup>&#8722;1024</sup></span>。这是一个<em>极为宽松的上界</em>——真实概率还要小得多。结论无可回避：<strong>汤姆孙模型无法产生哪怕一次大角度散射。</strong></p>
+
+  <figure class="fig">
+    <div class="frame">
+      <svg viewBox="0 0 660 210" role="img" aria-label="汤姆孙模型与核式模型的散射对比示意">
+        <defs>
+          <marker id="ah" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M0,0 L10,5 L0,10 z" fill="currentColor"/>
+          </marker>
+        </defs>
+        <!-- 左：汤姆孙模型 -->
+        <g color="var(--ink-3)">
+          <circle class="sv-ink2" cx="165" cy="105" r="72"/>
+        </g>
+        <g class="sv-k">
+          <text x="165" y="34" text-anchor="middle" class="sv-tu">汤姆孙模型（正电荷弥散）</text>
+        </g>
+        <g fill="var(--ink-3)" opacity=".55">
+          <text x="140" y="86" font-size="13">+</text><text x="180" y="76" font-size="13">+</text>
+          <text x="196" y="118" font-size="13">+</text><text x="150" y="134" font-size="13">+</text>
+          <text x="168" y="108" font-size="13">+</text>
+        </g>
+        <g fill="var(--ai)" opacity=".8">
+          <circle cx="128" cy="100" r="3"/><circle cx="204" cy="92" r="3"/>
+          <circle cx="148" cy="128" r="3"/><circle cx="188" cy="132" r="3"/>
+        </g>
+        <path class="sv-shu" d="M28,96 L296,104" marker-end="url(#ah)" color="var(--shu)"/>
+        <text x="300" y="106" class="sv-t" fill="var(--shu)">&#952; &#8776; 10&#8315;&#8308; rad</text>
+
+        <!-- 分隔 -->
+        <line x1="330" y1="20" x2="330" y2="190" stroke="var(--rule)" stroke-width="1" stroke-dasharray="4 5"/>
+
+        <!-- 右：核式模型 -->
+        <circle class="sv-ink2" cx="500" cy="105" r="72"/>
+        <text x="500" y="34" text-anchor="middle" class="sv-tu" fill="var(--ink-2)">核式模型（正电荷集中）</text>
+        <circle cx="490" cy="105" r="3.6" fill="var(--shu)"/>
+        <text x="498" y="122" class="sv-t" fill="var(--shu)">+Ze</text>
+        <path class="sv-shu" d="M360,84 L474,100" color="var(--shu)"/>
+        <path class="sv-shu" d="M474,100 Q 492,106 482,128" color="var(--shu)"/>
+        <path class="sv-shu" d="M482,128 L432,192" marker-end="url(#ah)" color="var(--shu)"/>
+        <path class="sv-ink2" d="M474,100 L560,105" />
+        <text x="440" y="182" class="sv-t" fill="var(--shu)">&#952; &#8776; 90&#176;</text>
+      </svg>
+    </div>
+    <figcaption><b>图 1.</b> 同样的入射能量，正电荷分布尺度不同，结果截然不同。左：弥散电荷只能造成微小偏转，轨迹近似直线。右：若正电荷集中在一个远小于原子的区域内，粒子可以"贴着"它掠过而被大幅偏折，轨迹成为一条以该点为一个焦点的双曲线——这正是下文要严格求解的轨道。</figcaption>
+  </figure>
+
+  <div class="box note">
+    <p class="bt">
+      <svg class="ic ic-in" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11.2v5.2M12 7.7h.01"/></svg>
+      这一节说明了什么
+    </p>
+    <p>式 (1.3) 是<strong>纯粹的量纲论证</strong>：它只用到"正电荷分布在一个尺度 <span class="m"><i>R</i></span> 上"这一条。因此它的反面同样成立——只要观察到任意一次大角度散射，就足以断定正电荷<em>不是</em>弥散的，而必定集中在一个远小于 <span class="m"><i>R</i></span> 的尺度内。这就是 1911 年卢瑟福提出核式模型的全部逻辑起点。</p>
+  </div>
+
+  <h3 class="sub">本文的目标与路线</h3>
+  <p>接下来的章节不引用"卢瑟福公式"这一结论，而是从库仑力与两条守恒律出发把它重新推出来，并对每一步的物理含义作出交代。路线是：<span class="m">&#167;2</span> 明确假设与其失效尺度 → <span class="m">&#167;3</span> 写出力与守恒量 → <span class="m">&#167;4</span> 积分轨道方程得到双曲线 → <span class="m">&#167;5</span> 用冲量法求出 <span class="m"><i>b</i>&#8211;<i>&#952;</i></span> 关系 → <span class="m">&#167;6&#8211;&#167;7</span> 得到最近逼近距离与微分散射截面 → <span class="m">&#167;8&#8211;&#167;9</span> 讨论量级与数值 → <span class="m">&#167;10&#8211;&#167;13</span> 提取推论并划定适用边界。四个附录给出被正文略过的计算细节。</p>
+</section>
+
+<section class="sec" id="s2">
+  <h2 class="sec-title"><span class="num">二</span>模型与基本假设</h2>
+
+  <p class="lede">推导的可靠性完全取决于假设清单是否诚实。下面把每一条假设、它的物理依据、以及"什么时候会失效"一并列出；后文 <span class="m">&#167;13</span> 会逐条给出修正。</p>
+
+  <div class="tw">
+    <table>
+      <caption>表 1 &nbsp;模型假设、依据与失效尺度</caption>
+      <thead>
+        <tr><th style="width:3.2rem">编号</th><th>假设</th><th>依据 / 成立条件</th><th style="width:11rem">失效尺度</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="n">A1</td>
+          <td>靶核固定在原点，质量视为无限大（不反冲）</td>
+          <td><span class="m"><i>M</i><sub>核</sub> &#8776; 50<i>m</i><sub>&#945;</sub></span> 量级，反冲速度小</td>
+          <td>见 <span class="m">&#167;13.1</span>：精确处理用约化质量 <span class="m"><i>&#956;</i></span></td>
+        </tr>
+        <tr>
+          <td class="n">A2</td>
+          <td>α 粒子与靶核都可视为<strong>点电荷</strong>，电荷分别为 <span class="m"><i>ze</i></span>、<span class="m"><i>Ze</i></span></td>
+          <td>核半径 <span class="m">&#8776; 1.2<i>A</i><sup>1/3</sup></span> fm，远小于本文涉及的 <span class="m"><i>r</i><sub>min</sub></span></td>
+          <td>当 <span class="m"><i>r</i><sub>min</sub></span> 逼近核半径时核力介入</td>
+        </tr>
+        <tr>
+          <td class="n">A3</td>
+          <td>两粒子间只有<strong>库仑力</strong></td>
+          <td>库仑力是长程力；核力短程（&#8818; 2 fm）</td>
+          <td>核力在 <span class="m"><i>r</i> &#8818; <i>R</i><sub>核</sub></span> 处接管</td>
+        </tr>
+        <tr>
+          <td class="n">A4</td>
+          <td>经典力学、<strong>非相对论</strong>（<span class="m"><i>v</i> &#8810; <i>c</i></span>）</td>
+          <td>5 MeV α 的 <span class="m"><i>v</i>/<i>c</i> &#8776; 0.052</span>，<span class="m"><i>v</i><sup>2</sup>/<i>c</i><sup>2</sup> &#8776; 2.7&#215;10<sup>&#8722;3</sup></span></td>
+          <td><span class="m">&#8819; 100</span> MeV；见 <span class="m">&#167;13.3</span></td>
+        </tr>
+        <tr>
+          <td class="n">A5</td>
+          <td><strong>单次散射</strong>：粒子在整块靶中只发生一次有效碰撞</td>
+          <td>金属箔足够薄；大角度散射本身极稀有</td>
+          <td>厚靶或多重散射累积时失效</td>
+        </tr>
+        <tr>
+          <td class="n">A6</td>
+          <td>忽略<strong>电子屏蔽</strong>，势能严格为 <span class="m"><i>C</i>/<i>r</i></span></td>
+          <td>当 <span class="m"><i>r</i> &#8810; <i>a</i><sub>0</sub><i>Z</i><sup>&#8722;1/3</sup></span> 时屏蔽可忽略</td>
+          <td><span class="m"><i>r</i> &#8819; <i>a</i><sub>0</sub><i>Z</i><sup>&#8722;1/3</sup></span>；见 <span class="m">&#167;13.2</span></td>
+        </tr>
+        <tr>
+          <td class="n">A7</td>
+          <td>只考虑<strong>弹性</strong>散射，粒子不损失能量给电子</td>
+          <td>电子质量仅为 α 的 1/7300，能量转移可忽略</td>
+          <td>伴随激发/电离的能量损失不可忽略时</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="box caution">
+    <p class="bt">
+      <svg class="ic ic-in" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.6 21.4 19.6H2.6z"/><path d="M12 9.6v4.4M12 17h.01"/></svg>
+      关于 A2 的常见误解
+    </p>
+    <p>"把原子核当成点电荷"并不意味着核真的没有大小，而是说：在<em>本文所讨论的能量范围内</em>，粒子能靠近的最小距离远大于核半径，因此波函数/轨道从未"进入"核内部，此时点电荷假设是一个可检验的近似。一旦能量高到使 <span class="m"><i>r</i><sub>min</sub></span> 与核半径可比，这条假设就失效，而它的失效<strong>恰恰成为测量核半径的手段</strong>（见 <span class="m">&#167;10.2</span>）。</p>
+  </div>
+
+  <h3 class="sub">几何约定</h3>
+  <p>取靶核为原点，入射方向为 <span class="m">+<i>x</i></span> 轴。粒子在无穷远处沿一条与 <span class="m"><i>x</i></span> 轴平行、垂直距离为 <span class="m"><i>b</i></span> 的直线运动，<span class="m"><i>b</i></span> 称为<strong>瞄准距</strong>（impact parameter）。出射方向与原入射方向的夹角 <span class="m"><i>&#952;</i></span> 称为<strong>散射角</strong>。由于力是中心力，轨道必在一个过原点且含初速度的平面内，以下均在该平面内取极坐标 <span class="m">(<i>r</i>, <i>&#966;</i>)</span>，原点为力心。</p>
+</section>
+
+<section class="sec" id="s3">
+  <h2 class="sec-title"><span class="num">三</span>相互作用与守恒律</h2>
+
+  <h3 class="sub">库仑力与相互作用常数</h3>
+
+  <p>α 粒子（电荷 <span class="m"><i>ze</i></span>，<span class="m"><i>z</i> = 2</span>）与靶核（电荷 <span class="m"><i>Ze</i></span>）同号，相互<strong>排斥</strong>。取力心为原点，粒子所受的力沿径向朝外：</p>
+
+  <div class="eq">
+    <span class="body m"><span class="vec">F</span><span class="mo">=</span><span class="frac"><span class="fn">1</span><span class="fd">4<i>&#960;&#949;</i><sub>0</sub></span></span><span class="frac"><span class="fn"><i>zZe</i><sup>2</sup></span><span class="fd"><i>r</i><sup>2</sup></span></span><span class="vec">r&#770;</span><span class="mo">&#8801;</span><span class="frac"><span class="fn"><i>C</i></span><span class="fd"><i>r</i><sup>2</sup></span></span><span class="vec">r&#770;</span></span>
+    <span class="tag">(3.1)</span>
+  </div>
+
+  <p>其中把整个相互作用浓缩成了一个常数：</p>
+
+  <div class="eq key">
+    <span class="body m"><i>C</i><span class="mo">&#8801;</span><i>k</i><sub>e</sub><i>zZe</i><sup>2</sup><span class="mo">,</span><span class="mo">&nbsp;&nbsp;</span><i>k</i><sub>e</sub><span class="mo">&#8801;</span><span class="frac"><span class="fn">1</span><span class="fd">4<i>&#960;&#949;</i><sub>0</sub></span></span><span class="mo">=</span>8.9875517923&#215;10<sup>9</sup><span class="mtext">&nbsp;N&middot;m<sup>2</sup>/C<sup>2</sup></span></span>
+    <span class="tag">(3.2)</span>
+  </div>
+
+  <p><span class="m"><i>C</i></span> 的量纲是<strong>能量&#215;长度</strong>（J&middot;m），它同时扮演两个角色：<span class="m"><i>U</i>(<i>r</i>) = <i>C</i>/<i>r</i></span> 是势能，而 <span class="m"><i>C</i>/<i>E</i></span> 是一个长度——后文会看到，整个散射问题的所有特征长度都是 <span class="m"><i>C</i>/<i>E</i></span> 的倍数。相应的势能为</p>
+
+  <div class="eq">
+    <span class="body m"><i>U</i>(<i>r</i>)<span class="mo">=</span><span class="frac"><span class="fn"><i>C</i></span><span class="fd"><i>r</i></span></span><span class="mo">,</span><span class="mo">&nbsp;&nbsp;</span><i>U</i>(&#8734;)<span class="mo">=</span>0</span>
+    <span class="tag">(3.3)</span>
+  </div>
+
+  <h3 class="sub">守恒律一：机械能守恒</h3>
+
+  <p>库仑力是保守力，且只与 <span class="m"><i>r</i></span> 有关，故机械能守恒。粒子从无穷远处以速度 <span class="m"><i>v</i><sub>0</sub></span> 入射，在无穷远处势能为零：</p>
+
+  <div class="eq">
+    <span class="body m"><i>E</i><span class="mo">=</span><span class="frac"><span class="fn">1</span><span class="fd">2</span></span><i>mv</i><sub>0</sub><sup>2</sup><span class="mo">=</span><span class="frac"><span class="fn">1</span><span class="fd">2</span></span><i>mv</i><sup>2</sup><span class="mo">+</span><span class="frac"><span class="fn"><i>C</i></span><span class="fd"><i>r</i></span></span><span class="mo">=</span><span class="mtext">const</span></span>
+    <span class="tag">(3.4)</span>
+  </div>
+
+  <p>把速度分解为径向与横向两部分 <span class="m"><i>v</i><sup>2</sup> = <i>v</i><sub>r</sub><sup>2</sup> + <i>v</i><sub>&#966;</sub><sup>2</sup></span>（其中 <span class="m"><i>v</i><sub>&#966;</sub> = <i>r</i><i>&#966;&#775;</i></span>），式 (3.4) 说明：粒子越靠近核，势能越大，可用的径向动能越小——这已经预示了"最近逼近距离"的存在。</p>
+
+  <h3 class="sub">守恒律二：角动量守恒</h3>
+
+  <p>中心力对原点的力矩恒为零，故角动量 <span class="m"><span class="vec">L</span> = <i>m</i><span class="vec">r</span> &#215; <span class="vec">v</span></span> 守恒，方向固定（垂直于轨道平面），大小</p>
+
+  <div class="eq">
+    <span class="body m"><i>L</i><span class="mo">=</span><i>m</i><span class="mo">&#8201;</span><i>r</i><sup>2</sup><i>&#966;&#775;</i></span>
+    <span class="tag">(3.5)</span>
+  </div>
+
+  <p>在无穷远处，速度垂直于瞄准距臂，故 <span class="m"><i>L</i> = <i>m</i><i>v</i><sub>0</sub><i>b</i></span>。于是式 (3.5) 给出一个后面反复使用的替换关系：</p>
+
+  <div class="eq key">
+    <span class="body m"><i>m</i><i>v</i><sub>0</sub><i>b</i><span class="mo">=</span><i>m</i><span class="mo">&#8201;</span><i>r</i><sup>2</sup><i>&#966;&#775;</i><span class="mo">&nbsp;&nbsp;&#8658;&nbsp;&nbsp;</span><i>d</i><i>t</i><span class="mo">=</span><span class="frac"><span class="fn"><i>m</i><span class="mo">&#8201;</span><i>r</i><sup>2</sup></span><span class="fd"><i>L</i></span></span><i>d</i><i>&#966;</i></span>
+    <span class="tag">(3.6)</span>
+  </div>
+
+  <p>式 (3.6) 是把"对时间积分"换成"对角度积分"的钥匙。由于被积函数 <span class="m"><i>m</i><i>r</i><sup>2</sup>/<i>L</i></span> 中含 <span class="m"><i>r</i><sup>2</sup></span>，它恰好能与库仑力的 <span class="m">1/<i>r</i><sup>2</sup></span> 相消——这正是库仑问题能被初等积分求解的深层原因（见附录 <a class="ref" href="#a2">B</a>）。</p>
+
+  <h3 class="sub">问题的可积性</h3>
+
+  <p>平面内有 2 个自由度，而式 (3.4) 与 (3.5) 给出 2 个独立守恒量，因此系统完全可积，轨道可由积分封闭求出。定向到具体路径：把式 (3.4) 中的 <span class="m"><i>v</i><sup>2</sup></span> 用 <span class="m"><i>v</i><sub>r</sub> = <i>r&#775;</i></span> 与 <span class="m"><i>v</i><sub>&#966;</sub> = <i>L</i>/(<i>mr</i>)</span> 表出，得到关于 <span class="m"><i>r</i>(<i>t</i>)</span> 的一阶方程；再用式 (3.6) 消去 <span class="m"><i>t</i></span>，即得轨道方程 <span class="m"><i>r</i>(<i>&#966;</i>)</span>。下一节按这个思路直接给出结果，完整的积分过程放在附录 <a class="ref" href="#a1">A</a>。</p>
+
+  <div class="box key">
+    <p class="bt">
+      <svg class="ic ic-in" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7.5v4.7l3 1.8"/></svg>
+      本节小结
+    </p>
+    <p>整个散射问题由三个量完全确定：相互作用强度 <span class="m"><i>C</i></span>、入射能量 <span class="m"><i>E</i></span>、以及瞄准距 <span class="m"><i>b</i></span>（隐藏在角动量 <span class="m"><i>L</i> = <i>m</i><i>v</i><sub>0</sub><i>b</i></span> 中）。实验中前两者是给定的，<span class="m"><i>b</i></span> 则是随机的——所以接下来的任务就是找出 <span class="m"><i>b</i></span> 与可观测的 <span class="m"><i>&#952;</i></span> 之间的确定性关系。</p>
+  </div>
+</section>
