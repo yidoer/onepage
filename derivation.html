@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh-CN" class="no-katex">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -11,6 +11,7 @@
    和纸（washi）设计系统 —— 全部为语义令牌，无逐屏硬编码
    ============================================================ */
 :root{
+  color-scheme:light dark;
   /* 纸与墨 */
   --paper:#F5F0E6;          /* 生成り：主纸色 */
   --paper-2:#EDE5D6;        /* 稍深的纸，用于内嵌块 */
@@ -38,7 +39,13 @@
   --sp-1:8px;  --sp-2:16px; --sp-3:24px; --sp-4:32px;
   --sp-5:48px; --sp-6:64px; --sp-7:96px;
   --measure:45rem;          /* 正文栏宽 720px ≈ 每行 40 个汉字 */
-  --measure-wide:68rem;
+  --measure-wide:69rem;      /* 目录 + 间距 + 正文 + 左右内边距，三处（报头/版面/页脚）共用 */
+  /* 字号梯度：正文 17 → h3 19 → h2 23 → h1 28–34，逐级约 1.12/1.21/1.48；
+     向下 15 / 13.5 / 12.5 / 11.5 用于目录、表格、注释与标签。 */
+  --fs-body:17px; --fs-h3:19px; --fs-h2:23px;
+  --fs-h1:clamp(1.75rem,1.15rem + 1.9vw,2.15rem);
+  --fs-md:13.5px; --fs-sm:12.5px; --fs-xs:11.5px;
+  --lh-body:1.85;
   --r:3px;                  /* 和纸不做大圆角 */
   /* 图标尺寸令牌 */
   --icon-sm:13px; --icon-md:16px; --icon-lg:20px;
@@ -63,7 +70,7 @@ html{-webkit-text-size-adjust:100%;scroll-behavior:smooth;scroll-padding-top:var
 
 body{
   margin:0; background:var(--paper); color:var(--ink);
-  font-family:var(--serif); font-size:17px; line-height:1.95;
+  font-family:var(--serif); font-size:var(--fs-body); line-height:var(--lh-body);
   font-kerning:normal; text-rendering:optimizeLegibility;
   -webkit-font-smoothing:antialiased;
 }
@@ -111,35 +118,35 @@ a:focus-visible,button:focus-visible,[tabindex]:focus-visible{
 /* ---- 报头 ---- */
 .masthead{
   max-width:var(--measure-wide); margin:0 auto;
-  padding:var(--sp-6) var(--sp-4) var(--sp-4);
+  padding:var(--sp-5) var(--sp-4) var(--sp-4);
   border-bottom:3px double var(--rule-2);
 }
 .eyebrow{
-  font-family:var(--mono); font-size:11.5px; letter-spacing:.22em;
-  text-transform:uppercase; color:var(--ink-3); margin:0 0 var(--sp-2);
+  font-family:var(--mono); font-size:var(--fs-xs); line-height:1.5;
+  letter-spacing:.22em; text-transform:uppercase; color:var(--ink-3); margin:0 0 var(--sp-2);
 }
 .masthead h1{
-  font-size:clamp(1.6rem,1.1rem + 2.2vw,2.5rem);
-  line-height:1.34; font-weight:700; letter-spacing:.01em;
-  margin:0 0 var(--sp-2); text-wrap:balance;
+  font-size:var(--fs-h1);
+  line-height:1.26; font-weight:700; letter-spacing:.01em;
+  margin:0 0 12px; text-wrap:balance;
 }
 .masthead h1 .accent{color:var(--shu)}
 .masthead .subtitle{
-  margin:0; color:var(--ink-2); font-size:1rem; line-height:1.8;
-  max-width:38rem; font-family:var(--kai);
+  margin:0; color:var(--ink-2); font-size:1rem; line-height:1.75;
+  max-width:36rem; font-family:var(--kai);
 }
 .meta{
-  margin-top:var(--sp-3); display:flex; flex-wrap:wrap; gap:var(--sp-1) var(--sp-3);
-  font-size:12.5px; color:var(--ink-3); font-family:var(--mono);
+  margin-top:var(--sp-2); display:flex; flex-wrap:wrap; gap:var(--sp-1) var(--sp-3);
+  font-size:var(--fs-sm); line-height:1.6; color:var(--ink-3); font-family:var(--mono);
   letter-spacing:.04em;
 }
 .meta span{display:inline-flex;align-items:center}
 .seal{
   display:inline-flex; align-items:center; justify-content:center;
-  width:34px; height:34px; flex:0 0 auto; margin-right:var(--sp-2);
+  width:30px; height:30px; flex:0 0 auto; margin-right:12px;
   background:var(--shu); color:#FBF8F1; border-radius:2px;
-  font-family:var(--serif); font-size:19px; font-weight:700; line-height:1;
-  vertical-align:-6px; letter-spacing:0;
+  font-family:var(--serif); font-size:17px; font-weight:700; line-height:1;
+  vertical-align:-4px; letter-spacing:0;
   box-shadow:inset 0 0 0 1px rgba(255,255,255,.22);
 }
 .masthead-row{display:flex;align-items:flex-start;gap:var(--sp-1)}
@@ -152,35 +159,89 @@ a:focus-visible,button:focus-visible,[tabindex]:focus-visible{
   display:grid; grid-template-columns:1fr; gap:var(--sp-5);
   align-items:start;
 }
+/* 双栏：目录列宽按最长一条目录项定（20rem 时 17 项全部一行放得下），
+   总宽 20rem + 3rem + 45rem = 68rem，加上左右内边距正好等于 --measure-wide。 */
 @media (min-width:1080px){
-  .layout{grid-template-columns:15rem minmax(0,var(--measure)); gap:var(--sp-6); justify-content:center}
+  .layout{grid-template-columns:17rem minmax(0,var(--measure)); gap:var(--sp-5); justify-content:center}
 }
 
 .toc{
   border:1px solid var(--rule); background:var(--paper-3);
-  padding:var(--sp-3); border-radius:var(--r);
+  padding:var(--sp-2); border-radius:var(--r);
 }
+/* 双栏时目录退成"页边栏"：没有卡片边框和底色，只留当前项的竖线，
+   视觉重量让给正文；单栏（<1080px）时恢复成一块独立卡片。 */
 @media (min-width:1080px){
-  .toc{position:sticky; top:var(--sp-4); max-height:calc(100vh - var(--sp-6)); overflow:auto}
+  .toc{
+    border:0; background:none; padding:0;
+    position:sticky; top:var(--sp-4);
+    max-height:calc(100vh - var(--sp-6)); overflow:auto;
+    overscroll-behavior:contain;
+    scrollbar-width:thin; scrollbar-color:var(--rule-2) transparent;
+  }
+  .toc::-webkit-scrollbar{width:6px}
+  .toc::-webkit-scrollbar-thumb{background:var(--rule-2);border-radius:3px}
 }
 .toc h2{
-  font-size:12px; font-family:var(--mono); letter-spacing:.2em;
+  font-size:11.5px; font-family:var(--mono); letter-spacing:.2em;
   text-transform:uppercase; color:var(--ink-3);
-  margin:0 0 var(--sp-2); font-weight:600;
+  margin:0 0 12px; font-weight:600;
   padding-bottom:var(--sp-1); border-bottom:1px solid var(--rule);
 }
 .toc ol{list-style:none; margin:0; padding:0; counter-reset:toc}
 .toc li{margin:0}
+/* 目录项：左侧固定宽度的序号列 + 右侧标题列。
+   序号用等宽小字右对齐，标题从同一条竖线起排，整列看起来是一条干净的"页码边"，
+   折行时第二行也对齐标题列，不会缩到序号底下。
+   序号列取 24px：中日文数字（"十一""十二"）在等宽字体里是满宽字形，要占 2×11.5px。 */
 .toc a{
-  display:block; padding:5px 0 5px var(--sp-2);
-  color:var(--ink-2); text-decoration:none; font-size:13.5px; line-height:1.55;
+  display:grid; grid-template-columns:24px minmax(0,1fr); column-gap:6px;
+  align-items:baseline; align-content:center;
+  padding:4px 0 4px 10px;
+  color:var(--ink-2); text-decoration:none; font-size:var(--fs-md); line-height:1.5;
   border-left:2px solid transparent; transition:color .15s ease,border-color .15s ease;
 }
+.toc .n{
+  font-family:var(--mono); font-size:var(--fs-xs); letter-spacing:0;
+  color:var(--ink-3); text-align:right; white-space:nowrap;
+}
+.toc .t{min-width:0}
+.toc a:hover .n,.toc a.is-current .n{color:inherit}
 .toc a:hover{color:var(--shu); border-left-color:var(--rule-2)}
 .toc a:focus-visible{border-left-color:var(--focus)}
+/* 当前阅读位置（脚本维护；无脚本时此项不出现，目录照常可用） */
+.toc a.is-current{
+  color:var(--shu); border-left-color:var(--shu);
+  background:var(--shu-soft); font-weight:600;
+}
 .toc .grp{
-  margin-top:var(--sp-2); padding-top:var(--sp-2);
+  margin-top:var(--sp-2); padding:var(--sp-2) 0 4px var(--sp-2);
   border-top:1px dashed var(--rule);
+  font-family:var(--mono); font-size:10.5px; letter-spacing:.2em;
+  color:var(--ink-3);
+}
+
+/* 触控设备上目录项至少 44px 高（准则：触控目标 ≥44×44px），
+   清单因此变长，但目录本身限高可滚动。 */
+@media (pointer:coarse){
+  .toc a{min-height:44px; padding-top:0; padding-bottom:0}
+}
+
+/* 单栏（<1080px）时目录跑到了正文上方：排成两列并限高，
+   否则 17 条目录会把首屏整屏占满，要滑过一屏才看到正文。 */
+@media (max-width:1079px){
+  .toc{
+    max-height:min(60vh,34rem); overflow:auto;
+    scrollbar-width:thin; scrollbar-color:var(--rule-2) transparent;
+  }
+  .toc ol{columns:2; column-gap:var(--sp-3)}
+  .toc li{break-inside:avoid}
+}
+@media (max-width:640px){
+  /* 手机上排成一列，并把高度限制在 40vh：首屏仍能看到正文开头，
+     目录本身可以滑动；滚到底时继续滚动会交还给页面（不做 contain）。 */
+  .toc{max-height:40vh}
+  .toc ol{columns:1}
 }
 
 /* ---- 正文 ---- */
@@ -188,22 +249,22 @@ a:focus-visible,button:focus-visible,[tabindex]:focus-visible{
 .sec{margin:0 0 var(--sp-6); scroll-margin-top:var(--sp-4)}
 .sec-title{
   display:flex; align-items:baseline; gap:var(--sp-2);
-  font-size:1.28rem; line-height:1.5; font-weight:700;
-  margin:0 0 var(--sp-3); padding-bottom:var(--sp-1);
+  font-size:var(--fs-h2); line-height:1.4; font-weight:700;
+  margin:0 0 var(--sp-2); padding-bottom:var(--sp-1);
   border-bottom:1px solid var(--rule);
   text-wrap:balance;
 }
 .sec-title .num{
-  font-family:var(--mono); font-size:.72em; letter-spacing:.06em;
+  font-family:var(--mono); font-size:.7em; letter-spacing:.06em;
   color:var(--shu); flex:0 0 auto; font-weight:600;
 }
 h3.sub{
-  font-size:1.02rem; font-weight:700; margin:var(--sp-4) 0 var(--sp-2);
-  color:var(--ink); line-height:1.6;
+  font-size:var(--fs-h3); font-weight:700; margin:var(--sp-4) 0 12px;
+  color:var(--ink); line-height:1.5;
 }
 h3.sub::before{content:"§ "; color:var(--ink-3); font-weight:400}
 p{margin:0 0 var(--sp-2); text-align:justify; text-justify:inter-ideograph}
-.lede{font-size:1.04rem; color:var(--ink-2); line-height:1.9}
+.lede{font-size:1.02rem; color:var(--ink-2); line-height:1.8}
 em{font-style:normal; background:linear-gradient(transparent 62%,var(--kin-soft) 62%); padding:0 .1em}
 strong{font-weight:700; color:var(--ink)}
 a.ref{color:var(--ai); text-decoration:none; border-bottom:1px solid var(--ai-soft)}
@@ -223,18 +284,41 @@ code{
 .eq{
   margin:var(--sp-3) 0; padding:var(--sp-2) 0;
   display:flex; align-items:center; gap:var(--sp-2);
-  font-size:1.06rem; line-height:2.4;
-  overflow-x:auto;
+  font-size:1.06rem; line-height:2.05;
 }
-.eq .body{flex:1 1 auto; text-align:center; white-space:nowrap; min-width:0}
+/* 只有公式本体可横向滚动：编号始终留在原位，不会被长公式压住。
+   注意 .katex-display 用 max-content + min-width:100%，这样公式比容器窄时居中、
+   比容器宽时从左边开始溢出（可以滚动看到全部），不会像 text-align:center 那样
+   把左半截挤到滚动区之外、永远看不到。 */
+.eq .body{
+  flex:1 1 auto; min-width:0; text-align:center; white-space:nowrap;
+  overflow-x:auto; overflow-y:hidden;
+  overscroll-behavior-x:contain;
+  -webkit-overflow-scrolling:touch;
+  scrollbar-width:thin; scrollbar-color:var(--rule-2) transparent;
+  padding-bottom:2px;
+}
+.eq .body::-webkit-scrollbar{height:6px}
+.eq .body::-webkit-scrollbar-thumb{background:var(--rule-2);border-radius:3px}
+.eq .body::-webkit-scrollbar-track{background:transparent}
+.eq .body>.katex-display{width:max-content; min-width:100%; margin:0}
 .eq .tag{
-  flex:0 0 auto; font-family:var(--mono); font-size:12px; color:var(--ink-3);
+  flex:0 0 auto; font-family:var(--mono); font-size:var(--fs-xs); color:var(--ink-3);
 }
+/* 公式编号即深链接：点击后地址栏得到 #eq-4-10 这样的锚点 */
+a.tag{text-decoration:none; color:var(--ink-3); border-bottom:1px dotted transparent}
+a.tag:hover{border-bottom-color:var(--rule-2); color:var(--ink-2)}
 .eq.key{
   background:var(--shu-soft); border-top:1px solid var(--rule-2);
   border-bottom:1px solid var(--rule-2); padding:var(--sp-3) var(--sp-2);
 }
 .eq.key .body{font-size:1.16rem}
+/* 被深链接指向的公式：给一点底色，便于在长文里定位 */
+.eq:target{
+  background:var(--kin-soft);
+  box-shadow:inset 2px 0 0 var(--kin);
+}
+.eq:target .tag{color:var(--kin)}
 
 /* ---- 提示框 ---- */
 .box{
@@ -244,7 +328,7 @@ code{
 }
 .box>.bt{
   display:flex; align-items:center; gap:6px;
-  font-size:12.5px; font-weight:700; letter-spacing:.08em;
+  font-size:var(--fs-sm); font-weight:700; letter-spacing:.08em;
   color:var(--ink-2); margin:0 0 var(--sp-1);
   font-family:var(--mono); text-transform:uppercase;
 }
@@ -258,25 +342,25 @@ code{
 
 /* ---- 表格 ---- */
 .tw{overflow-x:auto; margin:var(--sp-3) 0}
-table{border-collapse:collapse; width:100%; font-size:14.5px; line-height:1.7}
+table{border-collapse:collapse; width:100%; font-size:15px; line-height:1.75}
 caption{
-  caption-side:top; text-align:left; font-size:12.5px; color:var(--ink-3);
+  caption-side:top; text-align:left; font-size:var(--fs-sm); color:var(--ink-3);
   font-family:var(--mono); padding-bottom:var(--sp-1); letter-spacing:.04em;
 }
 th,td{padding:8px 12px; border-bottom:1px solid var(--rule); text-align:left; vertical-align:top}
 thead th{
   border-bottom:1.5px solid var(--rule-2); border-top:1.5px solid var(--rule-2);
-  font-size:12.5px; letter-spacing:.06em; color:var(--ink-2); font-weight:700;
+  font-size:var(--fs-sm); letter-spacing:.06em; color:var(--ink-2); font-weight:700;
   font-family:var(--mono); white-space:nowrap;
 }
 tbody tr:hover{background:var(--paper-2)}
-td.n,th.n{text-align:right; font-family:var(--mono); font-size:13px; white-space:nowrap}
+td.n,th.n{text-align:right; font-family:var(--mono); font-size:var(--fs-md); white-space:nowrap}
 
 /* ---- 图 ---- */
 .fig{margin:var(--sp-4) 0; text-align:center}
 .fig svg{max-width:100%; height:auto; display:block; margin:0 auto}
 .fig figcaption{
-  margin-top:var(--sp-2); font-size:13px; color:var(--ink-3);
+  margin-top:var(--sp-2); font-size:var(--fs-md); color:var(--ink-3);
   line-height:1.75; text-align:left; max-width:36rem; margin-left:auto; margin-right:auto;
 }
 .fig figcaption b{color:var(--ink-2)}
@@ -293,7 +377,7 @@ td.n,th.n{text-align:right; font-family:var(--mono); font-size:13px; white-space
 
 /* ---- 脚注 / 旁注 ---- */
 .mnote{
-  font-size:13px; color:var(--ink-3); line-height:1.75;
+  font-size:var(--fs-md); color:var(--ink-3); line-height:1.75;
   border-left:2px solid var(--rule); padding-left:var(--sp-2);
   margin:var(--sp-2) 0 var(--sp-3);
 }
@@ -303,7 +387,7 @@ td.n,th.n{text-align:right; font-family:var(--mono); font-size:13px; white-space
 .pfoot{
   max-width:var(--measure-wide); margin:0 auto;
   padding:var(--sp-5) var(--sp-4) var(--sp-6);
-  border-top:3px double var(--rule-2); font-size:13px; color:var(--ink-3);
+  border-top:3px double var(--rule-2); font-size:var(--fs-md); color:var(--ink-3);
 }
 .pfoot .back{
   display:inline-flex; align-items:center; gap:8px;
@@ -314,6 +398,45 @@ td.n,th.n{text-align:right; font-family:var(--mono); font-size:13px; white-space
 }
 .pfoot .back:hover{border-color:var(--ai); color:var(--shu)}
 .pfoot p{margin:0 0 var(--sp-1); text-align:left}
+
+/* ---- 报头右上：返回模拟器 ---- */
+.mh-top{
+  display:flex; align-items:center; justify-content:space-between;
+  gap:var(--sp-2); margin-bottom:var(--sp-2); flex-wrap:wrap;
+}
+.mh-top .eyebrow{margin:0}
+.mnav{
+  display:inline-flex; align-items:center; gap:6px; flex:0 0 auto;
+  font-family:var(--mono); font-size:12px; letter-spacing:.04em;
+  color:var(--ink-2); text-decoration:none;
+  border:1px solid var(--rule); background:var(--paper-3);
+  padding:6px 10px; border-radius:var(--r);
+  transition:color .15s ease, border-color .15s ease;
+}
+.mnav:hover{color:var(--shu); border-color:var(--rule-2)}
+
+/* ---- 回到顶部 ---- */
+.to-top{
+  position:fixed; right:var(--sp-3); bottom:var(--sp-3); z-index:5;
+  display:inline-flex; align-items:center; justify-content:center;
+  width:44px; height:44px;
+  background:var(--paper-3); color:var(--ink-2); text-decoration:none;
+  border:1px solid var(--rule); border-radius:var(--r);
+  box-shadow:0 2px 10px rgba(36,31,26,.10);
+  opacity:0; visibility:hidden;
+  transition:opacity .2s ease, visibility .2s ease, color .15s ease, border-color .15s ease;
+}
+.to-top.is-on{opacity:1; visibility:visible}
+.to-top:hover{color:var(--shu); border-color:var(--rule-2)}
+@media (prefers-reduced-motion: reduce){.to-top{transition:none}}
+@media print{.to-top,.mnav{display:none}}
+
+/* ---- KaTeX 未就绪时的降级：把 LaTeX 源码按等宽字体呈现，至少可读 ---- */
+.no-katex .m{
+  font-family:var(--mono); font-size:.88em; color:var(--ink-2);
+  background:var(--paper-2); padding:.05em .3em; border-radius:2px;
+}
+.no-katex .eq .body{white-space:normal; text-align:left}
 
 /* ---- 窄屏 ---- */
 @media (max-width:600px){
@@ -345,11 +468,17 @@ td.n,th.n{text-align:right; font-family:var(--mono); font-size:13px; white-space
 </style>
 </head>
 <body>
-<div class="paper">
+<div class="paper" id="top">
 <a class="skip" href="#main">跳到正文</a>
 
 <header class="masthead">
-  <p class="eyebrow">Rutherford Scattering &middot; Complete Derivation</p>
+  <div class="mh-top">
+    <p class="eyebrow">Rutherford Scattering &middot; Complete Derivation</p>
+    <a class="mnav" href="index.html" title="返回交互式 3D 模拟器">
+      <svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M19.5 12H4.5M11 18.5 4.5 12 11 5.5"/></svg>
+      3D 模拟器
+    </a>
+  </div>
   <div class="masthead-row">
     <span class="seal" aria-hidden="true">&#945;</span>
     <div class="masthead-text">
@@ -361,7 +490,7 @@ td.n,th.n{text-align:right; font-family:var(--mono); font-size:13px; white-space
     <span>经典力学 &middot; 中心力场</span>
     <span>坐标：极坐标 (r, &phi;)</span>
     <span>单位：SI</span>
-    <span>纯静态排版 &middot; 零外部依赖</span>
+    <span>静态页面 &middot; 公式由本地 KaTeX 排版</span>
   </div>
 </header>
 
@@ -370,23 +499,24 @@ td.n,th.n{text-align:right; font-family:var(--mono); font-size:13px; white-space
   <nav class="toc" aria-label="目录">
     <h2>目录</h2>
     <ol>
-      <li><a href="#s1">一 &nbsp;引言：从"葡萄干布丁"到核式模型</a></li>
-      <li><a href="#s2">二 &nbsp;模型与基本假设</a></li>
-      <li><a href="#s3">三 &nbsp;相互作用与守恒律</a></li>
-      <li><a href="#s4">四 &nbsp;轨道积分：双曲线轨道</a></li>
-      <li><a href="#s5">五 &nbsp;散射角与瞄准距的关系</a></li>
-      <li><a href="#s6">六 &nbsp;最近逼近距离</a></li>
-      <li><a href="#s7">七 &nbsp;微分散射截面与卢瑟福公式</a></li>
-      <li><a href="#s8">八 &nbsp;积分截面与大角度稀有性</a></li>
-      <li><a href="#s9">九 &nbsp;数值实例：5 MeV α 粒子对金箔</a></li>
-      <li><a href="#s10">十 &nbsp;推论一：原子核的存在与核半径上限</a></li>
-      <li><a href="#s11">十一 &nbsp;推论二：核式模型的确立</a></li>
-      <li><a href="#s12">十二 &nbsp;推论三：经典模型的困难</a></li>
-      <li><a href="#s13">十三 &nbsp;适用边界与各类修正</a></li>
-      <li class="grp"><a href="#a1">附录 A &nbsp;Binet 方程与圆锥曲线解</a></li>
-      <li><a href="#a2">附录 B &nbsp;冲量积分的严格计算</a></li>
-      <li><a href="#a3">附录 C &nbsp;质心系与实验室系的转换</a></li>
-      <li><a href="#a4">附录 D &nbsp;符号与常数表</a></li>
+      <li><a href="#s1"><span class="n">一</span><span class="t">引言：从"葡萄干布丁"到核式模型</span></a></li>
+      <li><a href="#s2"><span class="n">二</span><span class="t">模型与基本假设</span></a></li>
+      <li><a href="#s3"><span class="n">三</span><span class="t">相互作用与守恒律</span></a></li>
+      <li><a href="#s4"><span class="n">四</span><span class="t">轨道积分：双曲线轨道</span></a></li>
+      <li><a href="#s5"><span class="n">五</span><span class="t">散射角与瞄准距的关系</span></a></li>
+      <li><a href="#s6"><span class="n">六</span><span class="t">最近逼近距离</span></a></li>
+      <li><a href="#s7"><span class="n">七</span><span class="t">微分散射截面与卢瑟福公式</span></a></li>
+      <li><a href="#s8"><span class="n">八</span><span class="t">积分截面与大角度稀有性</span></a></li>
+      <li><a href="#s9"><span class="n">九</span><span class="t">数值实例：5 MeV α 粒子对金箔</span></a></li>
+      <li><a href="#s10"><span class="n">十</span><span class="t">推论一：原子核的存在与核半径上限</span></a></li>
+      <li><a href="#s11"><span class="n">十一</span><span class="t">推论二：核式模型的确立</span></a></li>
+      <li><a href="#s12"><span class="n">十二</span><span class="t">推论三：经典模型的困难</span></a></li>
+      <li><a href="#s13"><span class="n">十三</span><span class="t">适用边界与各类修正</span></a></li>
+      <li class="grp">附录</li>
+      <li><a href="#a1"><span class="n">A</span><span class="t">Binet 方程与圆锥曲线解</span></a></li>
+      <li><a href="#a2"><span class="n">B</span><span class="t">冲量积分的严格计算</span></a></li>
+      <li><a href="#a3"><span class="n">C</span><span class="t">质心系与实验室系的转换</span></a></li>
+      <li><a href="#a4"><span class="n">D</span><span class="t">符号与常数表</span></a></li>
     </ol>
   </nav>
 
@@ -396,41 +526,41 @@ td.n,th.n{text-align:right; font-family:var(--mono); font-size:13px; white-space
 
   <p class="lede">1903 年前后，J. J. 汤姆孙提出的原子模型把正电荷看作<em>均匀分布</em>在整个原子球体内的"布丁"，电子则像葡萄干一样嵌在其中。这个模型能解释当时已知的许多现象，却对一件小事给出了极其强硬的预言——而正是这个预言被实验推翻了。</p>
 
-  <h3 class="sub">汤姆孙模型给出的偏转上限</h3>
+  <h3 class="sub">1.1 汤姆孙模型给出的偏转上限</h3>
 
   <p>设原子半径为 <span class="m">R</span>，正电荷 <span class="m">Ze</span> 均匀分布在球内。由高斯定理，球内半径 <span class="m">r</span> 处的电场为</p>
 
-  <div class="eq">
+  <div class="eq" id="eq-1-1">
     <span class="body m">E(r)=k_{e}\frac{Ze\!r}{R^{3}},\ \ E_{\text{max}}=E(R)=\frac{k_{e}Ze}{R^{2}}</span>
-    <span class="tag">(1.1)</span>
+    <a class="tag" href="#eq-1-1" title="公式 (1.1) 的固定链接">(1.1)</a>
   </div>
 
   <p>α 粒子电荷为 <span class="m">2e</span>。取最有利的情形——粒子沿直径穿过、且全程处于最大场强处，横向冲量为</p>
 
-  <div class="eq">
+  <div class="eq" id="eq-1-2">
     <span class="body m">\Delta p_{\perp }\le 2e\cdot E_{\text{max}}\cdot \frac{2R}{v}=\frac{4k_{e}Ze^{2}}{R\!v}</span>
-    <span class="tag">(1.2)</span>
+    <a class="tag" href="#eq-1-2" title="公式 (1.2) 的固定链接">(1.2)</a>
   </div>
 
   <p>入射动量 <span class="m">p = mv</span>，而 <span class="m">mv^{2} = 2E</span>（<span class="m">E</span> 为动能），故单次穿越的最大偏转角为</p>
 
-  <div class="eq key">
+  <div class="eq key" id="eq-1-3">
     <span class="body m">\theta _{\text{max}}\approx \frac{\Delta p_{\perp }}{p}=\frac{4k_{e}Ze^{2}}{R\cdot mv^{2}}=\frac{2k_{e}Ze^{2}}{R\!E}</span>
-    <span class="tag">(1.3)</span>
+    <a class="tag" href="#eq-1-3" title="公式 (1.3) 的固定链接">(1.3)</a>
   </div>
 
   <p>代入盖革–马斯登实验的实际条件：<span class="m">Z = 79</span>（金）、<span class="m">R \approx 1.0\times 10^{-10}</span> m、<span class="m">E = 5</span> MeV <span class="m">= 8.01\times 10^{-13}</span> J，得</p>
 
-  <div class="eq">
+  <div class="eq" id="eq-1-4">
     <span class="body m">\theta _{\text{max}}\approx 4.6\times 10^{-4} \text{rad}\approx 0.026^{\circ }</span>
-    <span class="tag">(1.4)</span>
+    <a class="tag" href="#eq-1-4" title="公式 (1.4) 的固定链接">(1.4)</a>
   </div>
 
   <p>也就是说，整个原子的正电荷"摊开"在 10<sup>&#8722;10</sup> m 尺度上时，它对 α 粒子只能产生百分之几度的扰动。要累积到 90&#176;（<span class="m">1.571</span> rad），即便假设每次碰撞都恰好取到理论上限、且全部朝同一方向叠加，也至少需要</p>
 
-  <div class="eq">
+  <div class="eq" id="eq-1-5">
     <span class="body m">N\ge \frac{1.571}{4.6\times 10^{-4}}\approx 3.4\times 10^{3} \text{次}</span>
-    <span class="tag">(1.5)</span>
+    <a class="tag" href="#eq-1-5" title="公式 (1.5) 的固定链接">(1.5)</a>
   </div>
 
   <p>而 3400 次独立碰撞全部取向一致的概率量级为 <span class="m">2^{-3400} \approx 10^{-1024}</span>。这是一个<em>极为宽松的上界</em>——真实概率还要小得多。结论无可回避：<strong>汤姆孙模型无法产生哪怕一次大角度散射。</strong></p>
@@ -488,7 +618,7 @@ td.n,th.n{text-align:right; font-family:var(--mono); font-size:13px; white-space
     <p>式 (1.3) 是<strong>纯粹的量纲论证</strong>：它只用到"正电荷分布在一个尺度 <span class="m">R</span> 上"这一条。因此它的反面同样成立——只要观察到任意一次大角度散射，就足以断定正电荷<em>不是</em>弥散的，而必定集中在一个远小于 <span class="m">R</span> 的尺度内。这就是 1911 年卢瑟福提出核式模型的全部逻辑起点。</p>
   </div>
 
-  <h3 class="sub">本文的目标与路线</h3>
+  <h3 class="sub">1.2 本文的目标与路线</h3>
   <p>接下来的章节不引用"卢瑟福公式"这一结论，而是从库仑力与两条守恒律出发把它重新推出来，并对每一步的物理含义作出交代。路线是：<span class="m">\S 2</span> 明确假设与其失效尺度 → <span class="m">\S 3</span> 写出力与守恒量 → <span class="m">\S 4</span> 积分轨道方程得到双曲线 → <span class="m">\S 5</span> 用冲量法求出 <span class="m">b-\theta</span> 关系 → <span class="m">\S 6-\S 7</span> 得到最近逼近距离与微分散射截面 → <span class="m">\S 8-\S 9</span> 讨论量级与数值 → <span class="m">\S 10-\S 13</span> 提取推论并划定适用边界。四个附录给出被正文略过的计算细节。</p>
 </section>
 
@@ -558,68 +688,68 @@ td.n,th.n{text-align:right; font-family:var(--mono); font-size:13px; white-space
     <p>"把原子核当成点电荷"并不意味着核真的没有大小，而是说：在<em>本文所讨论的能量范围内</em>，粒子能靠近的最小距离远大于核半径，因此波函数/轨道从未"进入"核内部，此时点电荷假设是一个可检验的近似。一旦能量高到使 <span class="m">r_{\text{min}}</span> 与核半径可比，这条假设就失效，而它的失效<strong>恰恰成为测量核半径的手段</strong>（见 <span class="m">\S 10.2</span>）。</p>
   </div>
 
-  <h3 class="sub">几何约定</h3>
+  <h3 class="sub">2.1 几何约定</h3>
   <p>取靶核为原点，入射方向为 <span class="m">+x</span> 轴。粒子在无穷远处沿一条与 <span class="m">x</span> 轴平行、垂直距离为 <span class="m">b</span> 的直线运动，<span class="m">b</span> 称为<strong>瞄准距</strong>（impact parameter）。出射方向与原入射方向的夹角 <span class="m">\theta</span> 称为<strong>散射角</strong>。由于力是中心力，轨道必在一个过原点且含初速度的平面内，以下均在该平面内取极坐标 <span class="m">(r, \varphi )</span>，原点为力心。</p>
 </section>
 
 <section class="sec" id="s3">
   <h2 class="sec-title"><span class="num">三</span>相互作用与守恒律</h2>
 
-  <h3 class="sub">库仑力与相互作用常数</h3>
+  <h3 class="sub">3.1 库仑力与相互作用常数</h3>
 
   <p>α 粒子（电荷 <span class="m">ze</span>，<span class="m">z = 2</span>）与靶核（电荷 <span class="m">Ze</span>）同号，相互<strong>排斥</strong>。取力心为原点，粒子所受的力沿径向朝外：</p>
 
-  <div class="eq">
+  <div class="eq" id="eq-3-1">
     <span class="body m">\vec{F}=\frac{1}{4\pi \varepsilon _{0}}\frac{zZe^{2}}{r^{2}}\hat{r}\equiv \frac{C}{r^{2}}\hat{r}</span>
-    <span class="tag">(3.1)</span>
+    <a class="tag" href="#eq-3-1" title="公式 (3.1) 的固定链接">(3.1)</a>
   </div>
 
   <p>其中把整个相互作用浓缩成了一个常数：</p>
 
-  <div class="eq key">
-    <span class="body m">C\equiv k_{e}zZe^{2},\ \ k_{e}\equiv \frac{1}{4\pi \varepsilon _{0}}=8.9875517923\times 10^{9} \text{N}\cdot \text{m}^{2}\text{/C}^{2}</span>
-    <span class="tag">(3.2)</span>
+  <div class="eq key" id="eq-3-2">
+    <span class="body m">\begin{aligned}C&amp;\equiv k_{e}zZe^{2}\\k_{e}&amp;\equiv \frac{1}{4\pi \varepsilon _{0}}=8.9875517923\times 10^{9}\ \text{N}\cdot \text{m}^{2}\text{/C}^{2}\end{aligned}</span>
+    <a class="tag" href="#eq-3-2" title="公式 (3.2) 的固定链接">(3.2)</a>
   </div>
 
   <p><span class="m">C</span> 的量纲是<strong>能量&#215;长度</strong>（J&middot;m），它同时扮演两个角色：<span class="m">U(r) = C/r</span> 是势能，而 <span class="m">C/E</span> 是一个长度——后文会看到，整个散射问题的所有特征长度都是 <span class="m">C/E</span> 的倍数。相应的势能为</p>
 
-  <div class="eq">
+  <div class="eq" id="eq-3-3">
     <span class="body m">U(r)=\frac{C}{r},\ \ U(\infty )=0</span>
-    <span class="tag">(3.3)</span>
+    <a class="tag" href="#eq-3-3" title="公式 (3.3) 的固定链接">(3.3)</a>
   </div>
 
-  <h3 class="sub">守恒律一：机械能守恒</h3>
+  <h3 class="sub">3.2 守恒律一：机械能守恒</h3>
 
   <p>库仑力是保守力，且只与 <span class="m">r</span> 有关，故机械能守恒。粒子从无穷远处以速度 <span class="m">v_{0}</span> 入射，在无穷远处势能为零：</p>
 
-  <div class="eq">
+  <div class="eq" id="eq-3-4">
     <span class="body m">E=\frac{1}{2}mv_{0}^{2}=\frac{1}{2}mv^{2}+\frac{C}{r}=\text{const}</span>
-    <span class="tag">(3.4)</span>
+    <a class="tag" href="#eq-3-4" title="公式 (3.4) 的固定链接">(3.4)</a>
   </div>
 
-  <p>把速度分解为径向与横向两部分 <span class="m">v^{2} = v_{r}^{2} + v_{\varphi }^{2}</span>（其中 <span class="m">v_{\varphi } = r\varphi \dot{}</span>），式 (3.4) 说明：粒子越靠近核，势能越大，可用的径向动能越小——这已经预示了"最近逼近距离"的存在。</p>
+  <p>把速度分解为径向与横向两部分 <span class="m">v^{2} = v_{r}^{2} + v_{\varphi }^{2}</span>（其中 <span class="m">v_{\varphi } = r\dot{\varphi }</span>），式 (3.4) 说明：粒子越靠近核，势能越大，可用的径向动能越小——这已经预示了"最近逼近距离"的存在。</p>
 
-  <h3 class="sub">守恒律二：角动量守恒</h3>
+  <h3 class="sub">3.3 守恒律二：角动量守恒</h3>
 
   <p>中心力对原点的力矩恒为零，故角动量 <span class="m">\vec{L} = m\vec{r} \times \vec{v}</span> 守恒，方向固定（垂直于轨道平面），大小</p>
 
-  <div class="eq">
-    <span class="body m">L=m\,r^{2}\varphi \dot{}</span>
-    <span class="tag">(3.5)</span>
+  <div class="eq" id="eq-3-5">
+    <span class="body m">L=m\,r^{2}\dot{\varphi }</span>
+    <a class="tag" href="#eq-3-5" title="公式 (3.5) 的固定链接">(3.5)</a>
   </div>
 
   <p>在无穷远处，速度垂直于瞄准距臂，故 <span class="m">L = mv_{0}b</span>。于是式 (3.5) 给出一个后面反复使用的替换关系：</p>
 
-  <div class="eq key">
-    <span class="body m">mv_{0}b=m\,r^{2}\varphi \dot{}\ \ \Rightarrow \ \ dt=\frac{m\,r^{2}}{L}d\varphi</span>
-    <span class="tag">(3.6)</span>
+  <div class="eq key" id="eq-3-6">
+    <span class="body m">mv_{0}b=m\,r^{2}\dot{\varphi }\ \ \Rightarrow \ \ dt=\frac{m\,r^{2}}{L}d\varphi</span>
+    <a class="tag" href="#eq-3-6" title="公式 (3.6) 的固定链接">(3.6)</a>
   </div>
 
   <p>式 (3.6) 是把"对时间积分"换成"对角度积分"的钥匙。由于被积函数 <span class="m">mr^{2}/L</span> 中含 <span class="m">r^{2}</span>，它恰好能与库仑力的 <span class="m">1/r^{2}</span> 相消——这正是库仑问题能被初等积分求解的深层原因（见附录 <a class="ref" href="#a2">B</a>）。</p>
 
-  <h3 class="sub">问题的可积性</h3>
+  <h3 class="sub">3.4 问题的可积性</h3>
 
-  <p>平面内有 2 个自由度，而式 (3.4) 与 (3.5) 给出 2 个独立守恒量，因此系统完全可积，轨道可由积分封闭求出。定向到具体路径：把式 (3.4) 中的 <span class="m">v^{2}</span> 用 <span class="m">v_{r} = r\dot{}</span> 与 <span class="m">v_{\varphi } = L/(mr)</span> 表出，得到关于 <span class="m">r(t)</span> 的一阶方程；再用式 (3.6) 消去 <span class="m">t</span>，即得轨道方程 <span class="m">r(\varphi )</span>。下一节按这个思路直接给出结果，完整的积分过程放在附录 <a class="ref" href="#a1">A</a>。</p>
+  <p>平面内有 2 个自由度，而式 (3.4) 与 (3.5) 给出 2 个独立守恒量，因此系统完全可积，轨道可由积分封闭求出。定向到具体路径：把式 (3.4) 中的 <span class="m">v^{2}</span> 用 <span class="m">v_{r} = \dot{r}</span> 与 <span class="m">v_{\varphi } = L/(mr)</span> 表出，得到关于 <span class="m">r(t)</span> 的一阶方程；再用式 (3.6) 消去 <span class="m">t</span>，即得轨道方程 <span class="m">r(\varphi )</span>。下一节按这个思路直接给出结果，完整的积分过程放在附录 <a class="ref" href="#a1">A</a>。</p>
 
   <div class="box key">
     <p class="bt">
@@ -634,27 +764,27 @@ td.n,th.n{text-align:right; font-family:var(--mono); font-size:13px; white-space
 
   <p class="lede">这一节把两条守恒律合成一个关于轨道的微分方程并解出它。结果会告诉我们：α 粒子在库仑场中的轨道是一条<strong>以核为一个焦点的双曲线</strong>——这个几何事实是后面一切推论的地基。</p>
 
-  <h3 class="sub">4.1 &nbsp;从守恒律到轨道方程</h3>
+  <h3 class="sub">4.1 从守恒律到轨道方程</h3>
 
-  <p>用极坐标写出能量守恒式 (3.4)。横向速度由角动量给出 <span class="m">v_{\varphi } = L/(mr)</span>，径向速度写成对角的导数 <span class="m">v_{r} = r\dot{} = (dr/d\varphi )\varphi \dot{}</span>，而由式 (3.6) <span class="m">\varphi \dot{} = L/(mr^{2})</span>，于是</p>
+  <p>用极坐标写出能量守恒式 (3.4)。横向速度由角动量给出 <span class="m">v_{\varphi } = L/(mr)</span>，径向速度写成对角的导数 <span class="m">v_{r} = \dot{r} = (dr/d\varphi )\dot{\varphi }</span>，而由式 (3.6) <span class="m">\dot{\varphi } = L/(mr^{2})</span>，于是</p>
 
-  <div class="eq">
-    <span class="body m">E=\frac{L^{2}}{2mr^{4}}\sqrt{\frac{dr}{d\varphi }}^{2}+\frac{L^{2}}{2mr^{2}}+\frac{C}{r}</span>
-    <span class="tag">(4.1)</span>
+  <div class="eq" id="eq-4-1">
+    <span class="body m">E=\frac{L^{2}}{2mr^{4}}\left(\frac{dr}{d\varphi }\right)^{2}+\frac{L^{2}}{2mr^{2}}+\frac{C}{r}</span>
+    <a class="tag" href="#eq-4-1" title="公式 (4.1) 的固定链接">(4.1)</a>
   </div>
 
   <p>作代换 <span class="m">u \equiv 1/r</span>。此时 <span class="m">1/r^{4}\,(dr/d\varphi )^{2} = (du/d\varphi )^{2}</span>，式 (4.1) 化简为一个<strong>不含一次导数项、且没有显含 <i>&#966;</i></strong> 的方程：</p>
 
-  <div class="eq">
-    <span class="body m">E=\frac{L^{2}}{2m}\sqrt{\frac{du}{d\varphi }}^{2}+\frac{L^{2}u^{2}}{2m}+Cu</span>
-    <span class="tag">(4.2)</span>
+  <div class="eq" id="eq-4-2">
+    <span class="body m">E=\frac{L^{2}}{2m}\left(\frac{du}{d\varphi }\right)^{2}+\frac{L^{2}u^{2}}{2m}+Cu</span>
+    <a class="tag" href="#eq-4-2" title="公式 (4.2) 的固定链接">(4.2)</a>
   </div>
 
   <p>两边对 <span class="m">\varphi</span> 求导，并约去公因子 <span class="m">(L^{2}/m)(du/d\varphi )</span>（该因子在转折点处为零，需单独讨论，见附录 <a class="ref" href="#a1">A</a>），得到一个常系数线性方程：</p>
 
-  <div class="eq key">
+  <div class="eq key" id="eq-4-3">
     <span class="body m">\frac{d^{2}u}{d\varphi ^{2}}+u=-\frac{mC}{L^{2}}</span>
-    <span class="tag">(4.3)</span>
+    <a class="tag" href="#eq-4-3" title="公式 (4.3) 的固定链接">(4.3)</a>
   </div>
 
   <div class="box note">
@@ -665,63 +795,63 @@ td.n,th.n{text-align:right; font-family:var(--mono); font-size:13px; white-space
     <p>负号是<strong>排斥</strong>的标记。若把力改成吸引（如电子绕核），右端变为 <span class="m">+mC/L^{2}</span>，解的形式随之变为 <span class="m">r = \alpha /(1 + e\,\cos \,\varphi )</span>——那才是行星轨道（椭圆/双曲线，核在焦点上）。这里 <span class="m">e\,\cos \,\varphi</span> 与 1 的相对符号相反，所以<em>轨道的凹侧背离力心</em>：粒子被"推出去"。这个符号差异正是卢瑟福散射与行星运动在几何上的唯一区别。</p>
   </div>
 
-  <h3 class="sub">4.2 &nbsp;解的形式：圆锥曲线</h3>
+  <h3 class="sub">4.2 解的形式：圆锥曲线</h3>
 
   <p>式 (4.3) 的通解为</p>
 
-  <div class="eq">
+  <div class="eq" id="eq-4-4">
     <span class="body m">u(\varphi )=A\,\cos \,\varphi +B\,\sin \,\varphi -\frac{mC}{L^{2}}</span>
-    <span class="tag">(4.4)</span>
+    <a class="tag" href="#eq-4-4" title="公式 (4.4) 的固定链接">(4.4)</a>
   </div>
 
   <p>由于轨道关于最近点（<strong>近核点</strong>，apsis）对称，我们可以把极角的原点选在近核点方向上，即令 <span class="m">\varphi = 0</span> 处 <span class="m">du/d\varphi = 0</span>。这立即给出 <span class="m">B = 0</span>。<strong>近核点处 <i>du</i>/<i>d&#966;</i> = 0 并非额外假设</strong>，它是"轨道在近核点处 <i>r</i> 取极值"的直接后果。</p>
 
   <p>再引入两个具有明确物理意义的量——一个<strong>长度</strong>和一个<strong>纯数</strong>：</p>
 
-  <div class="eq">
+  <div class="eq" id="eq-4-5">
     <span class="body m">\alpha \equiv \frac{L^{2}}{mC},\ \ e\equiv A\alpha</span>
-    <span class="tag">(4.5)</span>
+    <a class="tag" href="#eq-4-5" title="公式 (4.5) 的固定链接">(4.5)</a>
   </div>
 
   <p>于是 <span class="m">u = A\cos \varphi - 1/\alpha</span>，取倒数得到<strong>轨道方程</strong>：</p>
 
-  <div class="eq key">
+  <div class="eq key" id="eq-4-6">
     <span class="body m">r(\varphi )=\frac{\alpha }{e\,\cos \,\varphi -1}</span>
-    <span class="tag">(4.6)</span>
+    <a class="tag" href="#eq-4-6" title="公式 (4.6) 的固定链接">(4.6)</a>
   </div>
 
   <p>式 (4.6) 就是极坐标下圆锥曲线的标准式，<span class="m">e</span> 为偏心率。<span class="m">e &lt; 1</span> 为椭圆，<span class="m">e = 1</span> 为抛物线，<span class="m">e &gt; 1</span> 为双曲线。由于粒子来自无穷远又回到无穷远，且势能在无穷远为零、动能为正，轨道必须是<strong>开放</strong>的；又由上一节的符号讨论，<span class="m">e &gt; 1</span>。因此：<strong>轨道是以核为一个焦点的双曲线。</strong></p>
 
   <p>由式 (4.6) 可直接读出两个几何特征。第一，<span class="m">r</span> 在 <span class="m">\varphi = 0</span> 处取极小值</p>
 
-  <div class="eq">
+  <div class="eq" id="eq-4-7">
     <span class="body m">r_{\text{min}}=r(0)=\frac{\alpha }{e-1}</span>
-    <span class="tag">(4.7)</span>
+    <a class="tag" href="#eq-4-7" title="公式 (4.7) 的固定链接">(4.7)</a>
   </div>
 
   <p>第二，粒子只能到达 <span class="m">e\,\cos \,\varphi \ge 1</span> 的角度范围。记 <span class="m">\varphi _{\infty }</span> 为 <span class="m">r \to \infty</span> 时 <span class="m">\varphi</span> 的极限，则</p>
 
-  <div class="eq">
+  <div class="eq" id="eq-4-8">
     <span class="body m">\cos \,\varphi _{\infty }=\frac{1}{e},\ \ \varphi _{\infty }=\arccos \,\frac{1}{e}</span>
-    <span class="tag">(4.8)</span>
+    <a class="tag" href="#eq-4-8" title="公式 (4.8) 的固定链接">(4.8)</a>
   </div>
 
-  <h3 class="sub">4.3 &nbsp;散射角与偏心率</h3>
+  <h3 class="sub">4.3 散射角与偏心率</h3>
 
   <p>式 (4.6) 描述的轨道关于 <span class="m">\varphi = 0</span> 对称：粒子从 <span class="m">\varphi = -\varphi _{\infty }</span> 进入，经过近核点，从 <span class="m">\varphi = +\varphi _{\infty }</span> 离开。现在把它翻译成实验室里的角度。</p>
 
   <p>在无穷远处 <span class="m">v_{r} \gg v_{\varphi }</span>，速度几乎沿径向。入射端速度<strong>指向</strong>力心，其方向角为 <span class="m">\pi - \varphi _{\infty }</span>；出射端速度<strong>背离</strong>力心，方向角为 <span class="m">\varphi _{\infty }</span>。两者之差就是散射角：</p>
 
-  <div class="eq">
+  <div class="eq" id="eq-4-9">
     <span class="body m">\theta =(\pi -\varphi _{\infty })-\varphi _{\infty }=\pi -2\varphi _{\infty }\ \ \Rightarrow \ \ \varphi _{\infty }=\frac{\pi -\theta }{2}</span>
-    <span class="tag">(4.9)</span>
+    <a class="tag" href="#eq-4-9" title="公式 (4.9) 的固定链接">(4.9)</a>
   </div>
 
   <p>代入式 (4.8) 并用 <span class="m">\cos ((\pi -\theta )/2) = \sin (\theta /2)</span>：</p>
 
-  <div class="eq key">
-    <span class="body m">\frac{1}{e}=\cos \,\frac{\pi -\theta }{2}=\sin \,\frac{\theta }{2}\ \ \Rightarrow \ \ e=\frac{1}{\sin (\theta /2)}=\csc \,\frac{\theta }{2}</span>
-    <span class="tag">(4.10)</span>
+  <div class="eq key" id="eq-4-10">
+    <span class="body m">\begin{aligned}\frac{1}{e}&amp;=\cos \,\frac{\pi -\theta }{2}=\sin \,\frac{\theta }{2}\\&amp;\Rightarrow \ e=\frac{1}{\sin (\theta /2)}=\csc \,\frac{\theta }{2}\end{aligned}</span>
+    <a class="tag" href="#eq-4-10" title="公式 (4.10) 的固定链接">(4.10)</a>
   </div>
 
   <p>式 (4.10) 是一个很强的结果：<strong>偏心率只由散射角决定</strong>，与能量、电荷、瞄准距都无关。两个极限可以自检：正碰 <span class="m">\theta \to \pi</span> 给出 <span class="m">e \to 1</span>（双曲线退化为抛物线，粒子恰好"擦到"折返点）；擦边 <span class="m">\theta \to 0</span> 给出 <span class="m">e \to \infty</span>（双曲线拉直成一条直线，正如无场情形）。</p>
@@ -770,95 +900,95 @@ td.n,th.n{text-align:right; font-family:var(--mono); font-size:13px; white-space
 
   <p class="lede">上一节给出了轨道的形状，但还没把 <span class="m">\theta</span> 与真正决定命运的参数 <span class="m">b</span> 联系起来。这一节用<strong>冲量法</strong>求出这条关系，并在 5.4 用完全独立的第二条路线互校。</p>
 
-  <h3 class="sub">5.1 &nbsp;动量变化所受的两条约束</h3>
+  <h3 class="sub">5.1 动量变化所受的两条约束</h3>
 
   <p><strong>约束一：大小。</strong>在无穷远处势能为零，故入射与出射速率相等，均为 <span class="m">v_{0}</span>。两个等长矢量 <span class="m">m\vec{v}_{0}</span> 与 <span class="m">m\vec{v}_{0}'</span> 夹角为 <span class="m">\theta</span>，其差的模为</p>
 
-  <div class="eq">
-    <span class="body m">|\vec{\Delta p}|=2mv_{0}\,\sin \,\frac{\theta }{2}</span>
-    <span class="tag">(5.1)</span>
+  <div class="eq" id="eq-5-1">
+    <span class="body m">|\Delta \vec{p}|=2mv_{0}\,\sin \,\frac{\theta }{2}</span>
+    <a class="tag" href="#eq-5-1" title="公式 (5.1) 的固定链接">(5.1)</a>
   </div>
 
   <p class="mnote"><b>为什么？</b>把等长矢量的差写成 <span class="m">2v\sin (\theta /2)</span>：两个矢量 <span class="m">\vec{a}, \vec{b}</span> 等长时 <span class="m">|\vec{a}-\vec{b}| = 2|\vec{a}|\sin (\theta /2)</span>，其中 <span class="m">\theta</span> 为夹角。这是"弦长 = 2R&#8201;sin(半角)"的直接应用。</p>
 
   <p><strong>约束二：方向。</strong>轨道关于近核点与力心的连线（即对称轴）镜像对称。库仑力在镜像下不变，而垂直于对称轴的冲量分量在轨迹前半段与后半段<strong>等大反向</strong>，彼此抵消。因此净冲量<strong>严格沿对称轴</strong>，且因力为斥力而指向背离核的一侧。</p>
 
-  <h3 class="sub">5.2 &nbsp;把冲量积出来</h3>
+  <h3 class="sub">5.2 把冲量积出来</h3>
 
   <p>设 <span class="m">\varphi</span> 为粒子位置矢量与对称轴的夹角（与 4.2 节同一约定）。冲量沿对称轴的分量为</p>
 
-  <div class="eq">
+  <div class="eq" id="eq-5-2">
     <span class="body m">\Delta p=\int _{-\varphi _{\infty }}^{+\varphi _{\infty }}\frac{C}{r^{2}}\,\cos \,\varphi \,dt</span>
-    <span class="tag">(5.2)</span>
+    <a class="tag" href="#eq-5-2" title="公式 (5.2) 的固定链接">(5.2)</a>
   </div>
 
   <p>关键一步是用式 (3.6) 换掉 <span class="m">dt</span>。这一步之所以奏效，是因为 <span class="m">dt = (mr^{2}/L)d\varphi</span> 分子上的 <span class="m">r^{2}</span> 恰好与力中的 <span class="m">1/r^{2}</span> 相消，积分顿时变得与轨道形状<strong>无关</strong>：</p>
 
-  <div class="eq">
-    <span class="body m">\Delta p=\frac{mC}{L}\int _{-\varphi _{\infty }}^{+\varphi _{\infty }}\cos \,\varphi \,d\varphi =\frac{mC}{L}\,[\sin \,\varphi ]_{-\varphi _{\infty }}^{+\varphi _{\infty }}=\frac{2mC}{L}\,\sin \,\varphi _{\infty }</span>
-    <span class="tag">(5.3)</span>
+  <div class="eq" id="eq-5-3">
+    <span class="body m">\begin{aligned}\Delta p&amp;=\frac{mC}{L}\int _{-\varphi _{\infty }}^{+\varphi _{\infty }}\cos \,\varphi \,d\varphi\\&amp;=\frac{mC}{L}\,[\sin \,\varphi ]_{-\varphi _{\infty }}^{+\varphi _{\infty }}=\frac{2mC}{L}\,\sin \,\varphi _{\infty }\end{aligned}</span>
+    <a class="tag" href="#eq-5-3" title="公式 (5.3) 的固定链接">(5.3)</a>
   </div>
 
   <p>由式 (4.9) 与 (4.10)，<span class="m">\sin \varphi _{\infty } = \sin ((\pi -\theta )/2) = \cos (\theta /2)</span>，于是</p>
 
-  <div class="eq">
+  <div class="eq" id="eq-5-4">
     <span class="body m">\Delta p=\frac{2mC}{L}\,\cos \,\frac{\theta }{2}</span>
-    <span class="tag">(5.4)</span>
+    <a class="tag" href="#eq-5-4" title="公式 (5.4) 的固定链接">(5.4)</a>
   </div>
 
-  <h3 class="sub">5.3 &nbsp;联立求解</h3>
+  <h3 class="sub">5.3 联立求解</h3>
 
   <p>式 (5.1) 与 (5.4) 是同一个 <span class="m">\Delta p</span> 的两种表达，令其相等：</p>
 
-  <div class="eq">
+  <div class="eq" id="eq-5-5">
     <span class="body m">2mv_{0}\,\sin \,\frac{\theta }{2}=\frac{2mC}{L}\,\cos \,\frac{\theta }{2}</span>
-    <span class="tag">(5.5)</span>
+    <a class="tag" href="#eq-5-5" title="公式 (5.5) 的固定链接">(5.5)</a>
   </div>
 
   <p>两边约去 <span class="m">2m</span>，用 <span class="m">L = mv_{0}b</span> 与 <span class="m">E = \tfrac{1}{2}mv_{0}^{2}</span> 整理：</p>
 
-  <div class="eq">
+  <div class="eq" id="eq-5-6">
     <span class="body m">v_{0}\,\sin \,\frac{\theta }{2}=\frac{C}{mv_{0}b}\,\cos \,\frac{\theta }{2}\ \ \Rightarrow \ \ mv_{0}^{2}b\,\sin \,\frac{\theta }{2}=C\,\cos \,\frac{\theta }{2}</span>
-    <span class="tag">(5.6)</span>
+    <a class="tag" href="#eq-5-6" title="公式 (5.6) 的固定链接">(5.6)</a>
   </div>
 
   <p>即 <span class="m">2Eb\,\sin (\theta /2) = C\,\cos (\theta /2)</span>。于是得到本节的核心结果：</p>
 
-  <div class="eq key">
+  <div class="eq key" id="eq-5-7">
     <span class="body m">\tan \,\frac{\theta }{2}=\frac{C}{2Eb},\ \ \ b=\frac{C}{2E}\,\cot \,\frac{\theta }{2}</span>
-    <span class="tag">(5.7)</span>
+    <a class="tag" href="#eq-5-7" title="公式 (5.7) 的固定链接">(5.7)</a>
   </div>
 
   <p>式 (5.7) 里出现了贯穿全文的特征长度 <span class="m">C/(2E)</span>。它完全由入射条件决定，与瞄准距无关；<span class="m">b</span> 与 <span class="m">\theta</span> 的关系就是这个长度充当"标尺"的 <span class="m">\cot</span> 曲线。三个极限都合理：<span class="m">b \to \infty</span> 时 <span class="m">\theta \to 0</span>（远处掠过，几乎不偏）；<span class="m">b \to 0</span> 时 <span class="m">\theta \to \pi</span>（正碰，原路返回）；<span class="m">b</span> 越小偏转越大，且严格单调。</p>
 
-  <h3 class="sub">5.4 &nbsp;第二条路线：从轨道方程直接互校</h3>
+  <h3 class="sub">5.4 第二条路线：从轨道方程直接互校</h3>
 
   <p>冲量法用到"净冲量沿对称轴"这一对称性论证。为了不留下任何可疑之处，这里再从轨道方程本身独立算一遍。在近核点处速度纯横向，能量守恒式 (3.4) 给出</p>
 
-  <div class="eq">
+  <div class="eq" id="eq-5-8">
     <span class="body m">E=\frac{L^{2}}{2mr_{\text{min}}^{2}}+\frac{C}{r_{\text{min}}}</span>
-    <span class="tag">(5.8)</span>
+    <a class="tag" href="#eq-5-8" title="公式 (5.8) 的固定链接">(5.8)</a>
   </div>
 
   <p>把 <span class="m">L^{2} = mC\alpha</span>（式 4.5）与 <span class="m">r_{\text{min}} = \alpha /(e-1)</span>（式 4.7）代入，消去 <span class="m">\alpha</span>：</p>
 
-  <div class="eq">
-    <span class="body m">E=\frac{C}{2}\,\frac{e-1}{r_{\text{min}}}+\frac{C}{r_{\text{min}}}=\frac{C}{2r_{\text{min}}}(e+1)\ \ \Rightarrow \ \ r_{\text{min}}=\frac{C}{2E}(e+1)</span>
-    <span class="tag">(5.9)</span>
+  <div class="eq" id="eq-5-9">
+    <span class="body m">\begin{aligned}E&amp;=\frac{C}{2}\,\frac{e-1}{r_{\text{min}}}+\frac{C}{r_{\text{min}}}=\frac{C}{2r_{\text{min}}}(e+1)\\&amp;\Rightarrow \ r_{\text{min}}=\frac{C}{2E}(e+1)\end{aligned}</span>
+    <a class="tag" href="#eq-5-9" title="公式 (5.9) 的固定链接">(5.9)</a>
   </div>
 
   <p>再由式 (4.5) 与 <span class="m">L^{2} = 2mEb^{2}</span>：</p>
 
-  <div class="eq">
-    <span class="body m">b^{2}=\frac{L^{2}}{2mE}=\frac{C\alpha }{2E}=\frac{C}{2E}\,\frac{C(e+1)}{2E}(e-1)=\frac{C^{2}}{4E^{2}}(e^{2}-1)</span>
-    <span class="tag">(5.10)</span>
+  <div class="eq" id="eq-5-10">
+    <span class="body m">\begin{aligned}b^{2}&amp;=\frac{L^{2}}{2mE}=\frac{C\alpha }{2E}\\&amp;=\frac{C}{2E}\,\frac{C(e+1)}{2E}(e-1)=\frac{C^{2}}{4E^{2}}(e^{2}-1)\end{aligned}</span>
+    <a class="tag" href="#eq-5-10" title="公式 (5.10) 的固定链接">(5.10)</a>
   </div>
 
   <p>而由式 (4.10)，<span class="m">e^{2} - 1 = \csc ^{2}(\theta /2) - 1 = \cot ^{2}(\theta /2)</span>（因为 <span class="m">1 + \cot ^{2} = \csc ^{2}</span>）。开方即得</p>
 
-  <div class="eq">
+  <div class="eq" id="eq-5-11">
     <span class="body m">b=\frac{C}{2E}\,\cot \,\frac{\theta }{2}</span>
-    <span class="tag">(5.11)</span>
+    <a class="tag" href="#eq-5-11" title="公式 (5.11) 的固定链接">(5.11)</a>
   </div>
 
   <p>与式 (5.7) <strong>完全一致</strong>。两条互不依赖的推导（一条用力的时间积分，一条用轨道几何与能量）给出同一结果，式 (5.7) 可以放心使用。</p>
@@ -869,25 +999,25 @@ td.n,th.n{text-align:right; font-family:var(--mono); font-size:13px; white-space
 
   <p>把式 (4.10) 与 (5.9) 合起来，立刻得到最近逼近距离与散射角的关系：</p>
 
-  <div class="eq key">
-    <span class="body m">r_{\text{min}}=\frac{C}{2E}\,(1+\csc \,\frac{\theta }{2})=\frac{C}{2E}\,(1+\sqrt{1+\frac{2Eb}{C}^{2}})</span>
-    <span class="tag">(6.1)</span>
+  <div class="eq key" id="eq-6-1">
+    <span class="body m">\begin{aligned}r_{\text{min}}&amp;=\frac{C}{2E}\left(1+\csc \,\frac{\theta }{2}\right)\\&amp;=\frac{C}{2E}\left(1+\sqrt{1+\left(\frac{2Eb}{C}\right)^{2}}\right)\end{aligned}</span>
+    <a class="tag" href="#eq-6-1" title="公式 (6.1) 的固定链接">(6.1)</a>
   </div>
 
   <p>（第二个等式用了 <span class="m">\csc (\theta /2) = \sqrt{1 + \cot ^{2}(\theta /2)}</span> 与式 5.7 的 <span class="m">\cot (\theta /2) = 2Eb/C</span>。）</p>
 
-  <h3 class="sub">6.1 &nbsp;正碰距离：一个自然的长度标尺</h3>
+  <h3 class="sub">6.1 正碰距离：一个自然的长度标尺</h3>
 
   <p>取正碰 <span class="m">\theta = \pi</span>（即 <span class="m">b = 0</span>），<span class="m">\csc (\pi /2) = 1</span>，式 (6.1) 给出</p>
 
-  <div class="eq key">
+  <div class="eq key" id="eq-6-2">
     <span class="body m">d\equiv r_{\text{min}}(\theta =\pi )=\frac{C}{E}=\frac{2k_{e}zZe^{2}}{mv_{0}^{2}}</span>
-    <span class="tag">(6.2)</span>
+    <a class="tag" href="#eq-6-2" title="公式 (6.2) 的固定链接">(6.2)</a>
   </div>
 
   <p class="mnote">式 (6.2) 也可以由初等论证直接看出：正碰时粒子在最近点速度为零，全部动能转化为势能，<span class="m">\tfrac{1}{2}mv_{0}^{2} = C/d</span>，故 <span class="m">d = C/E</span>。式 (6.1) 是它的非正碰推广。</p>
 
-  <p><span class="m">d</span> 是核物理中最常用的长度标尺之一，称为<strong>库仑最近接近距离</strong>。它同时给出了两条信息：一是粒子在该能量下最多能靠近核多近；二是当 <span class="m">d</span> 与人射粒子的德布罗意波长、或与核半径可比时，本文的经典处理需要修正（<span class="m">\S 13</span>）。</p>
+  <p><span class="m">d</span> 是核物理中最常用的长度标尺之一，称为<strong>库仑最近接近距离</strong>。它同时给出了两条信息：一是粒子在该能量下最多能靠近核多近；二是当 <span class="m">d</span> 与入射粒子的德布罗意波长、或与核半径可比时，本文的经典处理需要修正（<span class="m">\S 13</span>）。</p>
 
   <div class="box key">
     <p class="bt">
@@ -906,71 +1036,71 @@ td.n,th.n{text-align:right; font-family:var(--mono); font-size:13px; white-space
 
   <p class="lede">实验中不能控制单个粒子的瞄准距，只能统计"多少粒子被弹到了哪个角度"。截面就是把"<span class="m">b(\theta )</span> 这条确定性关系"翻译成"可测量的计数分布"的桥梁。这一节完成这个翻译，并得到本文的主角——卢瑟福公式。</p>
 
-  <h3 class="sub">7.1 &nbsp;截面的定义</h3>
+  <h3 class="sub">7.1 截面的定义</h3>
 
   <p>设有一束强度为 <span class="m">I</span>（单位时间穿过单位面积的粒子数）的平行粒子流射向一个靶核。由于轴对称，瞄准距在 <span class="m">[b, b+db]</span> 内的粒子落在面积为 <span class="m">d\sigma = 2\pi b\,|db|</span> 的圆环内。把</p>
 
-  <div class="eq">
+  <div class="eq" id="eq-7-1">
     <span class="body m">d\sigma \equiv \frac{dN}{I}=2\pi b\,|db|</span>
-    <span class="tag">(7.1)</span>
+    <a class="tag" href="#eq-7-1" title="公式 (7.1) 的固定链接">(7.1)</a>
   </div>
 
   <p>称为<strong>微分截面</strong>。它是对单个靶核而言的等效面积，量纲为面积。<span class="m">d\sigma</span> 是"落在 <span class="m">[\theta , \theta +d\theta ]</span> 环内"的截面。习惯上再除以该环对应的立体角</p>
 
-  <div class="eq">
+  <div class="eq" id="eq-7-2">
     <span class="body m">d\Omega =2\pi \,\sin \,\theta \,d\theta</span>
-    <span class="tag">(7.2)</span>
+    <a class="tag" href="#eq-7-2" title="公式 (7.2) 的固定链接">(7.2)</a>
   </div>
 
   <p>得到与探测器立体角无关的量</p>
 
-  <div class="eq">
-    <span class="body m">\frac{d\sigma }{d\Omega }=\frac{b}{\sin \,\theta }\,|\frac{db}{d\theta }|</span>
-    <span class="tag">(7.3)</span>
+  <div class="eq" id="eq-7-3">
+    <span class="body m">\frac{d\sigma }{d\Omega }=\frac{b}{\sin \,\theta }\left|\frac{db}{d\theta }\right|</span>
+    <a class="tag" href="#eq-7-3" title="公式 (7.3) 的固定链接">(7.3)</a>
   </div>
 
   <p class="mnote"><b>截面的物理读法。</b>截面不是几何面积，而是"有效靶面积"。它把"粒子被弹到 <span class="m">\theta</span> 附近"这件事折算成"靶核在这条路径上占据了多大一块面积"。这样不同实验的几何布置就可以互相比对。</p>
 
-  <h3 class="sub">7.2 &nbsp;代入 <i>b</i>(<i>&#952;</i>) 并化简</h3>
+  <h3 class="sub">7.2 代入 <i>b</i>(<i>&#952;</i>) 并化简</h3>
 
   <p>由式 (5.7)，<span class="m">b = (C/2E)\cot (\theta /2)</span>。对 <span class="m">\theta</span> 求导（注意 <span class="m">(\cot x)' = -\csc ^{2}x</span>）：</p>
 
-  <div class="eq">
-    <span class="body m">\frac{db}{d\theta }=\frac{C}{2E}\cdot (-\frac{1}{2})\,\csc ^{2}\,\frac{\theta }{2}=-\frac{C}{4E}\,\csc ^{2}\,\frac{\theta }{2}</span>
-    <span class="tag">(7.4)</span>
+  <div class="eq" id="eq-7-4">
+    <span class="body m">\frac{db}{d\theta }=\frac{C}{2E}\cdot \left(-\frac{1}{2}\right)\csc ^{2}\,\frac{\theta }{2}=-\frac{C}{4E}\,\csc ^{2}\,\frac{\theta }{2}</span>
+    <a class="tag" href="#eq-7-4" title="公式 (7.4) 的固定链接">(7.4)</a>
   </div>
 
   <p>把 <span class="m">b</span>、<span class="m">|db/d\theta |</span> 与 <span class="m">\sin \theta = 2\sin (\theta /2)\cos (\theta /2)</span> 一并代入式 (7.3)：</p>
 
-  <div class="eq">
+  <div class="eq" id="eq-7-5">
     <span class="body m">\frac{d\sigma }{d\Omega }=\frac{C}{2E}\frac{\cot (\theta /2)}{2\sin (\theta /2)\cos (\theta /2)}\cdot \frac{C}{4E}\csc ^{2}\,\frac{\theta }{2}</span>
-    <span class="tag">(7.5)</span>
+    <a class="tag" href="#eq-7-5" title="公式 (7.5) 的固定链接">(7.5)</a>
   </div>
 
   <p>这里发生了一次漂亮的连锁相消。记 <span class="m">s \equiv \sin (\theta /2)</span>、<span class="m">c \equiv \cos (\theta /2)</span>，则 <span class="m">\cot (\theta /2) = c/s</span>，式 (7.5) 中三角函数因子为</p>
 
-  <div class="eq">
+  <div class="eq" id="eq-7-6">
     <span class="body m">\frac{c/s}{2sc}\cdot \frac{1}{s^{2}}=\frac{1}{2s^{2}}\cdot \frac{1}{s^{2}}=\frac{1}{2\sin ^{4}(\theta /2)}</span>
-    <span class="tag">(7.6)</span>
+    <a class="tag" href="#eq-7-6" title="公式 (7.6) 的固定链接">(7.6)</a>
   </div>
 
   <p>把 <span class="m">c</span> 完全约掉，只剩一个纯粹的 <span class="m">\sin ^{4}(\theta /2)</span>。系数为 <span class="m">(C/2E)(C/4E) = C^{2}/(8E^{2})</span>，再乘上式 (7.6) 中的 <span class="m">\tfrac{1}{2}</span>：</p>
 
-  <div class="eq">
+  <div class="eq" id="eq-7-7">
     <span class="body m">\frac{d\sigma }{d\Omega }=\frac{C^{2}}{16E^{2}}\,\frac{1}{\sin ^{4}(\theta /2)}</span>
-    <span class="tag">(7.7)</span>
+    <a class="tag" href="#eq-7-7" title="公式 (7.7) 的固定链接">(7.7)</a>
   </div>
 
   <p>最后把 <span class="m">C = k_{e}zZe^{2}</span>（式 3.2）代回系数：<span class="m">C^{2}/(16E^{2}) = (k_{e}zZe^{2}/4E)^{2}</span>。得到<strong>卢瑟福散射公式</strong>：</p>
 
-  <div class="eq key">
-    <span class="body m">\frac{d\sigma }{d\Omega }=(\frac{k_{e}zZe^{2}}{4E})^{2}\,\frac{1}{\sin ^{4}(\theta /2)}</span>
-    <span class="tag">(7.8)</span>
+  <div class="eq key" id="eq-7-8">
+    <span class="body m">\frac{d\sigma }{d\Omega }=\left(\frac{k_{e}zZe^{2}}{4E}\right)^{2}\frac{1}{\sin ^{4}(\theta /2)}</span>
+    <a class="tag" href="#eq-7-8" title="公式 (7.8) 的固定链接">(7.8)</a>
   </div>
 
   <p class="mnote">若把入射粒子电荷写成 <span class="m">z = 2</span>（α 粒子），靶核电荷 <span class="m">Z</span>，并用 <span class="m">E</span> 表示入射动能，则式 (7.8) 亦可写作 <span class="m">(k_{e}zZe^{2}/4E)^{2}\csc ^{4}(\theta /2)</span> 或 <span class="m">(C/4E)^{2}\csc ^{4}(\theta /2)</span>。三者完全等价。</p>
 
-  <h3 class="sub">7.3 &nbsp;公式在说什么</h3>
+  <h3 class="sub">7.3 公式在说什么</h3>
 
   <p>式 (7.8) 有三个可单独检验的标度律，每一条都是实验可判据：</p>
 
@@ -1013,18 +1143,18 @@ td.n,th.n{text-align:right; font-family:var(--mono); font-size:13px; white-space
 <section class="sec" id="s8">
   <h2 class="sec-title"><span class="num">八</span>积分截面与大角度稀有性</h2>
 
-  <h3 class="sub">8.1 &nbsp;散射到 <i>&#952;</i> &#8805; <i>&#952;</i><sub>0</sub> 的总截面</h3>
+  <h3 class="sub">8.1 散射到 <i>&#952;</i> &#8805; <i>&#952;</i><sub>0</sub> 的总截面</h3>
 
   <p>把式 (7.8) 对角度积分，得到"散射角超过 <span class="m">\theta _{0}</span>"的截面。有一个更省力的等价做法：所有 <span class="m">b \le b(\theta _{0})</span> 的粒子都会被弹到 <span class="m">\theta \ge \theta _{0}</span>，所以这个截面就是半径为 <span class="m">b(\theta _{0})</span> 的圆盘面积：</p>
 
-  <div class="eq key">
-    <span class="body m">\sigma (\theta \ge \theta _{0})=\pi \,b(\theta _{0})^{2}=\pi (\frac{C}{2E})^{2}\,\cot ^{2}\,\frac{\theta _{0}}{2}</span>
-    <span class="tag">(8.1)</span>
+  <div class="eq key" id="eq-8-1">
+    <span class="body m">\sigma (\theta \ge \theta _{0})=\pi \,b(\theta _{0})^{2}=\pi \left(\frac{C}{2E}\right)^{2}\cot ^{2}\,\frac{\theta _{0}}{2}</span>
+    <a class="tag" href="#eq-8-1" title="公式 (8.1) 的固定链接">(8.1)</a>
   </div>
 
   <p class="mnote">直接对式 (7.8) 积分可以验证这一点：<span class="m">\int _{\theta _{0}}^{\pi }(C^{2}/16E^{2})\csc ^{4}(\theta /2)\,2\pi \sin \theta \,d\theta = \pi (C/2E)^{2}\cot ^{2}(\theta _{0}/2)</span>。用 <span class="m">u = \theta /2</span> 换元后，被积函数化为 <span class="m">-\text{d}(1/(2\sin ^{2}u))</span>，积分是初等的。结果与"圆盘面积"论证一致。这也从侧面确认式 (7.8) 的归一化是正确的。</p>
 
-  <h3 class="sub">8.2 &nbsp;"大角度稀有"到底有多稀有</h3>
+  <h3 class="sub">8.2 "大角度稀有"到底有多稀有</h3>
 
   <p>式 (7.8) 的角度因子 <span class="m">\csc ^{4}(\theta /2)</span> 在 <span class="m">\theta \to 0</span> 时发散得非常快。下表以小角度 <span class="m">10^\circ</span> 为基准列出相对强度：</p>
 
@@ -1107,7 +1237,7 @@ td.n,th.n{text-align:right; font-family:var(--mono); font-size:13px; white-space
 
   <p class="lede">把公式里的数字真正算出来，才能看清量级。以下全部使用 SI 单位与盖革–马斯登实验的典型条件。</p>
 
-  <h3 class="sub">9.1 &nbsp;输入常数</h3>
+  <h3 class="sub">9.1 输入常数</h3>
 
   <div class="tw">
     <table>
@@ -1126,7 +1256,7 @@ td.n,th.n{text-align:right; font-family:var(--mono); font-size:13px; white-space
     </table>
   </div>
 
-  <h3 class="sub">9.2 &nbsp;瞄准距与最近逼近距离</h3>
+  <h3 class="sub">9.2 瞄准距与最近逼近距离</h3>
 
   <p>由式 (5.7) 与 (6.1)，取 <span class="m">C/2E = 22.75</span> fm：</p>
 
@@ -1156,36 +1286,36 @@ td.n,th.n{text-align:right; font-family:var(--mono); font-size:13px; white-space
 
   <p><strong>(2) 与核半径相比还有很大余量。</strong>金核半径由 <span class="m">R \approx 1.2A^{1/3}</span> fm 估计（<span class="m">A = 197</span>）：</p>
 
-  <div class="eq">
+  <div class="eq" id="eq-9-1">
     <span class="body m">R_{\text{Au}}\approx 1.2\cdot 197^{1/3} \text{fm}\approx 1.2\cdot 5.818 \text{fm}\approx 7.0 \text{fm}</span>
-    <span class="tag">(9.1)</span>
+    <a class="tag" href="#eq-9-1" title="公式 (9.1) 的固定链接">(9.1)</a>
   </div>
 
   <p>而 <span class="m">d = 45.5</span> fm，是核半径的 <span class="m">6.5</span> 倍。所以 5 MeV 的 α 粒子<strong>根本碰不到核</strong>，全程只在核外感受纯库仑力——这正是卢瑟福公式在这个能量下精确成立的原因。</p>
 
   <p><strong>(3) 想要"碰到"核需要多高能量？</strong>令 <span class="m">d = R</span>，即 <span class="m">C/E = R</span>：</p>
 
-  <div class="eq key">
-    <span class="body m">E_{\text{crit}}=\frac{C}{R_{\text{Au}}}=\frac{3.6445\times 10^{-26}}{7.0\times 10^{-15}} \text{J}\approx 5.2\times 10^{-12} \text{J}\approx 32.6 \text{MeV}</span>
-    <span class="tag">(9.2)</span>
+  <div class="eq key" id="eq-9-2">
+    <span class="body m">\begin{aligned}E_{\text{crit}}&amp;=\frac{C}{R_{\text{Au}}}=\frac{3.6445\times 10^{-26}}{7.0\times 10^{-15}}\ \text{J}\\&amp;\approx 5.2\times 10^{-12}\ \text{J}\approx 32.6\ \text{MeV}\end{aligned}</span>
+    <a class="tag" href="#eq-9-2" title="公式 (9.2) 的固定链接">(9.2)</a>
   </div>
 
   <p>这与实验事实高度吻合：用 α 粒子轰击金箔时，<strong>约 25&#8211;30 MeV 以上开始观察到对卢瑟福公式的系统偏离</strong>，而偏离正是核力开始介入、点电荷假设失效的标志。也就是说，<span class="m">\S 10.2</span> 中由该公式反推出的核半径上限，其自洽性是被实验独立确认过的。</p>
 
-  <h3 class="sub">9.3 &nbsp;散射到 90&#176; 以上的概率</h3>
+  <h3 class="sub">9.3 散射到 90&#176; 以上的概率</h3>
 
   <p>用式 (8.1) 取 <span class="m">\theta _{0} = 90^\circ</span>（每核）：</p>
 
-  <div class="eq">
-    <span class="body m">\sigma (\theta \ge 90^{\circ })=\pi \,b(90^{\circ })^{2}=\pi \,(22.75 \text{fm})^{2}=1.63\times 10^{3} \text{fm}^{2}=16.3 \text{b}</span>
-    <span class="tag">(9.3)</span>
+  <div class="eq" id="eq-9-3">
+    <span class="body m">\begin{aligned}\sigma (\theta \ge 90^{\circ })&amp;=\pi \,b(90^{\circ })^{2}=\pi \,(22.75\ \text{fm})^{2}\\&amp;=1.63\times 10^{3}\ \text{fm}^{2}=16.3\ \text{b}\end{aligned}</span>
+    <a class="tag" href="#eq-9-3" title="公式 (9.3) 的固定链接">(9.3)</a>
   </div>
 
   <p>作为对照，一个金原子的几何截面约 <span class="m">\pi (144 \text{pm})^{2} \approx 6.5\times 10^{8}</span> b。因此被弹到 90&#176; 以上的比例约为</p>
 
-  <div class="eq">
+  <div class="eq" id="eq-9-4">
     <span class="body m">\frac{16.3}{6.5\times 10^{8}}\approx 2.5\times 10^{-8}</span>
-    <span class="tag">(9.4)</span>
+    <a class="tag" href="#eq-9-4" title="公式 (9.4) 的固定链接">(9.4)</a>
   </div>
 
   <p>约四千万分之一。这就是为什么盖革和马斯登需要观察数以万计的闪烁、才能记录到寥寥几次大角度事件——也正是这寥寥几次，否定了汤姆孙模型。</p>
@@ -1195,20 +1325,20 @@ td.n,th.n{text-align:right; font-family:var(--mono); font-size:13px; white-space
 
   <p class="lede">推导到这里，公式本身已经完备。但物理学的价值在于它<strong>允许我们断言什么</strong>。这一节从式 (7.8) 出发，提取出三条互相独立、且都能被实验检验的结论。</p>
 
-  <h3 class="sub">10.1 &nbsp;正电荷必定高度集中</h3>
+  <h3 class="sub">10.1 正电荷必定高度集中</h3>
 
   <p>把 <span class="m">\S 1</span> 的论证反过来用。式 (1.3) 是<strong>给定弥散尺度 <span class="m">R</span> 时偏转的上界</strong>，它是一个严格的不等式。既然实验确实观测到了 <span class="m">\theta \ge 90^\circ = \pi /2</span>，就必有</p>
 
-  <div class="eq">
+  <div class="eq" id="eq-10-1">
     <span class="body m">\frac{2k_{e}Ze^{2}}{R\,E}\ge \frac{\pi }{2}\ \ \Rightarrow \ \ R\le \frac{4k_{e}Ze^{2}}{\pi E}</span>
-    <span class="tag">(10.1)</span>
+    <a class="tag" href="#eq-10-1" title="公式 (10.1) 的固定链接">(10.1)</a>
   </div>
 
   <p>代入 5 MeV / 金的条件：</p>
 
-  <div class="eq key">
+  <div class="eq key" id="eq-10-2">
     <span class="body m">R\le \frac{4\cdot 1.822\times 10^{-26}}{\pi \cdot 8.011\times 10^{-13}} \text{m}\approx 2.9\times 10^{-14} \text{m}=29 \text{fm}</span>
-    <span class="tag">(10.2)</span>
+    <a class="tag" href="#eq-10-2" title="公式 (10.2) 的固定链接">(10.2)</a>
   </div>
 
   <p>而原子的尺度是 <span class="m">\approx 10^{-10}</span> m。也就是说，<strong>集中正电荷的尺度至多是原子的 1/3400</strong>。这条结论只用到"存在 90&#176; 散射"这一个实验事实，不依赖卢瑟福公式的具体形状，因此格外可靠。</p>
@@ -1220,25 +1350,25 @@ td.n,th.n{text-align:right; font-family:var(--mono); font-size:13px; white-space
     </p>
     <p>有人会想：也许把 α 粒子弹回来的是电子？这个想法可以被一个纯粹的运动学事实排除。对于"质量 <span class="m">m</span> 的粒子弹性撞击静止的质量 <span class="m">M</span> 的粒子"，当 <span class="m">M &lt; m</span> 时，入射粒子在实验室系中的偏转角有<strong>严格上界</strong></p>
     <p style="margin-top:8px"><span class="m">\sin \,\theta _{\text{max}}=M/m</span>。对电子与 α 粒子：<span class="m">m_{e}/m_{\alpha } = 0.0005486/4.0015 = 1.37\times 10^{-4}</span>，故</p>
-    <p style="margin-top:8px"><span class="m">\theta _{\text{max}} = \arcsin (1.37\times 10^{-4}) \approx 0.0079^\circ</span>。即便 α 粒子<strong>正面撞上</strong>一个电子，它最多只能被偏转百分之八度。要累积到 90&#176; 需要约 11400 次方向完全一致的碰撞。因此大角度散射体必须是<strong>既重又集中</strong>的正电荷——它只能是原子核。</p>
+    <p style="margin-top:8px"><span class="m">\theta _{\text{max}} = \arcsin (1.37\times 10^{-4}) \approx 0.0079^\circ</span>。即便 α 粒子<strong>正面撞上</strong>一个电子，它最多只能被偏转千分之八度。要累积到 90&#176; 需要约 11400 次方向完全一致的碰撞。因此大角度散射体必须是<strong>既重又集中</strong>的正电荷——它只能是原子核。</p>
   </div>
 
-  <h3 class="sub">10.2 &nbsp;核半径的定量上限</h3>
+  <h3 class="sub">10.2 核半径的定量上限</h3>
 
   <p>式 (10.2) 给出的 29 fm 太宽松。利用卢瑟福公式本身，可以得到一个紧得多的界。</p>
 
   <p>推导卢瑟福公式时用了假设 A2（点电荷）。这条假设在 <span class="m">r_{\text{min}} \gg R</span> 时成立；一旦粒子能进入到核表面以内，势就不再是纯 <span class="m">1/r</span>，公式必定失效。由式 (6.2)，正碰时的最近距离为 <span class="m">d = C/E</span>，因此<strong>公式成立的条件</strong>可以写成一个能量条件：</p>
 
-  <div class="eq">
+  <div class="eq" id="eq-10-3">
     <span class="body m">\frac{C}{E}\gg R\ \ \Leftrightarrow \ \ E\ll \frac{C}{R}\equiv E_{\text{crit}}</span>
-    <span class="tag">(10.3)</span>
+    <a class="tag" href="#eq-10-3" title="公式 (10.3) 的固定链接">(10.3)</a>
   </div>
 
   <p>于是核半径可以<strong>由实验直接读出</strong>：找到卢瑟福公式开始系统失效的能量 <span class="m">E_{\text{crit}}</span>，则 <span class="m">R \approx C/E_{\text{crit}}</span>。α 粒子在金箔上的实测偏离出现在 <span class="m">E_{\text{crit}} \approx 25-30</span> MeV（<span class="m">\S 9.2</span> 式 9.2 的理论预言是 32.6 MeV），代入得</p>
 
-  <div class="eq key">
-    <span class="body m">R_{\text{Au}}\approx \frac{3.644\times 10^{-26}}{27\cdot 1.602\times 10^{-13}} \text{m}\approx 8.4\times 10^{-15} \text{m}=8.4 \text{fm}</span>
-    <span class="tag">(10.4)</span>
+  <div class="eq key" id="eq-10-4">
+    <span class="body m">\begin{aligned}R_{\text{Au}}&amp;\approx \frac{3.644\times 10^{-26}}{27\cdot 1.602\times 10^{-13}}\ \text{m}\\&amp;\approx 8.4\times 10^{-15}\ \text{m}=8.4\ \text{fm}\end{aligned}</span>
+    <a class="tag" href="#eq-10-4" title="公式 (10.4) 的固定链接">(10.4)</a>
   </div>
 
   <p>而由质量数经验公式 <span class="m">R = r_{0}A^{1/3}</span>（<span class="m">r_{0} \approx 1.2</span> fm）算得 <span class="m">R_{\text{Au}} \approx 7.0</span> fm。<strong>两种完全独立的途径给出同一量级</strong>——这正是核式模型最有力的自洽性证据。</p>
@@ -1257,7 +1387,7 @@ td.n,th.n{text-align:right; font-family:var(--mono); font-size:13px; white-space
 <section class="sec" id="s11">
   <h2 class="sec-title"><span class="num">十一</span>推论二：核式模型的确立</h2>
 
-  <h3 class="sub">11.1 &nbsp;公式给出的不是一条曲线，而是三条可分别验证的标度律</h3>
+  <h3 class="sub">11.1 公式给出的不是一条曲线，而是三条可分别验证的标度律</h3>
 
   <p>式 (7.8) 的价值不只在"能拟合一张角分布图"。它同时预言了三个方向的依赖关系（表 2），而这三条彼此独立。任何一条被违反，整个模型就要重来。盖革与马斯登在 1913 年发表的定量结果，正是逐条检验了它们：</p>
 
@@ -1292,7 +1422,7 @@ td.n,th.n{text-align:right; font-family:var(--mono); font-size:13px; white-space
 
   <p>特别值得注意的是 <span class="m">Z^{2}</span> 这一条。它意味着：<strong>通过测量散射强度，可以直接读出原子核的电荷数</strong>。这与莫塞莱由 X 射线特征频率测得的"原子序数"完全一致，从而把"原子序数"从一个排列序号变成了一个<em>有物理意义的电荷量</em>。</p>
 
-  <h3 class="sub">11.2 &nbsp;为什么"核式"是不可回避的</h3>
+  <h3 class="sub">11.2 为什么"核式"是不可回避的</h3>
 
   <p>把 <span class="m">\S 10</span> 与本节合起来看，逻辑链条是封闭的：</p>
 
@@ -1303,7 +1433,7 @@ td.n,th.n{text-align:right; font-family:var(--mono); font-size:13px; white-space
 
   <p>这四步之后，"正电荷弥散、电子嵌在其中"的图像已无立足之地。剩下的唯一可能是：<strong>原子由一个极小的重核与核外电子云构成</strong>——即核式模型。</p>
 
-  <h3 class="sub">11.3 &nbsp;散射实验作为"探针"的范式意义</h3>
+  <h3 class="sub">11.3 散射实验作为"探针"的范式意义</h3>
 
   <p>卢瑟福散射更深层的贡献，是确立了粒子物理最基本的方法论：<strong>用已知的探针去撞未知的靶，通过散射角分布反推靶的结构。</strong>式 (7.8) 就是这个反演的显式公式——测得 <span class="m">d\sigma /d\Omega</span>，就能定出相互作用势的形式与作用区域的尺度。此后从深度非弹性散射发现夸克、到在 LHC 上确认希格斯玻色子，用的都是同一套逻辑。</p>
 </section>
@@ -1313,27 +1443,27 @@ td.n,th.n{text-align:right; font-family:var(--mono); font-size:13px; white-space
 
   <p class="lede">核式模型解决了大角度散射，却立刻制造了一个更严重的危机。这一节给出这个危机的定量形式——它不属于卢瑟福散射本身，而是"把核式模型继续当作经典行星系"的必然后果。</p>
 
-  <h3 class="sub">12.1 &nbsp;加速电荷必然辐射</h3>
+  <h3 class="sub">12.1 加速电荷必然辐射</h3>
 
   <p>按经典电动力学，任何作加速运动的电荷都会辐射电磁波，功率由拉莫尔公式给出</p>
 
-  <div class="eq">
+  <div class="eq" id="eq-12-1">
     <span class="body m">P=\frac{q^{2}a^{2}}{6\pi \varepsilon _{0}c^{3}}</span>
-    <span class="tag">(12.1)</span>
+    <a class="tag" href="#eq-12-1" title="公式 (12.1) 的固定链接">(12.1)</a>
   </div>
 
   <p>核外电子在圆轨道上运动时加速度 <span class="m">a = v^{2}/r = k_{e}Ze^{2}/(m_{e}r^{2})</span>，而轨道能量 <span class="m">E = -k_{e}Ze^{2}/(2r)</span>。把 <span class="m">dE/dt = -P</span> 写成对 <span class="m">r</span> 的方程并积分（从玻尔半径 <span class="m">a_{0}</span> 一直落到 <span class="m">r = 0</span>），得到<strong>塌缩时间</strong></p>
 
-  <div class="eq key">
+  <div class="eq key" id="eq-12-2">
     <span class="body m">\tau =\frac{a_{0}^{3}c^{3}m_{e}^{2}}{4k_{e}^{2}Ze^{4}}</span>
-    <span class="tag">(12.2)</span>
+    <a class="tag" href="#eq-12-2" title="公式 (12.2) 的固定链接">(12.2)</a>
   </div>
 
   <p>对氢原子（<span class="m">Z = 1</span>，<span class="m">a_{0} = 5.2918\times 10^{-11}</span> m）代入数值：</p>
 
-  <div class="eq">
+  <div class="eq" id="eq-12-3">
     <span class="body m">\tau \approx 1.6\times 10^{-11} \text{s}</span>
-    <span class="tag">(12.3)</span>
+    <a class="tag" href="#eq-12-3" title="公式 (12.3) 的固定链接">(12.3)</a>
   </div>
 
   <p>约 <strong>16 皮秒</strong>。也就是说，如果电子真的像行星一样绕核作经典轨道运动，原子会在不到一亿分之一秒内辐射掉全部能量、电子坠入核中。物质根本不可能稳定存在。</p>
@@ -1353,13 +1483,13 @@ td.n,th.n{text-align:right; font-family:var(--mono); font-size:13px; white-space
 
   <p class="lede">卢瑟福公式是一个精确的经典结果，但它的成立有明确的条件。以下逐条给出"何时需要修正、如何修正、量级多大"。这些边界本身就是物理信息。</p>
 
-  <h3 class="sub">13.1 &nbsp;反冲：把靶核质量视为有限的后果</h3>
+  <h3 class="sub">13.1 反冲：把靶核质量视为有限的后果</h3>
 
   <p>假设 A1 把靶核当作固定不动的。实际上靶核会反冲，正确的做法是转到<strong>质心系</strong>并引入约化质量</p>
 
-  <div class="eq">
+  <div class="eq" id="eq-13-1">
     <span class="body m">\mu =\frac{mM}{m+M}</span>
-    <span class="tag">(13.1)</span>
+    <a class="tag" href="#eq-13-1" title="公式 (13.1) 的固定链接">(13.1)</a>
   </div>
 
   <p>质心系中相互作用能只依赖相对坐标，因此<strong>只要把 <span class="m">m</span> 换成 <span class="m">\mu</span>、<span class="m">E</span> 换成质心系动能 <span class="m">E_{\text{cm}} = \tfrac{1}{2}\mu v_{\text{rel}}^{2}</span></strong>，式 (7.8) 的形式<em>完全不变</em>，只是其中的 <span class="m">\theta</span> 变成质心系散射角。实验室系角度需再由附录 <a class="ref" href="#a3">C</a> 的关系转换。</p>
@@ -1379,40 +1509,40 @@ td.n,th.n{text-align:right; font-family:var(--mono); font-size:13px; white-space
 
   <p>结论：对重靶（<span class="m">A \gtrsim 100</span>）反冲可以忽略；对轻靶必须用约化质量。这正是"卢瑟福公式在重元素上吻合得最好"的原因之一。</p>
 
-  <h3 class="sub">13.2 &nbsp;电子屏蔽：把长程库仑势切断</h3>
+  <h3 class="sub">13.2 电子屏蔽：把长程库仑势切断</h3>
 
   <p>真实原子中核外电子会部分中和核的电场。在半径 <span class="m">r \gtrsim a</span> 之外，有效势被指数压低：</p>
 
-  <div class="eq">
+  <div class="eq" id="eq-13-2">
     <span class="body m">U(r)\approx \frac{C}{r}\,e^{-r/a},\ \ a\approx a_{0}Z^{-1/3}</span>
-    <span class="tag">(13.2)</span>
+    <a class="tag" href="#eq-13-2" title="公式 (13.2) 的固定链接">(13.2)</a>
   </div>
 
   <p>对金：<span class="m">a \approx 5.2918\times 10^{-11}/79^{1/3} \approx 1.23\times 10^{-11}</span> m（约 12.3 pm）。屏蔽只在瞄准距 <span class="m">b \gtrsim a</span> 时才有影响，对应</p>
 
-  <div class="eq">
+  <div class="eq" id="eq-13-3">
     <span class="body m">\cot \,\frac{\theta }{2}=\frac{a}{C/2E}=\frac{1.23\times 10^{-11}}{2.275\times 10^{-14}}=541\ \ \Rightarrow \ \ \theta \approx 0.21^{\circ }</span>
-    <span class="tag">(13.3)</span>
+    <a class="tag" href="#eq-13-3" title="公式 (13.3) 的固定链接">(13.3)</a>
   </div>
 
-  <p>因此<strong>只要 <span class="m">\theta \gtrsim 1^\circ</span>，屏蔽完全可忽略</strong>，卢瑟福公式按原样使用即可。屏蔽只在极小角度（<span class="m">\theta \lesssim 0.2^\circ</span>）才起作用，而且它恰好截断了式 (8.1) 中 <span class="m">\theta _{0} \to 0</span> 时的发散（<span class="m">\S 8.2</span>）。</p>
+  <p>因此<strong>只要 <span class="m">\theta \gtrsim 1^\circ</span>，屏蔽完全可忽略</strong>——式 (13.3) 给出的界限是 <span class="m">0.21^\circ</span>，取 <span class="m">1^\circ</span> 相当于留了约五倍余量。卢瑟福公式按原样使用即可。屏蔽只在极小角度（<span class="m">\theta \lesssim 0.2^\circ</span>）才起作用，而且它恰好截断了式 (8.1) 中 <span class="m">\theta _{0} \to 0</span> 时的发散（<span class="m">\S 8.2</span>，表 8 的 A6 行给的就是这个界限）。</p>
 
-  <h3 class="sub">13.3 &nbsp;相对论修正</h3>
+  <h3 class="sub">13.3 相对论修正</h3>
 
   <p>假设 A4 要求 <span class="m">v \ll c</span>。α 粒子静能 <span class="m">m_{\alpha }c^{2} = 3727.4</span> MeV，故</p>
 
-  <div class="eq">
+  <div class="eq" id="eq-13-4">
     <span class="body m">\frac{v}{c}=\sqrt{\frac{2E}{m_{\alpha }c^{2}}}:\ \ 5 \text{MeV}\to 0.052,\ \ 100 \text{MeV}\to 0.232</span>
-    <span class="tag">(13.4)</span>
+    <a class="tag" href="#eq-13-4" title="公式 (13.4) 的固定链接">(13.4)</a>
   </div>
 
   <p>5 MeV 时 <span class="m">v^{2}/c^{2} \approx 2.7\times 10^{-3}</span>，非相对论近似误差约 0.3%，完全可忽略。到 100 MeV 时 <span class="m">v^{2}/c^{2} \approx 5.4%</span>，必须改用相对论运动学（Mott 散射）。由于 α 粒子与多数偶偶核自旋均为 0，自旋相关的 Mott 项不出现，主要修正来自运动学。</p>
 
-  <h3 class="sub">13.4 &nbsp;自旋与磁相互作用</h3>
+  <h3 class="sub">13.4 自旋与磁相互作用</h3>
 
   <p>本文只考虑库仑（电）相互作用。若入射粒子或靶核有自旋，还会出现磁矩之间的相互作用。其相对大小约为 <span class="m">O(v^{2}/c^{2})</span>，对 5 MeV 的 α 粒子是 <span class="m">10^{-3}</span> 量级，属于可忽略的高阶效应。α 粒子自旋为 0，因此在 α 散射中这一项完全不存在。</p>
 
-  <h3 class="sub">13.5 &nbsp;量子力学为什么给出同一结果</h3>
+  <h3 class="sub">13.5 量子力学为什么给出同一结果</h3>
 
   <p>这是一个容易被含糊带过的要点，值得说清楚。</p>
 
@@ -1430,11 +1560,11 @@ td.n,th.n{text-align:right; font-family:var(--mono); font-size:13px; white-space
     <p style="margin-top:8px">所以 <strong>"经典推导得到正确公式"不是方法的胜利，而是这个特定势的巧合</strong>。这一点在把卢瑟福散射作为方法论推广时必须牢记。</p>
   </div>
 
-  <h3 class="sub">13.6 &nbsp;单次散射与薄靶条件</h3>
+  <h3 class="sub">13.6 单次散射与薄靶条件</h3>
 
   <p>假设 A5 要求粒子在穿过箔时只发生一次有效散射。这条假设的检验方式很直接：<strong>散射计数必须严格正比于箔厚</strong>（表 6 第二行）。若观察到非线性（偏薄时正比、偏厚时增长更快），说明多次散射开始贡献。多次散射的角分布近似为高斯型，会叠加在卢瑟福的 <span class="m">\csc ^{4}</span> 尾巴上，在小角度处首先造成偏离。</p>
 
-  <h3 class="sub">13.7 &nbsp;适用条件总表</h3>
+  <h3 class="sub">13.7 适用条件总表</h3>
 
   <div class="tw">
     <table>
@@ -1502,22 +1632,50 @@ td.n,th.n{text-align:right; font-family:var(--mono); font-size:13px; white-space
   <p>正文 4.1 节从"能量守恒 + 角动量守恒"直接得到了式 (4.3)。这里用更标准的 <strong>Binet 方程</strong>独立导出同一个方程，以确认式 (4.3) 的可靠性。</p>
 
   <p>径向运动方程为</p>
-  <div class="eq">
-    <span class="body m">m(r\ddot{}-r\varphi \dot{}^{2})=F_{r}=\frac{C}{r^{2}}</span>
-    <span class="tag">(A.1)</span>
+  <div class="eq" id="eq-A-1">
+    <span class="body m">m\left(\ddot{r}-r\dot{\varphi }^{2}\right)=F_{r}=\frac{C}{r^{2}}</span>
+    <a class="tag" href="#eq-A-1" title="公式 (A.1) 的固定链接">(A.1)</a>
   </div>
 
-  <p>由式 (3.6) <span class="m">\varphi \dot{} = L/(mr^{2})</span>，对时间求导可把 <span class="m">d/dt</span> 换成 <span class="m">(L/(mr^{2}))d/d\varphi</span>。记 <span class="m">u = 1/r</span>，有</p>
-  <div class="eq">
-    <span class="body m">r\ddot{}=-\frac{L^{2}u^{2}}{m^{2}}\frac{d^{2}u}{d\varphi ^{2}},\ \ r\varphi \dot{}^{2}=\frac{L^{2}u^{3}}{m^{2}}</span>
-    <span class="tag">(A.2)</span>
+  <p>由式 (3.6) <span class="m">\dot{\varphi } = L/(mr^{2})</span>，对时间求导可把 <span class="m">d/dt</span> 换成 <span class="m">(L/(mr^{2}))d/d\varphi</span>。记 <span class="m">u = 1/r</span>，有</p>
+  <div class="eq" id="eq-A-2">
+    <span class="body m">\ddot{r}=-\frac{L^{2}u^{2}}{m^{2}}\frac{d^{2}u}{d\varphi ^{2}},\ \ r\dot{\varphi }^{2}=\frac{L^{2}u^{3}}{m^{2}}</span>
+    <a class="tag" href="#eq-A-2" title="公式 (A.2) 的固定链接">(A.2)</a>
   </div>
   <p>代入式 (A.1) 并整理，即得式 (4.3)：<span class="m">u'' + u = -mC/L^{2}</span>。<strong>两条路线给出同一方程。</strong></p>
 
   <p class="mnote"><b>关于求导时约去的因子。</b>两边对 <span class="m">\varphi</span> 求导时约去了 <span class="m">du/d\varphi</span>。若 <span class="m">du/d\varphi = 0</span> 恒成立，则 <span class="m">u</span> 为常数，对应圆轨道——对开放轨道（双曲线）不适用，故本文情形下该因子的零点只是孤立点（近核点），不影响解的一般性。</p>
 
-  <h3 class="sub">A.1 &nbsp;由解反推 <i>A</i> 与 <i>&#945;</i> 的物理意义</h3>
-  <p>把解 <span class="m">u = A\cos \varphi - 1/\alpha</span> 代回能量守恒式 (4.2)，可用 <span class="m">\varphi = 0</span> 处（近核点，<span class="m">du/d\varphi = 0</span>）的值定出 <span class="m">A</span>，从而确认 <span class="m">\alpha = L^{2}/(mC)</span> 与 <span class="m">e = A\alpha</span> 的定义（式 4.5）是自洽的。正文 5.4 节用这套关系做了独立互校，结果与冲量法完全一致。</p>
+  <h3 class="sub">A.1 由解反推 <i>A</i> 与 <i>&#945;</i> 的物理意义</h3>
+  <p>式 (4.4) 里的 <span class="m">A</span> 与 <span class="m">\alpha</span> 是两个积分常数。它们不是可以随手选的：把一个试解代回能量守恒式 (4.2)，要求它对<em>任意</em> <span class="m">\varphi</span> 都成立，这两个量就被唯一确定。取</p>
+
+  <div class="eq" id="eq-A-3">
+    <span class="body m">u(\varphi )=A\,\cos \,\varphi -\frac{1}{\alpha },\ \ \frac{du}{d\varphi }=-A\,\sin \,\varphi</span>
+    <a class="tag" href="#eq-A-3" title="公式 (A.3) 的固定链接">(A.3)</a>
+  </div>
+
+  <p>代入式 (4.2)。用 <span class="m">\sin ^{2}\varphi = 1-\cos ^{2}\varphi</span> 展开，含 <span class="m">\cos ^{2}\varphi</span> 的两项恰好相消，剩下</p>
+
+  <div class="eq" id="eq-A-4">
+    <span class="body m">E=\frac{L^{2}A^{2}}{2m}+\frac{L^{2}}{2m\alpha ^{2}}-\frac{C}{\alpha }+A\left(C-\frac{L^{2}}{m\alpha }\right)\cos \,\varphi</span>
+    <a class="tag" href="#eq-A-4" title="公式 (A.4) 的固定链接">(A.4)</a>
+  </div>
+
+  <p>左端与 <span class="m">\varphi</span> 无关，所以右端 <span class="m">\cos \varphi</span> 的系数必须为零：</p>
+
+  <div class="eq" id="eq-A-5">
+    <span class="body m">C-\frac{L^{2}}{m\alpha }=0\ \ \Rightarrow \ \ \alpha =\frac{L^{2}}{mC}</span>
+    <a class="tag" href="#eq-A-5" title="公式 (A.5) 的固定链接">(A.5)</a>
+  </div>
+
+  <p>这正是式 (4.5) 中的 <span class="m">\alpha</span>——它并非"定义"，而是让试解成立的唯一取值。把 <span class="m">\alpha</span> 代回剩下的常数项，就得到 <span class="m">A</span>：</p>
+
+  <div class="eq key" id="eq-A-6">
+    <span class="body m">\begin{aligned}A^{2}&amp;=\frac{2mE}{L^{2}}+\frac{m^{2}C^{2}}{L^{4}}\\e^{2}&amp;=A^{2}\alpha ^{2}=1+\frac{2EL^{2}}{mC^{2}}=1+\left(\frac{2Eb}{C}\right)^{2}\end{aligned}</span>
+    <a class="tag" href="#eq-A-6" title="公式 (A.6) 的固定链接">(A.6)</a>
+  </div>
+
+  <p>最后一步用了 <span class="m">L^{2}=2mEb^{2}</span>。式 (A.6) 与正文式 (4.10) 的 <span class="m">e=\csc (\theta /2)</span> 完全一致（由 <span class="m">\csc ^{2}=1+\cot ^{2}</span> 与 <span class="m">\cot (\theta /2)=2Eb/C</span>）。也就是说 <span class="m">\alpha</span> 与 <span class="m">e</span> 由能量守恒唯一确定，5.4 节的互校是闭合的，而不是两个约定之间的循环论证。</p>
 </section>
 
 <section class="sec" id="a2">
@@ -1528,16 +1686,16 @@ td.n,th.n{text-align:right; font-family:var(--mono); font-size:13px; white-space
   <p>冲量的定义是 <span class="m">\Delta \vec{p} = \int \vec{F}\,dt</span>。力的方向沿 <span class="m">\hat{r}</span>。由对称性，我们只需它的对称轴分量，即把 <span class="m">\vec{F}</span> 投影到对称轴方向，得到 <span class="m">(C/r^{2})\cos \varphi</span>。</p>
 
   <p>换元时用的关键是式 (3.6)：</p>
-  <div class="eq">
+  <div class="eq" id="eq-B-1">
     <span class="body m">dt=\frac{mr^{2}}{L}d\varphi \ \ \Rightarrow \ \ \frac{C}{r^{2}}dt=\frac{mC}{L}d\varphi</span>
-    <span class="tag">(B.1)</span>
+    <a class="tag" href="#eq-B-1" title="公式 (B.1) 的固定链接">(B.1)</a>
   </div>
 
   <p>注意右端<strong>不再含 <i>r</i></strong>。这正是库仑问题可积的核心：<span class="m">1/r^{2}</span> 的力与 <span class="m">r^{2}</span> 的角动量因子恰好互为倒数。于是</p>
 
-  <div class="eq">
+  <div class="eq" id="eq-B-2">
     <span class="body m">\Delta p=\frac{mC}{L}\int _{-\varphi _{\infty }}^{\varphi _{\infty }}\cos \,\varphi \,d\varphi =\frac{2mC}{L}\sin \,\varphi _{\infty }</span>
-    <span class="tag">(B.2)</span>
+    <a class="tag" href="#eq-B-2" title="公式 (B.2) 的固定链接">(B.2)</a>
   </div>
 
   <p><strong>一个值得注意的地方</strong>：式 (B.2) 中不含偏心率 <span class="m">e</span>，也不含 <span class="m">\alpha</span>——积分的值只依赖积分限 <span class="m">\varphi _{\infty }</span>。也就是说，无论轨道"张得多开"，冲量都相同。这是 <span class="m">1/r^{2}</span> 力的另一项特殊性质，也是为什么式 (5.7) 会如此简洁。</p>
@@ -1552,17 +1710,17 @@ td.n,th.n{text-align:right; font-family:var(--mono); font-size:13px; white-space
 
   <p>质心系中两粒子动量大小相等方向相反，散射后仍如此。把质心速度变换回实验室系，可得</p>
 
-  <div class="eq">
+  <div class="eq" id="eq-C-1">
     <span class="body m">\tan \,\theta _{\text{lab}}=\frac{\sin \,\theta _{\text{cm}}}{\rho +\cos \,\theta _{\text{cm}}}</span>
-    <span class="tag">(C.1)</span>
+    <a class="tag" href="#eq-C-1" title="公式 (C.1) 的固定链接">(C.1)</a>
   </div>
 
   <p>当 <span class="m">\rho \ll 1</span>（重靶）时 <span class="m">\theta _{\text{lab}} \approx \theta _{\text{cm}}</span>，这正是假设 A1 的精确含义。对 α + Au，<span class="m">\rho = 4.0015/197 \approx 0.0203</span>，两系角度差异在 <span class="m">1^\circ</span> 量级，属于可修正的系统效应。</p>
 
   <p>相应地，能量也需换算：</p>
-  <div class="eq">
+  <div class="eq" id="eq-C-2">
     <span class="body m">E_{\text{cm}}=\frac{M}{m+M}E_{\text{lab}}=\frac{1}{1+\rho }E_{\text{lab}}</span>
-    <span class="tag">(C.2)</span>
+    <a class="tag" href="#eq-C-2" title="公式 (C.2) 的固定链接">(C.2)</a>
   </div>
 
   <p>把式 (7.8) 用在实验数据上时，必须用 <span class="m">E_{\text{cm}}</span> 与 <span class="m">\theta _{\text{cm}}</span>。对 α + Au 这带来约 2% 的能量修正，与表 7 的反冲修正一致（两者是同一件事的两种表述）。</p>
@@ -1629,39 +1787,123 @@ td.n,th.n{text-align:right; font-family:var(--mono); font-size:13px; white-space
     返回 3D 模拟器
   </a>
   <p><b>关于本文</b> &mdash;&mdash; 全文推导不引用任何"已知结论"，每一步都给出依据与自检；所有数值均可在附录 D 的常数下独立复算。</p>
-  <p><b>排版与依赖</b> &mdash;&mdash; 和纸（washi）风格；纸纹由 SVG <code>feTurbulence</code> 生成，公式以 HTML/CSS 手工排版。全文<strong>不含任何脚本、外部字体或 CDN 依赖</strong>，可直接离线打开，也可原样部署到 GitHub Pages。</p>
-  <p><b>可访问性与打印</b> &mdash;&mdash; 浅色与深色两套主题的正文对比度均已独立校验（&ge; 4.5:1）；支持 <code>prefers-reduced-motion</code> 与打印样式，可直接输出为纸张版式。</p>
+  <p><b>排版与依赖</b> &mdash;&mdash; 和纸（washi）风格；纸纹由 SVG <code>feTurbulence</code> 生成。公式由 <strong>KaTeX 0.16</strong> 排版，脚本、样式与全部字体都放在仓库内的 <code>vendor/katex/</code>，因此<strong>不联网也能正常显示公式</strong>；只有在本地文件缺失时，才会向 jsDelivr 取一次脚本作为兜底。</p>
+  <p><b>可访问性与打印</b> &mdash;&mdash; 浅色与深色两套主题的正文对比度均已独立校验（&ge; 4.5:1）；目录会跟随阅读位置高亮（无脚本时退化为普通链接）；支持 <code>prefers-reduced-motion</code> 与打印样式，可直接输出为纸张版式。</p>
   <p><b>配套</b> &mdash;&mdash; 交互式 3D 演示见 <a class="ref" href="index.html">卢瑟福 α 粒子散射 3D 模拟器</a>。</p>
 </footer>
 
 </div>
+
+<a class="to-top" href="#top" id="to-top" aria-label="回到顶部" title="回到顶部">
+  <svg class="ic ic-md" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19.5v-15M5.5 11 12 4.5 18.5 11"/></svg>
+</a>
+
 <script src="vendor/katex/katex.min.js"></script>
 <script>
-/* 公式渲染：把每个 .m 元素里的 LaTeX 源码交给 KaTeX 排版。
-   .body.m 为独立公式（display 模式），其余为行内公式。
-   本地 KaTeX 缺失时自动回退到 CDN。 */
-(function(){
-  function render(){
+/* ── 1. 公式渲染 ────────────────────────────────────────────────
+   把每个 .m 元素里的 LaTeX 源码交给 KaTeX 排版：.body.m 走 display 模式，
+   其余走行内模式。整页渲染失败时给 <html> 加 .no-katex，让 CSS 把源码
+   以等宽字体显示，而不是一片排版错乱的白纸。 */
+(function () {
+  'use strict';
+
+  function render() {
     if (!window.katex) return false;
     var nodes = document.querySelectorAll('.m');
-    for (var i = 0; i < nodes.length; i++){
+    var done = 0;
+    for (var i = 0; i < nodes.length; i++) {
       var el = nodes[i];
       if (el.parentElement && el.parentElement.closest('.m')) continue;
       try {
-        katex.render(el.textContent, el, {
+        window.katex.render(el.textContent, el, {
           displayMode: el.classList.contains('body'),
           throwOnError: false,
           strict: false
         });
-      } catch (e) { el.classList.add('tex-err'); }
+        done++;
+      } catch (e) {
+        el.classList.add('tex-err');
+      }
     }
-    return true;
+    return done > 0;
   }
-  if (!render()){
+
+  if (render()) {
+    document.documentElement.classList.remove('no-katex');
+  } else {
+    document.documentElement.classList.add('no-katex');
     var s = document.createElement('script');
     s.src = 'https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js';
-    s.onload = render;
+    s.onload = function () { if (render()) document.documentElement.classList.remove('no-katex'); };
     document.head.appendChild(s);
+  }
+})();
+
+/* ── 2. 目录跟随阅读位置 + 回到顶部 ─────────────────────────────
+   纯增强：脚本不执行时目录仍是普通锚点列表，页面功能不受影响。 */
+(function () {
+  'use strict';
+
+  var links = [].slice.call(document.querySelectorAll('.toc a[href^="#"]'));
+  var sections = [];
+  links.forEach(function (a) {
+    var el = document.getElementById(a.getAttribute('href').slice(1));
+    if (el) sections.push({ el: el, link: a });
+  });
+
+  var current = null;
+  function setCurrent(item) {
+    if (item === current) return;
+    if (current) {
+      current.link.classList.remove('is-current');
+      current.link.removeAttribute('aria-current');
+    }
+    current = item;
+    if (current) {
+      current.link.classList.add('is-current');
+      current.link.setAttribute('aria-current', 'true');
+    }
+  }
+
+  var top = document.getElementById('to-top');
+
+  function onScroll() {
+    var line = 132;                       // 视口上方 132px 处作为“当前章节”判定线
+    var found = null;
+    for (var i = 0; i < sections.length; i++) {
+      if (sections[i].el.getBoundingClientRect().top <= line) found = sections[i];
+    }
+    setCurrent(found);
+    if (top) {
+      var y = window.pageYOffset || document.documentElement.scrollTop;
+      top.classList.toggle('is-on', y > 800);
+    }
+  }
+
+  var ticking = false;
+  function requestScroll() {
+    if (ticking) return;
+    ticking = true;
+    window.requestAnimationFrame(function () { ticking = false; onScroll(); });
+  }
+
+  if (sections.length && 'getBoundingClientRect' in Element.prototype) {
+    window.addEventListener('scroll', requestScroll, { passive: true });
+    window.addEventListener('resize', requestScroll, { passive: true });
+    onScroll();
+  }
+
+  if (top) {
+    top.addEventListener('click', function (e) {
+      var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (reduce) return;                 // 交给浏览器直接跳转
+      e.preventDefault();
+      try {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } catch (err) {
+        window.scrollTo(0, 0);
+      }
+    });
   }
 })();
 </script>

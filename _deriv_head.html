@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh-CN" class="no-katex">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -11,6 +11,7 @@
    和纸（washi）设计系统 —— 全部为语义令牌，无逐屏硬编码
    ============================================================ */
 :root{
+  color-scheme:light dark;
   /* 纸与墨 */
   --paper:#F5F0E6;          /* 生成り：主纸色 */
   --paper-2:#EDE5D6;        /* 稍深的纸，用于内嵌块 */
@@ -38,7 +39,13 @@
   --sp-1:8px;  --sp-2:16px; --sp-3:24px; --sp-4:32px;
   --sp-5:48px; --sp-6:64px; --sp-7:96px;
   --measure:45rem;          /* 正文栏宽 720px ≈ 每行 40 个汉字 */
-  --measure-wide:68rem;
+  --measure-wide:69rem;      /* 目录 + 间距 + 正文 + 左右内边距，三处（报头/版面/页脚）共用 */
+  /* 字号梯度：正文 17 → h3 19 → h2 23 → h1 28–34，逐级约 1.12/1.21/1.48；
+     向下 15 / 13.5 / 12.5 / 11.5 用于目录、表格、注释与标签。 */
+  --fs-body:17px; --fs-h3:19px; --fs-h2:23px;
+  --fs-h1:clamp(1.75rem,1.15rem + 1.9vw,2.15rem);
+  --fs-md:13.5px; --fs-sm:12.5px; --fs-xs:11.5px;
+  --lh-body:1.85;
   --r:3px;                  /* 和纸不做大圆角 */
   /* 图标尺寸令牌 */
   --icon-sm:13px; --icon-md:16px; --icon-lg:20px;
@@ -63,7 +70,7 @@ html{-webkit-text-size-adjust:100%;scroll-behavior:smooth;scroll-padding-top:var
 
 body{
   margin:0; background:var(--paper); color:var(--ink);
-  font-family:var(--serif); font-size:17px; line-height:1.95;
+  font-family:var(--serif); font-size:var(--fs-body); line-height:var(--lh-body);
   font-kerning:normal; text-rendering:optimizeLegibility;
   -webkit-font-smoothing:antialiased;
 }
@@ -111,35 +118,35 @@ a:focus-visible,button:focus-visible,[tabindex]:focus-visible{
 /* ---- 报头 ---- */
 .masthead{
   max-width:var(--measure-wide); margin:0 auto;
-  padding:var(--sp-6) var(--sp-4) var(--sp-4);
+  padding:var(--sp-5) var(--sp-4) var(--sp-4);
   border-bottom:3px double var(--rule-2);
 }
 .eyebrow{
-  font-family:var(--mono); font-size:11.5px; letter-spacing:.22em;
-  text-transform:uppercase; color:var(--ink-3); margin:0 0 var(--sp-2);
+  font-family:var(--mono); font-size:var(--fs-xs); line-height:1.5;
+  letter-spacing:.22em; text-transform:uppercase; color:var(--ink-3); margin:0 0 var(--sp-2);
 }
 .masthead h1{
-  font-size:clamp(1.6rem,1.1rem + 2.2vw,2.5rem);
-  line-height:1.34; font-weight:700; letter-spacing:.01em;
-  margin:0 0 var(--sp-2); text-wrap:balance;
+  font-size:var(--fs-h1);
+  line-height:1.26; font-weight:700; letter-spacing:.01em;
+  margin:0 0 12px; text-wrap:balance;
 }
 .masthead h1 .accent{color:var(--shu)}
 .masthead .subtitle{
-  margin:0; color:var(--ink-2); font-size:1rem; line-height:1.8;
-  max-width:38rem; font-family:var(--kai);
+  margin:0; color:var(--ink-2); font-size:1rem; line-height:1.75;
+  max-width:36rem; font-family:var(--kai);
 }
 .meta{
-  margin-top:var(--sp-3); display:flex; flex-wrap:wrap; gap:var(--sp-1) var(--sp-3);
-  font-size:12.5px; color:var(--ink-3); font-family:var(--mono);
+  margin-top:var(--sp-2); display:flex; flex-wrap:wrap; gap:var(--sp-1) var(--sp-3);
+  font-size:var(--fs-sm); line-height:1.6; color:var(--ink-3); font-family:var(--mono);
   letter-spacing:.04em;
 }
 .meta span{display:inline-flex;align-items:center}
 .seal{
   display:inline-flex; align-items:center; justify-content:center;
-  width:34px; height:34px; flex:0 0 auto; margin-right:var(--sp-2);
+  width:30px; height:30px; flex:0 0 auto; margin-right:12px;
   background:var(--shu); color:#FBF8F1; border-radius:2px;
-  font-family:var(--serif); font-size:19px; font-weight:700; line-height:1;
-  vertical-align:-6px; letter-spacing:0;
+  font-family:var(--serif); font-size:17px; font-weight:700; line-height:1;
+  vertical-align:-4px; letter-spacing:0;
   box-shadow:inset 0 0 0 1px rgba(255,255,255,.22);
 }
 .masthead-row{display:flex;align-items:flex-start;gap:var(--sp-1)}
@@ -152,35 +159,89 @@ a:focus-visible,button:focus-visible,[tabindex]:focus-visible{
   display:grid; grid-template-columns:1fr; gap:var(--sp-5);
   align-items:start;
 }
+/* 双栏：目录列宽按最长一条目录项定（20rem 时 17 项全部一行放得下），
+   总宽 20rem + 3rem + 45rem = 68rem，加上左右内边距正好等于 --measure-wide。 */
 @media (min-width:1080px){
-  .layout{grid-template-columns:15rem minmax(0,var(--measure)); gap:var(--sp-6); justify-content:center}
+  .layout{grid-template-columns:17rem minmax(0,var(--measure)); gap:var(--sp-5); justify-content:center}
 }
 
 .toc{
   border:1px solid var(--rule); background:var(--paper-3);
-  padding:var(--sp-3); border-radius:var(--r);
+  padding:var(--sp-2); border-radius:var(--r);
 }
+/* 双栏时目录退成"页边栏"：没有卡片边框和底色，只留当前项的竖线，
+   视觉重量让给正文；单栏（<1080px）时恢复成一块独立卡片。 */
 @media (min-width:1080px){
-  .toc{position:sticky; top:var(--sp-4); max-height:calc(100vh - var(--sp-6)); overflow:auto}
+  .toc{
+    border:0; background:none; padding:0;
+    position:sticky; top:var(--sp-4);
+    max-height:calc(100vh - var(--sp-6)); overflow:auto;
+    overscroll-behavior:contain;
+    scrollbar-width:thin; scrollbar-color:var(--rule-2) transparent;
+  }
+  .toc::-webkit-scrollbar{width:6px}
+  .toc::-webkit-scrollbar-thumb{background:var(--rule-2);border-radius:3px}
 }
 .toc h2{
-  font-size:12px; font-family:var(--mono); letter-spacing:.2em;
+  font-size:11.5px; font-family:var(--mono); letter-spacing:.2em;
   text-transform:uppercase; color:var(--ink-3);
-  margin:0 0 var(--sp-2); font-weight:600;
+  margin:0 0 12px; font-weight:600;
   padding-bottom:var(--sp-1); border-bottom:1px solid var(--rule);
 }
 .toc ol{list-style:none; margin:0; padding:0; counter-reset:toc}
 .toc li{margin:0}
+/* 目录项：左侧固定宽度的序号列 + 右侧标题列。
+   序号用等宽小字右对齐，标题从同一条竖线起排，整列看起来是一条干净的"页码边"，
+   折行时第二行也对齐标题列，不会缩到序号底下。
+   序号列取 24px：中日文数字（"十一""十二"）在等宽字体里是满宽字形，要占 2×11.5px。 */
 .toc a{
-  display:block; padding:5px 0 5px var(--sp-2);
-  color:var(--ink-2); text-decoration:none; font-size:13.5px; line-height:1.55;
+  display:grid; grid-template-columns:24px minmax(0,1fr); column-gap:6px;
+  align-items:baseline; align-content:center;
+  padding:4px 0 4px 10px;
+  color:var(--ink-2); text-decoration:none; font-size:var(--fs-md); line-height:1.5;
   border-left:2px solid transparent; transition:color .15s ease,border-color .15s ease;
 }
+.toc .n{
+  font-family:var(--mono); font-size:var(--fs-xs); letter-spacing:0;
+  color:var(--ink-3); text-align:right; white-space:nowrap;
+}
+.toc .t{min-width:0}
+.toc a:hover .n,.toc a.is-current .n{color:inherit}
 .toc a:hover{color:var(--shu); border-left-color:var(--rule-2)}
 .toc a:focus-visible{border-left-color:var(--focus)}
+/* 当前阅读位置（脚本维护；无脚本时此项不出现，目录照常可用） */
+.toc a.is-current{
+  color:var(--shu); border-left-color:var(--shu);
+  background:var(--shu-soft); font-weight:600;
+}
 .toc .grp{
-  margin-top:var(--sp-2); padding-top:var(--sp-2);
+  margin-top:var(--sp-2); padding:var(--sp-2) 0 4px var(--sp-2);
   border-top:1px dashed var(--rule);
+  font-family:var(--mono); font-size:10.5px; letter-spacing:.2em;
+  color:var(--ink-3);
+}
+
+/* 触控设备上目录项至少 44px 高（准则：触控目标 ≥44×44px），
+   清单因此变长，但目录本身限高可滚动。 */
+@media (pointer:coarse){
+  .toc a{min-height:44px; padding-top:0; padding-bottom:0}
+}
+
+/* 单栏（<1080px）时目录跑到了正文上方：排成两列并限高，
+   否则 17 条目录会把首屏整屏占满，要滑过一屏才看到正文。 */
+@media (max-width:1079px){
+  .toc{
+    max-height:min(60vh,34rem); overflow:auto;
+    scrollbar-width:thin; scrollbar-color:var(--rule-2) transparent;
+  }
+  .toc ol{columns:2; column-gap:var(--sp-3)}
+  .toc li{break-inside:avoid}
+}
+@media (max-width:640px){
+  /* 手机上排成一列，并把高度限制在 40vh：首屏仍能看到正文开头，
+     目录本身可以滑动；滚到底时继续滚动会交还给页面（不做 contain）。 */
+  .toc{max-height:40vh}
+  .toc ol{columns:1}
 }
 
 /* ---- 正文 ---- */
@@ -188,22 +249,22 @@ a:focus-visible,button:focus-visible,[tabindex]:focus-visible{
 .sec{margin:0 0 var(--sp-6); scroll-margin-top:var(--sp-4)}
 .sec-title{
   display:flex; align-items:baseline; gap:var(--sp-2);
-  font-size:1.28rem; line-height:1.5; font-weight:700;
-  margin:0 0 var(--sp-3); padding-bottom:var(--sp-1);
+  font-size:var(--fs-h2); line-height:1.4; font-weight:700;
+  margin:0 0 var(--sp-2); padding-bottom:var(--sp-1);
   border-bottom:1px solid var(--rule);
   text-wrap:balance;
 }
 .sec-title .num{
-  font-family:var(--mono); font-size:.72em; letter-spacing:.06em;
+  font-family:var(--mono); font-size:.7em; letter-spacing:.06em;
   color:var(--shu); flex:0 0 auto; font-weight:600;
 }
 h3.sub{
-  font-size:1.02rem; font-weight:700; margin:var(--sp-4) 0 var(--sp-2);
-  color:var(--ink); line-height:1.6;
+  font-size:var(--fs-h3); font-weight:700; margin:var(--sp-4) 0 12px;
+  color:var(--ink); line-height:1.5;
 }
 h3.sub::before{content:"§ "; color:var(--ink-3); font-weight:400}
 p{margin:0 0 var(--sp-2); text-align:justify; text-justify:inter-ideograph}
-.lede{font-size:1.04rem; color:var(--ink-2); line-height:1.9}
+.lede{font-size:1.02rem; color:var(--ink-2); line-height:1.8}
 em{font-style:normal; background:linear-gradient(transparent 62%,var(--kin-soft) 62%); padding:0 .1em}
 strong{font-weight:700; color:var(--ink)}
 a.ref{color:var(--ai); text-decoration:none; border-bottom:1px solid var(--ai-soft)}
@@ -223,18 +284,41 @@ code{
 .eq{
   margin:var(--sp-3) 0; padding:var(--sp-2) 0;
   display:flex; align-items:center; gap:var(--sp-2);
-  font-size:1.06rem; line-height:2.4;
-  overflow-x:auto;
+  font-size:1.06rem; line-height:2.05;
 }
-.eq .body{flex:1 1 auto; text-align:center; white-space:nowrap; min-width:0}
+/* 只有公式本体可横向滚动：编号始终留在原位，不会被长公式压住。
+   注意 .katex-display 用 max-content + min-width:100%，这样公式比容器窄时居中、
+   比容器宽时从左边开始溢出（可以滚动看到全部），不会像 text-align:center 那样
+   把左半截挤到滚动区之外、永远看不到。 */
+.eq .body{
+  flex:1 1 auto; min-width:0; text-align:center; white-space:nowrap;
+  overflow-x:auto; overflow-y:hidden;
+  overscroll-behavior-x:contain;
+  -webkit-overflow-scrolling:touch;
+  scrollbar-width:thin; scrollbar-color:var(--rule-2) transparent;
+  padding-bottom:2px;
+}
+.eq .body::-webkit-scrollbar{height:6px}
+.eq .body::-webkit-scrollbar-thumb{background:var(--rule-2);border-radius:3px}
+.eq .body::-webkit-scrollbar-track{background:transparent}
+.eq .body>.katex-display{width:max-content; min-width:100%; margin:0}
 .eq .tag{
-  flex:0 0 auto; font-family:var(--mono); font-size:12px; color:var(--ink-3);
+  flex:0 0 auto; font-family:var(--mono); font-size:var(--fs-xs); color:var(--ink-3);
 }
+/* 公式编号即深链接：点击后地址栏得到 #eq-4-10 这样的锚点 */
+a.tag{text-decoration:none; color:var(--ink-3); border-bottom:1px dotted transparent}
+a.tag:hover{border-bottom-color:var(--rule-2); color:var(--ink-2)}
 .eq.key{
   background:var(--shu-soft); border-top:1px solid var(--rule-2);
   border-bottom:1px solid var(--rule-2); padding:var(--sp-3) var(--sp-2);
 }
 .eq.key .body{font-size:1.16rem}
+/* 被深链接指向的公式：给一点底色，便于在长文里定位 */
+.eq:target{
+  background:var(--kin-soft);
+  box-shadow:inset 2px 0 0 var(--kin);
+}
+.eq:target .tag{color:var(--kin)}
 
 /* ---- 提示框 ---- */
 .box{
@@ -244,7 +328,7 @@ code{
 }
 .box>.bt{
   display:flex; align-items:center; gap:6px;
-  font-size:12.5px; font-weight:700; letter-spacing:.08em;
+  font-size:var(--fs-sm); font-weight:700; letter-spacing:.08em;
   color:var(--ink-2); margin:0 0 var(--sp-1);
   font-family:var(--mono); text-transform:uppercase;
 }
@@ -258,25 +342,25 @@ code{
 
 /* ---- 表格 ---- */
 .tw{overflow-x:auto; margin:var(--sp-3) 0}
-table{border-collapse:collapse; width:100%; font-size:14.5px; line-height:1.7}
+table{border-collapse:collapse; width:100%; font-size:15px; line-height:1.75}
 caption{
-  caption-side:top; text-align:left; font-size:12.5px; color:var(--ink-3);
+  caption-side:top; text-align:left; font-size:var(--fs-sm); color:var(--ink-3);
   font-family:var(--mono); padding-bottom:var(--sp-1); letter-spacing:.04em;
 }
 th,td{padding:8px 12px; border-bottom:1px solid var(--rule); text-align:left; vertical-align:top}
 thead th{
   border-bottom:1.5px solid var(--rule-2); border-top:1.5px solid var(--rule-2);
-  font-size:12.5px; letter-spacing:.06em; color:var(--ink-2); font-weight:700;
+  font-size:var(--fs-sm); letter-spacing:.06em; color:var(--ink-2); font-weight:700;
   font-family:var(--mono); white-space:nowrap;
 }
 tbody tr:hover{background:var(--paper-2)}
-td.n,th.n{text-align:right; font-family:var(--mono); font-size:13px; white-space:nowrap}
+td.n,th.n{text-align:right; font-family:var(--mono); font-size:var(--fs-md); white-space:nowrap}
 
 /* ---- 图 ---- */
 .fig{margin:var(--sp-4) 0; text-align:center}
 .fig svg{max-width:100%; height:auto; display:block; margin:0 auto}
 .fig figcaption{
-  margin-top:var(--sp-2); font-size:13px; color:var(--ink-3);
+  margin-top:var(--sp-2); font-size:var(--fs-md); color:var(--ink-3);
   line-height:1.75; text-align:left; max-width:36rem; margin-left:auto; margin-right:auto;
 }
 .fig figcaption b{color:var(--ink-2)}
@@ -293,7 +377,7 @@ td.n,th.n{text-align:right; font-family:var(--mono); font-size:13px; white-space
 
 /* ---- 脚注 / 旁注 ---- */
 .mnote{
-  font-size:13px; color:var(--ink-3); line-height:1.75;
+  font-size:var(--fs-md); color:var(--ink-3); line-height:1.75;
   border-left:2px solid var(--rule); padding-left:var(--sp-2);
   margin:var(--sp-2) 0 var(--sp-3);
 }
@@ -303,7 +387,7 @@ td.n,th.n{text-align:right; font-family:var(--mono); font-size:13px; white-space
 .pfoot{
   max-width:var(--measure-wide); margin:0 auto;
   padding:var(--sp-5) var(--sp-4) var(--sp-6);
-  border-top:3px double var(--rule-2); font-size:13px; color:var(--ink-3);
+  border-top:3px double var(--rule-2); font-size:var(--fs-md); color:var(--ink-3);
 }
 .pfoot .back{
   display:inline-flex; align-items:center; gap:8px;
@@ -314,6 +398,45 @@ td.n,th.n{text-align:right; font-family:var(--mono); font-size:13px; white-space
 }
 .pfoot .back:hover{border-color:var(--ai); color:var(--shu)}
 .pfoot p{margin:0 0 var(--sp-1); text-align:left}
+
+/* ---- 报头右上：返回模拟器 ---- */
+.mh-top{
+  display:flex; align-items:center; justify-content:space-between;
+  gap:var(--sp-2); margin-bottom:var(--sp-2); flex-wrap:wrap;
+}
+.mh-top .eyebrow{margin:0}
+.mnav{
+  display:inline-flex; align-items:center; gap:6px; flex:0 0 auto;
+  font-family:var(--mono); font-size:12px; letter-spacing:.04em;
+  color:var(--ink-2); text-decoration:none;
+  border:1px solid var(--rule); background:var(--paper-3);
+  padding:6px 10px; border-radius:var(--r);
+  transition:color .15s ease, border-color .15s ease;
+}
+.mnav:hover{color:var(--shu); border-color:var(--rule-2)}
+
+/* ---- 回到顶部 ---- */
+.to-top{
+  position:fixed; right:var(--sp-3); bottom:var(--sp-3); z-index:5;
+  display:inline-flex; align-items:center; justify-content:center;
+  width:44px; height:44px;
+  background:var(--paper-3); color:var(--ink-2); text-decoration:none;
+  border:1px solid var(--rule); border-radius:var(--r);
+  box-shadow:0 2px 10px rgba(36,31,26,.10);
+  opacity:0; visibility:hidden;
+  transition:opacity .2s ease, visibility .2s ease, color .15s ease, border-color .15s ease;
+}
+.to-top.is-on{opacity:1; visibility:visible}
+.to-top:hover{color:var(--shu); border-color:var(--rule-2)}
+@media (prefers-reduced-motion: reduce){.to-top{transition:none}}
+@media print{.to-top,.mnav{display:none}}
+
+/* ---- KaTeX 未就绪时的降级：把 LaTeX 源码按等宽字体呈现，至少可读 ---- */
+.no-katex .m{
+  font-family:var(--mono); font-size:.88em; color:var(--ink-2);
+  background:var(--paper-2); padding:.05em .3em; border-radius:2px;
+}
+.no-katex .eq .body{white-space:normal; text-align:left}
 
 /* ---- 窄屏 ---- */
 @media (max-width:600px){
@@ -345,11 +468,17 @@ td.n,th.n{text-align:right; font-family:var(--mono); font-size:13px; white-space
 </style>
 </head>
 <body>
-<div class="paper">
+<div class="paper" id="top">
 <a class="skip" href="#main">跳到正文</a>
 
 <header class="masthead">
-  <p class="eyebrow">Rutherford Scattering &middot; Complete Derivation</p>
+  <div class="mh-top">
+    <p class="eyebrow">Rutherford Scattering &middot; Complete Derivation</p>
+    <a class="mnav" href="index.html" title="返回交互式 3D 模拟器">
+      <svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M19.5 12H4.5M11 18.5 4.5 12 11 5.5"/></svg>
+      3D 模拟器
+    </a>
+  </div>
   <div class="masthead-row">
     <span class="seal" aria-hidden="true">&#945;</span>
     <div class="masthead-text">
@@ -361,7 +490,7 @@ td.n,th.n{text-align:right; font-family:var(--mono); font-size:13px; white-space
     <span>经典力学 &middot; 中心力场</span>
     <span>坐标：极坐标 (r, &phi;)</span>
     <span>单位：SI</span>
-    <span>纯静态排版 &middot; 零外部依赖</span>
+    <span>静态页面 &middot; 公式由本地 KaTeX 排版</span>
   </div>
 </header>
 
@@ -370,23 +499,24 @@ td.n,th.n{text-align:right; font-family:var(--mono); font-size:13px; white-space
   <nav class="toc" aria-label="目录">
     <h2>目录</h2>
     <ol>
-      <li><a href="#s1">一 &nbsp;引言：从"葡萄干布丁"到核式模型</a></li>
-      <li><a href="#s2">二 &nbsp;模型与基本假设</a></li>
-      <li><a href="#s3">三 &nbsp;相互作用与守恒律</a></li>
-      <li><a href="#s4">四 &nbsp;轨道积分：双曲线轨道</a></li>
-      <li><a href="#s5">五 &nbsp;散射角与瞄准距的关系</a></li>
-      <li><a href="#s6">六 &nbsp;最近逼近距离</a></li>
-      <li><a href="#s7">七 &nbsp;微分散射截面与卢瑟福公式</a></li>
-      <li><a href="#s8">八 &nbsp;积分截面与大角度稀有性</a></li>
-      <li><a href="#s9">九 &nbsp;数值实例：5 MeV α 粒子对金箔</a></li>
-      <li><a href="#s10">十 &nbsp;推论一：原子核的存在与核半径上限</a></li>
-      <li><a href="#s11">十一 &nbsp;推论二：核式模型的确立</a></li>
-      <li><a href="#s12">十二 &nbsp;推论三：经典模型的困难</a></li>
-      <li><a href="#s13">十三 &nbsp;适用边界与各类修正</a></li>
-      <li class="grp"><a href="#a1">附录 A &nbsp;Binet 方程与圆锥曲线解</a></li>
-      <li><a href="#a2">附录 B &nbsp;冲量积分的严格计算</a></li>
-      <li><a href="#a3">附录 C &nbsp;质心系与实验室系的转换</a></li>
-      <li><a href="#a4">附录 D &nbsp;符号与常数表</a></li>
+      <li><a href="#s1"><span class="n">一</span><span class="t">引言：从"葡萄干布丁"到核式模型</span></a></li>
+      <li><a href="#s2"><span class="n">二</span><span class="t">模型与基本假设</span></a></li>
+      <li><a href="#s3"><span class="n">三</span><span class="t">相互作用与守恒律</span></a></li>
+      <li><a href="#s4"><span class="n">四</span><span class="t">轨道积分：双曲线轨道</span></a></li>
+      <li><a href="#s5"><span class="n">五</span><span class="t">散射角与瞄准距的关系</span></a></li>
+      <li><a href="#s6"><span class="n">六</span><span class="t">最近逼近距离</span></a></li>
+      <li><a href="#s7"><span class="n">七</span><span class="t">微分散射截面与卢瑟福公式</span></a></li>
+      <li><a href="#s8"><span class="n">八</span><span class="t">积分截面与大角度稀有性</span></a></li>
+      <li><a href="#s9"><span class="n">九</span><span class="t">数值实例：5 MeV α 粒子对金箔</span></a></li>
+      <li><a href="#s10"><span class="n">十</span><span class="t">推论一：原子核的存在与核半径上限</span></a></li>
+      <li><a href="#s11"><span class="n">十一</span><span class="t">推论二：核式模型的确立</span></a></li>
+      <li><a href="#s12"><span class="n">十二</span><span class="t">推论三：经典模型的困难</span></a></li>
+      <li><a href="#s13"><span class="n">十三</span><span class="t">适用边界与各类修正</span></a></li>
+      <li class="grp">附录</li>
+      <li><a href="#a1"><span class="n">A</span><span class="t">Binet 方程与圆锥曲线解</span></a></li>
+      <li><a href="#a2"><span class="n">B</span><span class="t">冲量积分的严格计算</span></a></li>
+      <li><a href="#a3"><span class="n">C</span><span class="t">质心系与实验室系的转换</span></a></li>
+      <li><a href="#a4"><span class="n">D</span><span class="t">符号与常数表</span></a></li>
     </ol>
   </nav>
 

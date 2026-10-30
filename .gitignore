@@ -1,0 +1,9 @@
+# 自检脚本的临时产物（probe-*.mjs 会用它们注入测量代码）
+_probe.tmp.html
+_cdp-profile*/
+_cdp-profile2/
+
+# 编辑器 / 系统
+.DS_Store
+Thumbs.db
+desktop.ini

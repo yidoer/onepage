@@ -3,20 +3,20 @@
 
   <p class="lede">推导到这里，公式本身已经完备。但物理学的价值在于它<strong>允许我们断言什么</strong>。这一节从式 (7.8) 出发，提取出三条互相独立、且都能被实验检验的结论。</p>
 
-  <h3 class="sub">10.1 &nbsp;正电荷必定高度集中</h3>
+  <h3 class="sub">10.1 正电荷必定高度集中</h3>
 
   <p>把 <span class="m">\S 1</span> 的论证反过来用。式 (1.3) 是<strong>给定弥散尺度 <span class="m">R</span> 时偏转的上界</strong>，它是一个严格的不等式。既然实验确实观测到了 <span class="m">\theta \ge 90^\circ = \pi /2</span>，就必有</p>
 
-  <div class="eq">
+  <div class="eq" id="eq-10-1">
     <span class="body m">\frac{2k_{e}Ze^{2}}{R\,E}\ge \frac{\pi }{2}\ \ \Rightarrow \ \ R\le \frac{4k_{e}Ze^{2}}{\pi E}</span>
-    <span class="tag">(10.1)</span>
+    <a class="tag" href="#eq-10-1" title="公式 (10.1) 的固定链接">(10.1)</a>
   </div>
 
   <p>代入 5 MeV / 金的条件：</p>
 
-  <div class="eq key">
+  <div class="eq key" id="eq-10-2">
     <span class="body m">R\le \frac{4\cdot 1.822\times 10^{-26}}{\pi \cdot 8.011\times 10^{-13}} \text{m}\approx 2.9\times 10^{-14} \text{m}=29 \text{fm}</span>
-    <span class="tag">(10.2)</span>
+    <a class="tag" href="#eq-10-2" title="公式 (10.2) 的固定链接">(10.2)</a>
   </div>
 
   <p>而原子的尺度是 <span class="m">\approx 10^{-10}</span> m。也就是说，<strong>集中正电荷的尺度至多是原子的 1/3400</strong>。这条结论只用到"存在 90&#176; 散射"这一个实验事实，不依赖卢瑟福公式的具体形状，因此格外可靠。</p>
@@ -28,25 +28,25 @@
     </p>
     <p>有人会想：也许把 α 粒子弹回来的是电子？这个想法可以被一个纯粹的运动学事实排除。对于"质量 <span class="m">m</span> 的粒子弹性撞击静止的质量 <span class="m">M</span> 的粒子"，当 <span class="m">M &lt; m</span> 时，入射粒子在实验室系中的偏转角有<strong>严格上界</strong></p>
     <p style="margin-top:8px"><span class="m">\sin \,\theta _{\text{max}}=M/m</span>。对电子与 α 粒子：<span class="m">m_{e}/m_{\alpha } = 0.0005486/4.0015 = 1.37\times 10^{-4}</span>，故</p>
-    <p style="margin-top:8px"><span class="m">\theta _{\text{max}} = \arcsin (1.37\times 10^{-4}) \approx 0.0079^\circ</span>。即便 α 粒子<strong>正面撞上</strong>一个电子，它最多只能被偏转百分之八度。要累积到 90&#176; 需要约 11400 次方向完全一致的碰撞。因此大角度散射体必须是<strong>既重又集中</strong>的正电荷——它只能是原子核。</p>
+    <p style="margin-top:8px"><span class="m">\theta _{\text{max}} = \arcsin (1.37\times 10^{-4}) \approx 0.0079^\circ</span>。即便 α 粒子<strong>正面撞上</strong>一个电子，它最多只能被偏转千分之八度。要累积到 90&#176; 需要约 11400 次方向完全一致的碰撞。因此大角度散射体必须是<strong>既重又集中</strong>的正电荷——它只能是原子核。</p>
   </div>
 
-  <h3 class="sub">10.2 &nbsp;核半径的定量上限</h3>
+  <h3 class="sub">10.2 核半径的定量上限</h3>
 
   <p>式 (10.2) 给出的 29 fm 太宽松。利用卢瑟福公式本身，可以得到一个紧得多的界。</p>
 
   <p>推导卢瑟福公式时用了假设 A2（点电荷）。这条假设在 <span class="m">r_{\text{min}} \gg R</span> 时成立；一旦粒子能进入到核表面以内，势就不再是纯 <span class="m">1/r</span>，公式必定失效。由式 (6.2)，正碰时的最近距离为 <span class="m">d = C/E</span>，因此<strong>公式成立的条件</strong>可以写成一个能量条件：</p>
 
-  <div class="eq">
+  <div class="eq" id="eq-10-3">
     <span class="body m">\frac{C}{E}\gg R\ \ \Leftrightarrow \ \ E\ll \frac{C}{R}\equiv E_{\text{crit}}</span>
-    <span class="tag">(10.3)</span>
+    <a class="tag" href="#eq-10-3" title="公式 (10.3) 的固定链接">(10.3)</a>
   </div>
 
   <p>于是核半径可以<strong>由实验直接读出</strong>：找到卢瑟福公式开始系统失效的能量 <span class="m">E_{\text{crit}}</span>，则 <span class="m">R \approx C/E_{\text{crit}}</span>。α 粒子在金箔上的实测偏离出现在 <span class="m">E_{\text{crit}} \approx 25-30</span> MeV（<span class="m">\S 9.2</span> 式 9.2 的理论预言是 32.6 MeV），代入得</p>
 
-  <div class="eq key">
-    <span class="body m">R_{\text{Au}}\approx \frac{3.644\times 10^{-26}}{27\cdot 1.602\times 10^{-13}} \text{m}\approx 8.4\times 10^{-15} \text{m}=8.4 \text{fm}</span>
-    <span class="tag">(10.4)</span>
+  <div class="eq key" id="eq-10-4">
+    <span class="body m">\begin{aligned}R_{\text{Au}}&amp;\approx \frac{3.644\times 10^{-26}}{27\cdot 1.602\times 10^{-13}}\ \text{m}\\&amp;\approx 8.4\times 10^{-15}\ \text{m}=8.4\ \text{fm}\end{aligned}</span>
+    <a class="tag" href="#eq-10-4" title="公式 (10.4) 的固定链接">(10.4)</a>
   </div>
 
   <p>而由质量数经验公式 <span class="m">R = r_{0}A^{1/3}</span>（<span class="m">r_{0} \approx 1.2</span> fm）算得 <span class="m">R_{\text{Au}} \approx 7.0</span> fm。<strong>两种完全独立的途径给出同一量级</strong>——这正是核式模型最有力的自洽性证据。</p>
@@ -65,7 +65,7 @@
 <section class="sec" id="s11">
   <h2 class="sec-title"><span class="num">十一</span>推论二：核式模型的确立</h2>
 
-  <h3 class="sub">11.1 &nbsp;公式给出的不是一条曲线，而是三条可分别验证的标度律</h3>
+  <h3 class="sub">11.1 公式给出的不是一条曲线，而是三条可分别验证的标度律</h3>
 
   <p>式 (7.8) 的价值不只在"能拟合一张角分布图"。它同时预言了三个方向的依赖关系（表 2），而这三条彼此独立。任何一条被违反，整个模型就要重来。盖革与马斯登在 1913 年发表的定量结果，正是逐条检验了它们：</p>
 
@@ -100,7 +100,7 @@
 
   <p>特别值得注意的是 <span class="m">Z^{2}</span> 这一条。它意味着：<strong>通过测量散射强度，可以直接读出原子核的电荷数</strong>。这与莫塞莱由 X 射线特征频率测得的"原子序数"完全一致，从而把"原子序数"从一个排列序号变成了一个<em>有物理意义的电荷量</em>。</p>
 
-  <h3 class="sub">11.2 &nbsp;为什么"核式"是不可回避的</h3>
+  <h3 class="sub">11.2 为什么"核式"是不可回避的</h3>
 
   <p>把 <span class="m">\S 10</span> 与本节合起来看，逻辑链条是封闭的：</p>
 
@@ -111,7 +111,7 @@
 
   <p>这四步之后，"正电荷弥散、电子嵌在其中"的图像已无立足之地。剩下的唯一可能是：<strong>原子由一个极小的重核与核外电子云构成</strong>——即核式模型。</p>
 
-  <h3 class="sub">11.3 &nbsp;散射实验作为"探针"的范式意义</h3>
+  <h3 class="sub">11.3 散射实验作为"探针"的范式意义</h3>
 
   <p>卢瑟福散射更深层的贡献，是确立了粒子物理最基本的方法论：<strong>用已知的探针去撞未知的靶，通过散射角分布反推靶的结构。</strong>式 (7.8) 就是这个反演的显式公式——测得 <span class="m">d\sigma /d\Omega</span>，就能定出相互作用势的形式与作用区域的尺度。此后从深度非弹性散射发现夸克、到在 LHC 上确认希格斯玻色子，用的都是同一套逻辑。</p>
 </section>
@@ -121,27 +121,27 @@
 
   <p class="lede">核式模型解决了大角度散射，却立刻制造了一个更严重的危机。这一节给出这个危机的定量形式——它不属于卢瑟福散射本身，而是"把核式模型继续当作经典行星系"的必然后果。</p>
 
-  <h3 class="sub">12.1 &nbsp;加速电荷必然辐射</h3>
+  <h3 class="sub">12.1 加速电荷必然辐射</h3>
 
   <p>按经典电动力学，任何作加速运动的电荷都会辐射电磁波，功率由拉莫尔公式给出</p>
 
-  <div class="eq">
+  <div class="eq" id="eq-12-1">
     <span class="body m">P=\frac{q^{2}a^{2}}{6\pi \varepsilon _{0}c^{3}}</span>
-    <span class="tag">(12.1)</span>
+    <a class="tag" href="#eq-12-1" title="公式 (12.1) 的固定链接">(12.1)</a>
   </div>
 
   <p>核外电子在圆轨道上运动时加速度 <span class="m">a = v^{2}/r = k_{e}Ze^{2}/(m_{e}r^{2})</span>，而轨道能量 <span class="m">E = -k_{e}Ze^{2}/(2r)</span>。把 <span class="m">dE/dt = -P</span> 写成对 <span class="m">r</span> 的方程并积分（从玻尔半径 <span class="m">a_{0}</span> 一直落到 <span class="m">r = 0</span>），得到<strong>塌缩时间</strong></p>
 
-  <div class="eq key">
+  <div class="eq key" id="eq-12-2">
     <span class="body m">\tau =\frac{a_{0}^{3}c^{3}m_{e}^{2}}{4k_{e}^{2}Ze^{4}}</span>
-    <span class="tag">(12.2)</span>
+    <a class="tag" href="#eq-12-2" title="公式 (12.2) 的固定链接">(12.2)</a>
   </div>
 
   <p>对氢原子（<span class="m">Z = 1</span>，<span class="m">a_{0} = 5.2918\times 10^{-11}</span> m）代入数值：</p>
 
-  <div class="eq">
+  <div class="eq" id="eq-12-3">
     <span class="body m">\tau \approx 1.6\times 10^{-11} \text{s}</span>
-    <span class="tag">(12.3)</span>
+    <a class="tag" href="#eq-12-3" title="公式 (12.3) 的固定链接">(12.3)</a>
   </div>
 
   <p>约 <strong>16 皮秒</strong>。也就是说，如果电子真的像行星一样绕核作经典轨道运动，原子会在不到一亿分之一秒内辐射掉全部能量、电子坠入核中。物质根本不可能稳定存在。</p>
@@ -161,13 +161,13 @@
 
   <p class="lede">卢瑟福公式是一个精确的经典结果，但它的成立有明确的条件。以下逐条给出"何时需要修正、如何修正、量级多大"。这些边界本身就是物理信息。</p>
 
-  <h3 class="sub">13.1 &nbsp;反冲：把靶核质量视为有限的后果</h3>
+  <h3 class="sub">13.1 反冲：把靶核质量视为有限的后果</h3>
 
   <p>假设 A1 把靶核当作固定不动的。实际上靶核会反冲，正确的做法是转到<strong>质心系</strong>并引入约化质量</p>
 
-  <div class="eq">
+  <div class="eq" id="eq-13-1">
     <span class="body m">\mu =\frac{mM}{m+M}</span>
-    <span class="tag">(13.1)</span>
+    <a class="tag" href="#eq-13-1" title="公式 (13.1) 的固定链接">(13.1)</a>
   </div>
 
   <p>质心系中相互作用能只依赖相对坐标，因此<strong>只要把 <span class="m">m</span> 换成 <span class="m">\mu</span>、<span class="m">E</span> 换成质心系动能 <span class="m">E_{\text{cm}} = \tfrac{1}{2}\mu v_{\text{rel}}^{2}</span></strong>，式 (7.8) 的形式<em>完全不变</em>，只是其中的 <span class="m">\theta</span> 变成质心系散射角。实验室系角度需再由附录 <a class="ref" href="#a3">C</a> 的关系转换。</p>
@@ -187,40 +187,40 @@
 
   <p>结论：对重靶（<span class="m">A \gtrsim 100</span>）反冲可以忽略；对轻靶必须用约化质量。这正是"卢瑟福公式在重元素上吻合得最好"的原因之一。</p>
 
-  <h3 class="sub">13.2 &nbsp;电子屏蔽：把长程库仑势切断</h3>
+  <h3 class="sub">13.2 电子屏蔽：把长程库仑势切断</h3>
 
   <p>真实原子中核外电子会部分中和核的电场。在半径 <span class="m">r \gtrsim a</span> 之外，有效势被指数压低：</p>
 
-  <div class="eq">
+  <div class="eq" id="eq-13-2">
     <span class="body m">U(r)\approx \frac{C}{r}\,e^{-r/a},\ \ a\approx a_{0}Z^{-1/3}</span>
-    <span class="tag">(13.2)</span>
+    <a class="tag" href="#eq-13-2" title="公式 (13.2) 的固定链接">(13.2)</a>
   </div>
 
   <p>对金：<span class="m">a \approx 5.2918\times 10^{-11}/79^{1/3} \approx 1.23\times 10^{-11}</span> m（约 12.3 pm）。屏蔽只在瞄准距 <span class="m">b \gtrsim a</span> 时才有影响，对应</p>
 
-  <div class="eq">
+  <div class="eq" id="eq-13-3">
     <span class="body m">\cot \,\frac{\theta }{2}=\frac{a}{C/2E}=\frac{1.23\times 10^{-11}}{2.275\times 10^{-14}}=541\ \ \Rightarrow \ \ \theta \approx 0.21^{\circ }</span>
-    <span class="tag">(13.3)</span>
+    <a class="tag" href="#eq-13-3" title="公式 (13.3) 的固定链接">(13.3)</a>
   </div>
 
-  <p>因此<strong>只要 <span class="m">\theta \gtrsim 1^\circ</span>，屏蔽完全可忽略</strong>，卢瑟福公式按原样使用即可。屏蔽只在极小角度（<span class="m">\theta \lesssim 0.2^\circ</span>）才起作用，而且它恰好截断了式 (8.1) 中 <span class="m">\theta _{0} \to 0</span> 时的发散（<span class="m">\S 8.2</span>）。</p>
+  <p>因此<strong>只要 <span class="m">\theta \gtrsim 1^\circ</span>，屏蔽完全可忽略</strong>——式 (13.3) 给出的界限是 <span class="m">0.21^\circ</span>，取 <span class="m">1^\circ</span> 相当于留了约五倍余量。卢瑟福公式按原样使用即可。屏蔽只在极小角度（<span class="m">\theta \lesssim 0.2^\circ</span>）才起作用，而且它恰好截断了式 (8.1) 中 <span class="m">\theta _{0} \to 0</span> 时的发散（<span class="m">\S 8.2</span>，表 8 的 A6 行给的就是这个界限）。</p>
 
-  <h3 class="sub">13.3 &nbsp;相对论修正</h3>
+  <h3 class="sub">13.3 相对论修正</h3>
 
   <p>假设 A4 要求 <span class="m">v \ll c</span>。α 粒子静能 <span class="m">m_{\alpha }c^{2} = 3727.4</span> MeV，故</p>
 
-  <div class="eq">
+  <div class="eq" id="eq-13-4">
     <span class="body m">\frac{v}{c}=\sqrt{\frac{2E}{m_{\alpha }c^{2}}}:\ \ 5 \text{MeV}\to 0.052,\ \ 100 \text{MeV}\to 0.232</span>
-    <span class="tag">(13.4)</span>
+    <a class="tag" href="#eq-13-4" title="公式 (13.4) 的固定链接">(13.4)</a>
   </div>
 
   <p>5 MeV 时 <span class="m">v^{2}/c^{2} \approx 2.7\times 10^{-3}</span>，非相对论近似误差约 0.3%，完全可忽略。到 100 MeV 时 <span class="m">v^{2}/c^{2} \approx 5.4%</span>，必须改用相对论运动学（Mott 散射）。由于 α 粒子与多数偶偶核自旋均为 0，自旋相关的 Mott 项不出现，主要修正来自运动学。</p>
 
-  <h3 class="sub">13.4 &nbsp;自旋与磁相互作用</h3>
+  <h3 class="sub">13.4 自旋与磁相互作用</h3>
 
   <p>本文只考虑库仑（电）相互作用。若入射粒子或靶核有自旋，还会出现磁矩之间的相互作用。其相对大小约为 <span class="m">O(v^{2}/c^{2})</span>，对 5 MeV 的 α 粒子是 <span class="m">10^{-3}</span> 量级，属于可忽略的高阶效应。α 粒子自旋为 0，因此在 α 散射中这一项完全不存在。</p>
 
-  <h3 class="sub">13.5 &nbsp;量子力学为什么给出同一结果</h3>
+  <h3 class="sub">13.5 量子力学为什么给出同一结果</h3>
 
   <p>这是一个容易被含糊带过的要点，值得说清楚。</p>
 
@@ -238,11 +238,11 @@
     <p style="margin-top:8px">所以 <strong>"经典推导得到正确公式"不是方法的胜利，而是这个特定势的巧合</strong>。这一点在把卢瑟福散射作为方法论推广时必须牢记。</p>
   </div>
 
-  <h3 class="sub">13.6 &nbsp;单次散射与薄靶条件</h3>
+  <h3 class="sub">13.6 单次散射与薄靶条件</h3>
 
   <p>假设 A5 要求粒子在穿过箔时只发生一次有效散射。这条假设的检验方式很直接：<strong>散射计数必须严格正比于箔厚</strong>（表 6 第二行）。若观察到非线性（偏薄时正比、偏厚时增长更快），说明多次散射开始贡献。多次散射的角分布近似为高斯型，会叠加在卢瑟福的 <span class="m">\csc ^{4}</span> 尾巴上，在小角度处首先造成偏离。</p>
 
-  <h3 class="sub">13.7 &nbsp;适用条件总表</h3>
+  <h3 class="sub">13.7 适用条件总表</h3>
 
   <div class="tw">
     <table>
@@ -310,22 +310,50 @@
   <p>正文 4.1 节从"能量守恒 + 角动量守恒"直接得到了式 (4.3)。这里用更标准的 <strong>Binet 方程</strong>独立导出同一个方程，以确认式 (4.3) 的可靠性。</p>
 
   <p>径向运动方程为</p>
-  <div class="eq">
-    <span class="body m">m(r\ddot{}-r\varphi \dot{}^{2})=F_{r}=\frac{C}{r^{2}}</span>
-    <span class="tag">(A.1)</span>
+  <div class="eq" id="eq-A-1">
+    <span class="body m">m\left(\ddot{r}-r\dot{\varphi }^{2}\right)=F_{r}=\frac{C}{r^{2}}</span>
+    <a class="tag" href="#eq-A-1" title="公式 (A.1) 的固定链接">(A.1)</a>
   </div>
 
-  <p>由式 (3.6) <span class="m">\varphi \dot{} = L/(mr^{2})</span>，对时间求导可把 <span class="m">d/dt</span> 换成 <span class="m">(L/(mr^{2}))d/d\varphi</span>。记 <span class="m">u = 1/r</span>，有</p>
-  <div class="eq">
-    <span class="body m">r\ddot{}=-\frac{L^{2}u^{2}}{m^{2}}\frac{d^{2}u}{d\varphi ^{2}},\ \ r\varphi \dot{}^{2}=\frac{L^{2}u^{3}}{m^{2}}</span>
-    <span class="tag">(A.2)</span>
+  <p>由式 (3.6) <span class="m">\dot{\varphi } = L/(mr^{2})</span>，对时间求导可把 <span class="m">d/dt</span> 换成 <span class="m">(L/(mr^{2}))d/d\varphi</span>。记 <span class="m">u = 1/r</span>，有</p>
+  <div class="eq" id="eq-A-2">
+    <span class="body m">\ddot{r}=-\frac{L^{2}u^{2}}{m^{2}}\frac{d^{2}u}{d\varphi ^{2}},\ \ r\dot{\varphi }^{2}=\frac{L^{2}u^{3}}{m^{2}}</span>
+    <a class="tag" href="#eq-A-2" title="公式 (A.2) 的固定链接">(A.2)</a>
   </div>
   <p>代入式 (A.1) 并整理，即得式 (4.3)：<span class="m">u'' + u = -mC/L^{2}</span>。<strong>两条路线给出同一方程。</strong></p>
 
   <p class="mnote"><b>关于求导时约去的因子。</b>两边对 <span class="m">\varphi</span> 求导时约去了 <span class="m">du/d\varphi</span>。若 <span class="m">du/d\varphi = 0</span> 恒成立，则 <span class="m">u</span> 为常数，对应圆轨道——对开放轨道（双曲线）不适用，故本文情形下该因子的零点只是孤立点（近核点），不影响解的一般性。</p>
 
-  <h3 class="sub">A.1 &nbsp;由解反推 <i>A</i> 与 <i>&#945;</i> 的物理意义</h3>
-  <p>把解 <span class="m">u = A\cos \varphi - 1/\alpha</span> 代回能量守恒式 (4.2)，可用 <span class="m">\varphi = 0</span> 处（近核点，<span class="m">du/d\varphi = 0</span>）的值定出 <span class="m">A</span>，从而确认 <span class="m">\alpha = L^{2}/(mC)</span> 与 <span class="m">e = A\alpha</span> 的定义（式 4.5）是自洽的。正文 5.4 节用这套关系做了独立互校，结果与冲量法完全一致。</p>
+  <h3 class="sub">A.1 由解反推 <i>A</i> 与 <i>&#945;</i> 的物理意义</h3>
+  <p>式 (4.4) 里的 <span class="m">A</span> 与 <span class="m">\alpha</span> 是两个积分常数。它们不是可以随手选的：把一个试解代回能量守恒式 (4.2)，要求它对<em>任意</em> <span class="m">\varphi</span> 都成立，这两个量就被唯一确定。取</p>
+
+  <div class="eq" id="eq-A-3">
+    <span class="body m">u(\varphi )=A\,\cos \,\varphi -\frac{1}{\alpha },\ \ \frac{du}{d\varphi }=-A\,\sin \,\varphi</span>
+    <a class="tag" href="#eq-A-3" title="公式 (A.3) 的固定链接">(A.3)</a>
+  </div>
+
+  <p>代入式 (4.2)。用 <span class="m">\sin ^{2}\varphi = 1-\cos ^{2}\varphi</span> 展开，含 <span class="m">\cos ^{2}\varphi</span> 的两项恰好相消，剩下</p>
+
+  <div class="eq" id="eq-A-4">
+    <span class="body m">E=\frac{L^{2}A^{2}}{2m}+\frac{L^{2}}{2m\alpha ^{2}}-\frac{C}{\alpha }+A\left(C-\frac{L^{2}}{m\alpha }\right)\cos \,\varphi</span>
+    <a class="tag" href="#eq-A-4" title="公式 (A.4) 的固定链接">(A.4)</a>
+  </div>
+
+  <p>左端与 <span class="m">\varphi</span> 无关，所以右端 <span class="m">\cos \varphi</span> 的系数必须为零：</p>
+
+  <div class="eq" id="eq-A-5">
+    <span class="body m">C-\frac{L^{2}}{m\alpha }=0\ \ \Rightarrow \ \ \alpha =\frac{L^{2}}{mC}</span>
+    <a class="tag" href="#eq-A-5" title="公式 (A.5) 的固定链接">(A.5)</a>
+  </div>
+
+  <p>这正是式 (4.5) 中的 <span class="m">\alpha</span>——它并非"定义"，而是让试解成立的唯一取值。把 <span class="m">\alpha</span> 代回剩下的常数项，就得到 <span class="m">A</span>：</p>
+
+  <div class="eq key" id="eq-A-6">
+    <span class="body m">\begin{aligned}A^{2}&amp;=\frac{2mE}{L^{2}}+\frac{m^{2}C^{2}}{L^{4}}\\e^{2}&amp;=A^{2}\alpha ^{2}=1+\frac{2EL^{2}}{mC^{2}}=1+\left(\frac{2Eb}{C}\right)^{2}\end{aligned}</span>
+    <a class="tag" href="#eq-A-6" title="公式 (A.6) 的固定链接">(A.6)</a>
+  </div>
+
+  <p>最后一步用了 <span class="m">L^{2}=2mEb^{2}</span>。式 (A.6) 与正文式 (4.10) 的 <span class="m">e=\csc (\theta /2)</span> 完全一致（由 <span class="m">\csc ^{2}=1+\cot ^{2}</span> 与 <span class="m">\cot (\theta /2)=2Eb/C</span>）。也就是说 <span class="m">\alpha</span> 与 <span class="m">e</span> 由能量守恒唯一确定，5.4 节的互校是闭合的，而不是两个约定之间的循环论证。</p>
 </section>
 
 <section class="sec" id="a2">
@@ -336,16 +364,16 @@
   <p>冲量的定义是 <span class="m">\Delta \vec{p} = \int \vec{F}\,dt</span>。力的方向沿 <span class="m">\hat{r}</span>。由对称性，我们只需它的对称轴分量，即把 <span class="m">\vec{F}</span> 投影到对称轴方向，得到 <span class="m">(C/r^{2})\cos \varphi</span>。</p>
 
   <p>换元时用的关键是式 (3.6)：</p>
-  <div class="eq">
+  <div class="eq" id="eq-B-1">
     <span class="body m">dt=\frac{mr^{2}}{L}d\varphi \ \ \Rightarrow \ \ \frac{C}{r^{2}}dt=\frac{mC}{L}d\varphi</span>
-    <span class="tag">(B.1)</span>
+    <a class="tag" href="#eq-B-1" title="公式 (B.1) 的固定链接">(B.1)</a>
   </div>
 
   <p>注意右端<strong>不再含 <i>r</i></strong>。这正是库仑问题可积的核心：<span class="m">1/r^{2}</span> 的力与 <span class="m">r^{2}</span> 的角动量因子恰好互为倒数。于是</p>
 
-  <div class="eq">
+  <div class="eq" id="eq-B-2">
     <span class="body m">\Delta p=\frac{mC}{L}\int _{-\varphi _{\infty }}^{\varphi _{\infty }}\cos \,\varphi \,d\varphi =\frac{2mC}{L}\sin \,\varphi _{\infty }</span>
-    <span class="tag">(B.2)</span>
+    <a class="tag" href="#eq-B-2" title="公式 (B.2) 的固定链接">(B.2)</a>
   </div>
 
   <p><strong>一个值得注意的地方</strong>：式 (B.2) 中不含偏心率 <span class="m">e</span>，也不含 <span class="m">\alpha</span>——积分的值只依赖积分限 <span class="m">\varphi _{\infty }</span>。也就是说，无论轨道"张得多开"，冲量都相同。这是 <span class="m">1/r^{2}</span> 力的另一项特殊性质，也是为什么式 (5.7) 会如此简洁。</p>
@@ -360,17 +388,17 @@
 
   <p>质心系中两粒子动量大小相等方向相反，散射后仍如此。把质心速度变换回实验室系，可得</p>
 
-  <div class="eq">
+  <div class="eq" id="eq-C-1">
     <span class="body m">\tan \,\theta _{\text{lab}}=\frac{\sin \,\theta _{\text{cm}}}{\rho +\cos \,\theta _{\text{cm}}}</span>
-    <span class="tag">(C.1)</span>
+    <a class="tag" href="#eq-C-1" title="公式 (C.1) 的固定链接">(C.1)</a>
   </div>
 
   <p>当 <span class="m">\rho \ll 1</span>（重靶）时 <span class="m">\theta _{\text{lab}} \approx \theta _{\text{cm}}</span>，这正是假设 A1 的精确含义。对 α + Au，<span class="m">\rho = 4.0015/197 \approx 0.0203</span>，两系角度差异在 <span class="m">1^\circ</span> 量级，属于可修正的系统效应。</p>
 
   <p>相应地，能量也需换算：</p>
-  <div class="eq">
+  <div class="eq" id="eq-C-2">
     <span class="body m">E_{\text{cm}}=\frac{M}{m+M}E_{\text{lab}}=\frac{1}{1+\rho }E_{\text{lab}}</span>
-    <span class="tag">(C.2)</span>
+    <a class="tag" href="#eq-C-2" title="公式 (C.2) 的固定链接">(C.2)</a>
   </div>
 
   <p>把式 (7.8) 用在实验数据上时，必须用 <span class="m">E_{\text{cm}}</span> 与 <span class="m">\theta _{\text{cm}}</span>。对 α + Au 这带来约 2% 的能量修正，与表 7 的反冲修正一致（两者是同一件事的两种表述）。</p>

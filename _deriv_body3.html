@@ -3,71 +3,71 @@
 
   <p class="lede">实验中不能控制单个粒子的瞄准距，只能统计"多少粒子被弹到了哪个角度"。截面就是把"<span class="m">b(\theta )</span> 这条确定性关系"翻译成"可测量的计数分布"的桥梁。这一节完成这个翻译，并得到本文的主角——卢瑟福公式。</p>
 
-  <h3 class="sub">7.1 &nbsp;截面的定义</h3>
+  <h3 class="sub">7.1 截面的定义</h3>
 
   <p>设有一束强度为 <span class="m">I</span>（单位时间穿过单位面积的粒子数）的平行粒子流射向一个靶核。由于轴对称，瞄准距在 <span class="m">[b, b+db]</span> 内的粒子落在面积为 <span class="m">d\sigma = 2\pi b\,|db|</span> 的圆环内。把</p>
 
-  <div class="eq">
+  <div class="eq" id="eq-7-1">
     <span class="body m">d\sigma \equiv \frac{dN}{I}=2\pi b\,|db|</span>
-    <span class="tag">(7.1)</span>
+    <a class="tag" href="#eq-7-1" title="公式 (7.1) 的固定链接">(7.1)</a>
   </div>
 
   <p>称为<strong>微分截面</strong>。它是对单个靶核而言的等效面积，量纲为面积。<span class="m">d\sigma</span> 是"落在 <span class="m">[\theta , \theta +d\theta ]</span> 环内"的截面。习惯上再除以该环对应的立体角</p>
 
-  <div class="eq">
+  <div class="eq" id="eq-7-2">
     <span class="body m">d\Omega =2\pi \,\sin \,\theta \,d\theta</span>
-    <span class="tag">(7.2)</span>
+    <a class="tag" href="#eq-7-2" title="公式 (7.2) 的固定链接">(7.2)</a>
   </div>
 
   <p>得到与探测器立体角无关的量</p>
 
-  <div class="eq">
-    <span class="body m">\frac{d\sigma }{d\Omega }=\frac{b}{\sin \,\theta }\,|\frac{db}{d\theta }|</span>
-    <span class="tag">(7.3)</span>
+  <div class="eq" id="eq-7-3">
+    <span class="body m">\frac{d\sigma }{d\Omega }=\frac{b}{\sin \,\theta }\left|\frac{db}{d\theta }\right|</span>
+    <a class="tag" href="#eq-7-3" title="公式 (7.3) 的固定链接">(7.3)</a>
   </div>
 
   <p class="mnote"><b>截面的物理读法。</b>截面不是几何面积，而是"有效靶面积"。它把"粒子被弹到 <span class="m">\theta</span> 附近"这件事折算成"靶核在这条路径上占据了多大一块面积"。这样不同实验的几何布置就可以互相比对。</p>
 
-  <h3 class="sub">7.2 &nbsp;代入 <i>b</i>(<i>&#952;</i>) 并化简</h3>
+  <h3 class="sub">7.2 代入 <i>b</i>(<i>&#952;</i>) 并化简</h3>
 
   <p>由式 (5.7)，<span class="m">b = (C/2E)\cot (\theta /2)</span>。对 <span class="m">\theta</span> 求导（注意 <span class="m">(\cot x)' = -\csc ^{2}x</span>）：</p>
 
-  <div class="eq">
-    <span class="body m">\frac{db}{d\theta }=\frac{C}{2E}\cdot (-\frac{1}{2})\,\csc ^{2}\,\frac{\theta }{2}=-\frac{C}{4E}\,\csc ^{2}\,\frac{\theta }{2}</span>
-    <span class="tag">(7.4)</span>
+  <div class="eq" id="eq-7-4">
+    <span class="body m">\frac{db}{d\theta }=\frac{C}{2E}\cdot \left(-\frac{1}{2}\right)\csc ^{2}\,\frac{\theta }{2}=-\frac{C}{4E}\,\csc ^{2}\,\frac{\theta }{2}</span>
+    <a class="tag" href="#eq-7-4" title="公式 (7.4) 的固定链接">(7.4)</a>
   </div>
 
   <p>把 <span class="m">b</span>、<span class="m">|db/d\theta |</span> 与 <span class="m">\sin \theta = 2\sin (\theta /2)\cos (\theta /2)</span> 一并代入式 (7.3)：</p>
 
-  <div class="eq">
+  <div class="eq" id="eq-7-5">
     <span class="body m">\frac{d\sigma }{d\Omega }=\frac{C}{2E}\frac{\cot (\theta /2)}{2\sin (\theta /2)\cos (\theta /2)}\cdot \frac{C}{4E}\csc ^{2}\,\frac{\theta }{2}</span>
-    <span class="tag">(7.5)</span>
+    <a class="tag" href="#eq-7-5" title="公式 (7.5) 的固定链接">(7.5)</a>
   </div>
 
   <p>这里发生了一次漂亮的连锁相消。记 <span class="m">s \equiv \sin (\theta /2)</span>、<span class="m">c \equiv \cos (\theta /2)</span>，则 <span class="m">\cot (\theta /2) = c/s</span>，式 (7.5) 中三角函数因子为</p>
 
-  <div class="eq">
+  <div class="eq" id="eq-7-6">
     <span class="body m">\frac{c/s}{2sc}\cdot \frac{1}{s^{2}}=\frac{1}{2s^{2}}\cdot \frac{1}{s^{2}}=\frac{1}{2\sin ^{4}(\theta /2)}</span>
-    <span class="tag">(7.6)</span>
+    <a class="tag" href="#eq-7-6" title="公式 (7.6) 的固定链接">(7.6)</a>
   </div>
 
   <p>把 <span class="m">c</span> 完全约掉，只剩一个纯粹的 <span class="m">\sin ^{4}(\theta /2)</span>。系数为 <span class="m">(C/2E)(C/4E) = C^{2}/(8E^{2})</span>，再乘上式 (7.6) 中的 <span class="m">\tfrac{1}{2}</span>：</p>
 
-  <div class="eq">
+  <div class="eq" id="eq-7-7">
     <span class="body m">\frac{d\sigma }{d\Omega }=\frac{C^{2}}{16E^{2}}\,\frac{1}{\sin ^{4}(\theta /2)}</span>
-    <span class="tag">(7.7)</span>
+    <a class="tag" href="#eq-7-7" title="公式 (7.7) 的固定链接">(7.7)</a>
   </div>
 
   <p>最后把 <span class="m">C = k_{e}zZe^{2}</span>（式 3.2）代回系数：<span class="m">C^{2}/(16E^{2}) = (k_{e}zZe^{2}/4E)^{2}</span>。得到<strong>卢瑟福散射公式</strong>：</p>
 
-  <div class="eq key">
-    <span class="body m">\frac{d\sigma }{d\Omega }=(\frac{k_{e}zZe^{2}}{4E})^{2}\,\frac{1}{\sin ^{4}(\theta /2)}</span>
-    <span class="tag">(7.8)</span>
+  <div class="eq key" id="eq-7-8">
+    <span class="body m">\frac{d\sigma }{d\Omega }=\left(\frac{k_{e}zZe^{2}}{4E}\right)^{2}\frac{1}{\sin ^{4}(\theta /2)}</span>
+    <a class="tag" href="#eq-7-8" title="公式 (7.8) 的固定链接">(7.8)</a>
   </div>
 
   <p class="mnote">若把入射粒子电荷写成 <span class="m">z = 2</span>（α 粒子），靶核电荷 <span class="m">Z</span>，并用 <span class="m">E</span> 表示入射动能，则式 (7.8) 亦可写作 <span class="m">(k_{e}zZe^{2}/4E)^{2}\csc ^{4}(\theta /2)</span> 或 <span class="m">(C/4E)^{2}\csc ^{4}(\theta /2)</span>。三者完全等价。</p>
 
-  <h3 class="sub">7.3 &nbsp;公式在说什么</h3>
+  <h3 class="sub">7.3 公式在说什么</h3>
 
   <p>式 (7.8) 有三个可单独检验的标度律，每一条都是实验可判据：</p>
 
@@ -110,18 +110,18 @@
 <section class="sec" id="s8">
   <h2 class="sec-title"><span class="num">八</span>积分截面与大角度稀有性</h2>
 
-  <h3 class="sub">8.1 &nbsp;散射到 <i>&#952;</i> &#8805; <i>&#952;</i><sub>0</sub> 的总截面</h3>
+  <h3 class="sub">8.1 散射到 <i>&#952;</i> &#8805; <i>&#952;</i><sub>0</sub> 的总截面</h3>
 
   <p>把式 (7.8) 对角度积分，得到"散射角超过 <span class="m">\theta _{0}</span>"的截面。有一个更省力的等价做法：所有 <span class="m">b \le b(\theta _{0})</span> 的粒子都会被弹到 <span class="m">\theta \ge \theta _{0}</span>，所以这个截面就是半径为 <span class="m">b(\theta _{0})</span> 的圆盘面积：</p>
 
-  <div class="eq key">
-    <span class="body m">\sigma (\theta \ge \theta _{0})=\pi \,b(\theta _{0})^{2}=\pi (\frac{C}{2E})^{2}\,\cot ^{2}\,\frac{\theta _{0}}{2}</span>
-    <span class="tag">(8.1)</span>
+  <div class="eq key" id="eq-8-1">
+    <span class="body m">\sigma (\theta \ge \theta _{0})=\pi \,b(\theta _{0})^{2}=\pi \left(\frac{C}{2E}\right)^{2}\cot ^{2}\,\frac{\theta _{0}}{2}</span>
+    <a class="tag" href="#eq-8-1" title="公式 (8.1) 的固定链接">(8.1)</a>
   </div>
 
   <p class="mnote">直接对式 (7.8) 积分可以验证这一点：<span class="m">\int _{\theta _{0}}^{\pi }(C^{2}/16E^{2})\csc ^{4}(\theta /2)\,2\pi \sin \theta \,d\theta = \pi (C/2E)^{2}\cot ^{2}(\theta _{0}/2)</span>。用 <span class="m">u = \theta /2</span> 换元后，被积函数化为 <span class="m">-\text{d}(1/(2\sin ^{2}u))</span>，积分是初等的。结果与"圆盘面积"论证一致。这也从侧面确认式 (7.8) 的归一化是正确的。</p>
 
-  <h3 class="sub">8.2 &nbsp;"大角度稀有"到底有多稀有</h3>
+  <h3 class="sub">8.2 "大角度稀有"到底有多稀有</h3>
 
   <p>式 (7.8) 的角度因子 <span class="m">\csc ^{4}(\theta /2)</span> 在 <span class="m">\theta \to 0</span> 时发散得非常快。下表以小角度 <span class="m">10^\circ</span> 为基准列出相对强度：</p>
 
@@ -204,7 +204,7 @@
 
   <p class="lede">把公式里的数字真正算出来，才能看清量级。以下全部使用 SI 单位与盖革–马斯登实验的典型条件。</p>
 
-  <h3 class="sub">9.1 &nbsp;输入常数</h3>
+  <h3 class="sub">9.1 输入常数</h3>
 
   <div class="tw">
     <table>
@@ -223,7 +223,7 @@
     </table>
   </div>
 
-  <h3 class="sub">9.2 &nbsp;瞄准距与最近逼近距离</h3>
+  <h3 class="sub">9.2 瞄准距与最近逼近距离</h3>
 
   <p>由式 (5.7) 与 (6.1)，取 <span class="m">C/2E = 22.75</span> fm：</p>
 
@@ -253,36 +253,36 @@
 
   <p><strong>(2) 与核半径相比还有很大余量。</strong>金核半径由 <span class="m">R \approx 1.2A^{1/3}</span> fm 估计（<span class="m">A = 197</span>）：</p>
 
-  <div class="eq">
+  <div class="eq" id="eq-9-1">
     <span class="body m">R_{\text{Au}}\approx 1.2\cdot 197^{1/3} \text{fm}\approx 1.2\cdot 5.818 \text{fm}\approx 7.0 \text{fm}</span>
-    <span class="tag">(9.1)</span>
+    <a class="tag" href="#eq-9-1" title="公式 (9.1) 的固定链接">(9.1)</a>
   </div>
 
   <p>而 <span class="m">d = 45.5</span> fm，是核半径的 <span class="m">6.5</span> 倍。所以 5 MeV 的 α 粒子<strong>根本碰不到核</strong>，全程只在核外感受纯库仑力——这正是卢瑟福公式在这个能量下精确成立的原因。</p>
 
   <p><strong>(3) 想要"碰到"核需要多高能量？</strong>令 <span class="m">d = R</span>，即 <span class="m">C/E = R</span>：</p>
 
-  <div class="eq key">
-    <span class="body m">E_{\text{crit}}=\frac{C}{R_{\text{Au}}}=\frac{3.6445\times 10^{-26}}{7.0\times 10^{-15}} \text{J}\approx 5.2\times 10^{-12} \text{J}\approx 32.6 \text{MeV}</span>
-    <span class="tag">(9.2)</span>
+  <div class="eq key" id="eq-9-2">
+    <span class="body m">\begin{aligned}E_{\text{crit}}&amp;=\frac{C}{R_{\text{Au}}}=\frac{3.6445\times 10^{-26}}{7.0\times 10^{-15}}\ \text{J}\\&amp;\approx 5.2\times 10^{-12}\ \text{J}\approx 32.6\ \text{MeV}\end{aligned}</span>
+    <a class="tag" href="#eq-9-2" title="公式 (9.2) 的固定链接">(9.2)</a>
   </div>
 
   <p>这与实验事实高度吻合：用 α 粒子轰击金箔时，<strong>约 25&#8211;30 MeV 以上开始观察到对卢瑟福公式的系统偏离</strong>，而偏离正是核力开始介入、点电荷假设失效的标志。也就是说，<span class="m">\S 10.2</span> 中由该公式反推出的核半径上限，其自洽性是被实验独立确认过的。</p>
 
-  <h3 class="sub">9.3 &nbsp;散射到 90&#176; 以上的概率</h3>
+  <h3 class="sub">9.3 散射到 90&#176; 以上的概率</h3>
 
   <p>用式 (8.1) 取 <span class="m">\theta _{0} = 90^\circ</span>（每核）：</p>
 
-  <div class="eq">
-    <span class="body m">\sigma (\theta \ge 90^{\circ })=\pi \,b(90^{\circ })^{2}=\pi \,(22.75 \text{fm})^{2}=1.63\times 10^{3} \text{fm}^{2}=16.3 \text{b}</span>
-    <span class="tag">(9.3)</span>
+  <div class="eq" id="eq-9-3">
+    <span class="body m">\begin{aligned}\sigma (\theta \ge 90^{\circ })&amp;=\pi \,b(90^{\circ })^{2}=\pi \,(22.75\ \text{fm})^{2}\\&amp;=1.63\times 10^{3}\ \text{fm}^{2}=16.3\ \text{b}\end{aligned}</span>
+    <a class="tag" href="#eq-9-3" title="公式 (9.3) 的固定链接">(9.3)</a>
   </div>
 
   <p>作为对照，一个金原子的几何截面约 <span class="m">\pi (144 \text{pm})^{2} \approx 6.5\times 10^{8}</span> b。因此被弹到 90&#176; 以上的比例约为</p>
 
-  <div class="eq">
+  <div class="eq" id="eq-9-4">
     <span class="body m">\frac{16.3}{6.5\times 10^{8}}\approx 2.5\times 10^{-8}</span>
-    <span class="tag">(9.4)</span>
+    <a class="tag" href="#eq-9-4" title="公式 (9.4) 的固定链接">(9.4)</a>
   </div>
 
   <p>约四千万分之一。这就是为什么盖革和马斯登需要观察数以万计的闪烁、才能记录到寥寥几次大角度事件——也正是这寥寥几次，否定了汤姆孙模型。</p>

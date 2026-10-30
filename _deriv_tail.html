@@ -7,39 +7,123 @@
     返回 3D 模拟器
   </a>
   <p><b>关于本文</b> &mdash;&mdash; 全文推导不引用任何"已知结论"，每一步都给出依据与自检；所有数值均可在附录 D 的常数下独立复算。</p>
-  <p><b>排版与依赖</b> &mdash;&mdash; 和纸（washi）风格；纸纹由 SVG <code>feTurbulence</code> 生成，公式以 HTML/CSS 手工排版。全文<strong>不含任何脚本、外部字体或 CDN 依赖</strong>，可直接离线打开，也可原样部署到 GitHub Pages。</p>
-  <p><b>可访问性与打印</b> &mdash;&mdash; 浅色与深色两套主题的正文对比度均已独立校验（&ge; 4.5:1）；支持 <code>prefers-reduced-motion</code> 与打印样式，可直接输出为纸张版式。</p>
+  <p><b>排版与依赖</b> &mdash;&mdash; 和纸（washi）风格；纸纹由 SVG <code>feTurbulence</code> 生成。公式由 <strong>KaTeX 0.16</strong> 排版，脚本、样式与全部字体都放在仓库内的 <code>vendor/katex/</code>，因此<strong>不联网也能正常显示公式</strong>；只有在本地文件缺失时，才会向 jsDelivr 取一次脚本作为兜底。</p>
+  <p><b>可访问性与打印</b> &mdash;&mdash; 浅色与深色两套主题的正文对比度均已独立校验（&ge; 4.5:1）；目录会跟随阅读位置高亮（无脚本时退化为普通链接）；支持 <code>prefers-reduced-motion</code> 与打印样式，可直接输出为纸张版式。</p>
   <p><b>配套</b> &mdash;&mdash; 交互式 3D 演示见 <a class="ref" href="index.html">卢瑟福 α 粒子散射 3D 模拟器</a>。</p>
 </footer>
 
 </div>
+
+<a class="to-top" href="#top" id="to-top" aria-label="回到顶部" title="回到顶部">
+  <svg class="ic ic-md" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19.5v-15M5.5 11 12 4.5 18.5 11"/></svg>
+</a>
+
 <script src="vendor/katex/katex.min.js"></script>
 <script>
-/* 公式渲染：把每个 .m 元素里的 LaTeX 源码交给 KaTeX 排版。
-   .body.m 为独立公式（display 模式），其余为行内公式。
-   本地 KaTeX 缺失时自动回退到 CDN。 */
-(function(){
-  function render(){
+/* ── 1. 公式渲染 ────────────────────────────────────────────────
+   把每个 .m 元素里的 LaTeX 源码交给 KaTeX 排版：.body.m 走 display 模式，
+   其余走行内模式。整页渲染失败时给 <html> 加 .no-katex，让 CSS 把源码
+   以等宽字体显示，而不是一片排版错乱的白纸。 */
+(function () {
+  'use strict';
+
+  function render() {
     if (!window.katex) return false;
     var nodes = document.querySelectorAll('.m');
-    for (var i = 0; i < nodes.length; i++){
+    var done = 0;
+    for (var i = 0; i < nodes.length; i++) {
       var el = nodes[i];
       if (el.parentElement && el.parentElement.closest('.m')) continue;
       try {
-        katex.render(el.textContent, el, {
+        window.katex.render(el.textContent, el, {
           displayMode: el.classList.contains('body'),
           throwOnError: false,
           strict: false
         });
-      } catch (e) { el.classList.add('tex-err'); }
+        done++;
+      } catch (e) {
+        el.classList.add('tex-err');
+      }
     }
-    return true;
+    return done > 0;
   }
-  if (!render()){
+
+  if (render()) {
+    document.documentElement.classList.remove('no-katex');
+  } else {
+    document.documentElement.classList.add('no-katex');
     var s = document.createElement('script');
     s.src = 'https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js';
-    s.onload = render;
+    s.onload = function () { if (render()) document.documentElement.classList.remove('no-katex'); };
     document.head.appendChild(s);
+  }
+})();
+
+/* ── 2. 目录跟随阅读位置 + 回到顶部 ─────────────────────────────
+   纯增强：脚本不执行时目录仍是普通锚点列表，页面功能不受影响。 */
+(function () {
+  'use strict';
+
+  var links = [].slice.call(document.querySelectorAll('.toc a[href^="#"]'));
+  var sections = [];
+  links.forEach(function (a) {
+    var el = document.getElementById(a.getAttribute('href').slice(1));
+    if (el) sections.push({ el: el, link: a });
+  });
+
+  var current = null;
+  function setCurrent(item) {
+    if (item === current) return;
+    if (current) {
+      current.link.classList.remove('is-current');
+      current.link.removeAttribute('aria-current');
+    }
+    current = item;
+    if (current) {
+      current.link.classList.add('is-current');
+      current.link.setAttribute('aria-current', 'true');
+    }
+  }
+
+  var top = document.getElementById('to-top');
+
+  function onScroll() {
+    var line = 132;                       // 视口上方 132px 处作为“当前章节”判定线
+    var found = null;
+    for (var i = 0; i < sections.length; i++) {
+      if (sections[i].el.getBoundingClientRect().top <= line) found = sections[i];
+    }
+    setCurrent(found);
+    if (top) {
+      var y = window.pageYOffset || document.documentElement.scrollTop;
+      top.classList.toggle('is-on', y > 800);
+    }
+  }
+
+  var ticking = false;
+  function requestScroll() {
+    if (ticking) return;
+    ticking = true;
+    window.requestAnimationFrame(function () { ticking = false; onScroll(); });
+  }
+
+  if (sections.length && 'getBoundingClientRect' in Element.prototype) {
+    window.addEventListener('scroll', requestScroll, { passive: true });
+    window.addEventListener('resize', requestScroll, { passive: true });
+    onScroll();
+  }
+
+  if (top) {
+    top.addEventListener('click', function (e) {
+      var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (reduce) return;                 // 交给浏览器直接跳转
+      e.preventDefault();
+      try {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } catch (err) {
+        window.scrollTo(0, 0);
+      }
+    });
   }
 })();
 </script>
