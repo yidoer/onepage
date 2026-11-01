@@ -40,18 +40,8 @@ https://<你的用户名>.github.io/<仓库名>/
 根目录的 `index.html` 会被自动加载，即 3D 模拟器；报头右上的「3D 模拟器 / 散射推导」按钮在两个页面之间切换。
 
 > **本仓库的线上地址**：<https://yidoer.github.io/onepage/>
-> 仓库名是 `onepage`，所以它属于**项目站点**，网址带仓库名后缀，不是域名根 https://yidoer.github.io/。
-> 仓库曾叫 `onepage.github.io`（旧地址 `https://yidoer.github.io/onepage.github.io/` 已随改名失效），改名后站点路径就是 `/onepage/`。
 
 > `.nojekyll` 已包含在仓库中，用于关闭 Jekyll 处理，避免以下划线开头的源文件被特殊对待。
-
-### 为什么部署这么简单
-
-- **产物是纯 HTML**：`index.html` 与 `derivation.html` 都是自包含的最终页面，直接打开即可运行，没有打包、没有框架、没有运行时依赖。
-- **不访问境外服务**：three.js、OrbitControls、KaTeX（js + css + 20 个 woff2 字体）全部放在仓库内的 `vendor/`，以相对路径引用。离线、内网环境同样正常。
-- **没有路径问题**：两个页面之间使用同目录相对链接，放在仓库根目录、子目录或任意静态服务器上都能工作。
-
----
 
 ## 本地使用
 
@@ -128,7 +118,8 @@ node _tools/probe-toc.mjs        # 目录栏在 9 种视口下的适配实测
 - 深浅两套主题通过 `prefers-color-scheme` 切换，正文对比度均 ≥ 4.5:1；含 `@media print` 样式，可直接打印或导出 PDF
 
 ---
-
+**Tip**：本项目完全由生成式人工智能完成，可能存在错误或者不严谨的地方。
+---
 ## 许可
 
 物理内容基于卢瑟福 1911 年论文的经典推导，属公有领域知识。
